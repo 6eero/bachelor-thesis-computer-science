@@ -9,6 +9,8 @@
 
 \usepackage[a-1b]{pdfx}
 \usepackage[pdfa]{hyperref}
+\usepackage{multicol}
+\usepackage{verbatim}
 
 
 \begin{document}
@@ -44,7 +46,7 @@
 
 % Capitolo 2
 \chapter{Background aziendale}
-Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del software, focalizzata sulla creazione e implementazione di soluzioni su architetture cloud-native e infrastrutture Cloud, utilizzando principalmente Amazon Web Services. La missione di Archeido è supportare le aziende durante il processo di trasformazione digitale e adozione del Cloud, offrendo un'assistenza sia tecnica che strategica con massima trasparenza. L'azienda adotta e si basa sulle metodologie DevOps e Agile, garantendo un processo di sviluppo rapido, sicuro ed efficientei.
+Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del software, focalizzata sulla creazione e implementazione di soluzioni su architetture cloud-native e infrastrutture Cloud, utilizzando principalmente Amazon Web Services. La missione di Archeido è supportare le aziende durante il processo di trasformazione digitale e adozione del Cloud, offrendo un'assistenza sia tecnica che strategica con massima trasparenza. L'azienda adotta e si basa sulle metodologie DevOps e Agile, garantendo un processo di sviluppo rapido, sicuro ed efficiente.
 
 \section{Prodotto Software}
 Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
@@ -53,15 +55,15 @@ Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationsh
 Il CRM offre una gestione completa (CRUD) dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione. Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti inviati da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performance aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
 
 \subsection{Obiettivi del software}
-Il CRM ha come obiettivo principale quello di valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato é dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
+Il CRM ha come obiettivo principale quello di valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
 
 \subsection{Stakeholders}
-Gli stakeholder di questo progetto includono:
+Gli stakeholders di questo progetto includono:
 
 \begin{itemize}
     \item I \textbf{Super Amministratori}, che gestiscono la creazione degli utenti, assegnano loro permessi e regole di visibilitá e hanno accesso completo a tutte le sezioni del CRM. 
     \item I \textbf{Project Manager}, i quali ricevono un account per accedere alla dashboard e possono visualizzare solo i progetti a cui sono stati assegnati, limitando l'accesso ad alcune sezioni.
-    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poiché il sistema è progettato per rispondere meglio alle loro necessità.
+    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poichè il sistema è progettato per rispondere meglio alle loro necessità.
 \end{itemize}
 
 \subsection{Caratteristiche tecniche}
@@ -71,10 +73,85 @@ Questo progetto è stato sviluppato utilizzando React e Next.js, sfruttando la l
 Archeido adotta un ciclo di vita del software basato su metodologie agili, come Scrum \cite{scrumwiki2024} e Kanban \cite{kanbanwiki2024}, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si distingue per un approccio meno rigido, focalizzato sull'obiettivo di fornire al cliente software funzionante in tempi brevi e con frequenza. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback. L'obiettivo primario è garantire la piena soddisfazione del cliente, andando oltre il semplice adempimento di un contratto.
 
 \section{Problemi e Valutazioni}
-Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si é deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto.
+Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto.
 
 \section{Formazione}
-Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante la quale é stata approfondito la programmazione funzionale in JavaScript \cite{knowthen2024}, acquisendo le competenze necessarie per scrivere codice più efficiente e manutenibile. Successivamente é stato approfondito React \cite{udemyreactredux2024}, una libreria JavaScript sviluppata da Facebook per la creazione di interfacce utente interattive e componenti riutilizzabili, facilitando lo sviluppo di applicazioni web complesse. Infine, é stato esplorato Next.js, un framework potente che estende le capacità di React, permettendo il rendering lato server e facilitando la creazione di applicazioni web performanti.
+Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante la quale è stata approfondita la programmazione funzionale in JavaScript \cite{knowthen2024}, acquisendo le competenze necessarie per scrivere codice più efficiente e manutenibile. In seguito, si è analizzato React \cite{udemyreactredux2024}, una libreria JavaScript sviluppata da Facebook per la creazione di interfacce utente interattive e componenti riutilizzabili, facilitando lo sviluppo di applicazioni web complesse. Infine, è stato esplorato Next.js, un framework potente che estende le capacità di React, permettendo il rendering lato server e facilitando la creazione di applicazioni web performanti.
+
+% Capitolo 3
+\chapter{Background tecnico}
+
+\section{Introduzione}
+In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: React, Next.js, TypeScript e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
+
+\section{JavaScript e TypeScript}
+JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js, come approfondito nelle sezioni successive. Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata. Inoltre, TypeScript è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente.
+
+Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizione a priori di \textbf{interfacce} come linee guida per i modelli dati. Le interfacce fungono da blueprint, definendo i tipi esplicitamente. Al contrario, in JavaScript, la mancanza di un sistema simile rende difficile garantire la conformità a una determinata forma, con errori di tipo che emergono solo durante l'esecuzione.
+
+\section{React}
+React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX}, una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Ad esempio:
+\begin{verbatim}
+
+const name = 'Alice';   
+const Greeting = () => {
+  return <h1>Hello, {name}!</h1>
+} 
+\end{verbatim}
+Qui il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma ritorna un codice HTML.
+
+\subsection{I componenti}
+Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma di un'interfaccia utente in un'applicazione React. I componenti permettono di scomporre l'interfaccia in parti più piccole e gestibili, promuovendo la leggibilitá, la manutenzione e il riuso del codice. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti piú semplici garantisce diversi vantaggi:
+
+\begin{itemize}
+    \item \textbf{Riuso}: Un componente può essere utilizzato in piú parti dell'applicazione, riuducendo la duplicazione del codice.
+    \item \textbf{Isolamento}: Ogni componente ha il proprio stato e le proprie proprietà, rendendo il singolo componente utilizzabile e testabile in ambienti isolati, rimuovendone le dipendenze da ció che appare al suo esterno.
+    \item \textbf{Composizione di componenti}: Una volta sviluppati diversi componenti, React consente di comporli insieme. Ad esempio, un componente \texttt{Card} potrebbe contenere tre componenti piú semplici: un'immagine, un titolo e un pulsante. Tale Card potrebbe venir poi usata molteplici volte all'interno di un componente piú complesso, come un \texttt{Carousel}.
+\end{itemize}
+
+\subsection{Le \textit{props}}
+Le props permettono a un componente genitore di fornire informazioni immutabili a un componente figlio, rendendo quest'ultimo più dinamico e flessibile. Un esempio è il seguente:
+
+\begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \textit{Componente genitore}
+    \vspace{0.5cm}
+    \begin{verbatim}
+import React from 'react';
+import Greeting from './Greeting';   
+
+const App = () => {
+    return (
+        <div>
+            <Greeting name="Alice" />
+            <Greeting name="Bob" />
+        </div>
+    );
+};     
+    \end{verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \textit{Componente figlio}
+    \vspace{0.5cm}
+    \begin{verbatim}
+import React from 'react';
+
+const Greeting = ({ name }) => {
+    return <h1>Hello, {name}!</h1>;
+};
+    
+export default Greeting;
+    \end{verbatim}
+\end{minipage}
+
+In questo esempio, il componente \texttt{Greeting} è una funzione che accetta la prop \texttt{name} e restituisce il testo  "Hello," seguito dal valore della prop \texttt{name}, ottenuta dal componente padre. Per esempio, quando viene passato "Alice" come valore, il risultato renderizzato sarà un'intestazione che dice "Hello, Alice!", mentre se invece viene passato "Bob", verrá stampato "Hello, Bob!".
+
+\section{Next.js}
+\section{Next UI}
+\section{Tailwind CSS}
+\section{Conclusione}
 
 %\appendix
 
