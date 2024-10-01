@@ -11,6 +11,61 @@
 \usepackage[pdfa]{hyperref}
 \usepackage{multicol}
 \usepackage{verbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{red}{rgb}{1.0, 0.0, 0.0}
+\definecolor{green}{rgb}{0.0, 0.5, 0.0}
+\definecolor{orange}{rgb}{1.0, 0.5, 0.0}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, switch, var, if, in, while, do, else, case, break, className},
+  keywordstyle=\color{orange}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{blue}\bfseries,
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{green}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinelanguage{JavaScriptWithInterface}{
+  language=JavaScript,
+  morekeywords={id, code, name, startdate, enddate, state, children}, 
+  keywordstyle=\color{purple}\bfseries,
+}
+
+\lstdefinelanguage{JavaScriptWithTailwind}{
+  language=JavaScript,
+  morekeywords={main, Navbar, div, Sidebar}, 
+  keywordstyle=\color{blue}\bfseries,
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b,
+   framerule=0.5pt, % Spessore del riquadro
+   rulecolor=\color{darkgray}, % Colore del riquadro
+}
 
 
 \begin{document}
@@ -82,23 +137,36 @@ Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante 
 \chapter{Background tecnico}
 
 \section{Introduzione}
-In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: React, Next.js, TypeScript e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
+In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: TypeScript, React, Next.js, Next UI e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
 
 \section{JavaScript e TypeScript}
-JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js, come approfondito nelle sezioni successive. Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata. Inoltre, TypeScript è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente.
+JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js, come approfondito nelle sezioni successive. Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata. Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente.
 
+\subsection{Le interfacce in TypeScript}
 Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizione a priori di \textbf{interfacce} come linee guida per i modelli dati. Le interfacce fungono da blueprint, definendo i tipi esplicitamente. Al contrario, in JavaScript, la mancanza di un sistema simile rende difficile garantire la conformità a una determinata forma, con errori di tipo che emergono solo durante l'esecuzione.
 
-\section{React}
-React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX}, una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Ad esempio:
-\begin{verbatim}
+Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema.
 
-const name = 'Alice';   
-const Greeting = () => {
-  return <h1>Hello, {name}!</h1>
-} 
-\end{verbatim}
-Qui il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma ritorna un codice HTML.
+\begin{lstlisting}[language=JavaScriptWithInterface, caption=Interfaccia di progetto]
+    export interface Project {
+        id: string;
+        code: string;
+        name: string;
+        startdate: string | number;
+        enddate: string | number;
+        state: string;
+    }
+\end{lstlisting}
+
+\section{React}
+React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX}, una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Nell'esempio qui sotto,  il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma ritorna un codice HTML:
+
+\begin{lstlisting}[caption=Esempio di codice React]
+    const name = 'Alice';   
+    const Greeting = () => {
+        return <h1>Hello, {name}!</h1>
+    } 
+\end{lstlisting}
 
 \subsection{I componenti}
 Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma di un'interfaccia utente in un'applicazione React. I componenti permettono di scomporre l'interfaccia in parti più piccole e gestibili, promuovendo la leggibilitá, la manutenzione e il riuso del codice. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti piú semplici garantisce diversi vantaggi:
@@ -113,12 +181,9 @@ Un componente React è una funzione JavaScript che rappresenta una parte riutili
 Le props permettono a un componente genitore di fornire informazioni immutabili a un componente figlio, rendendo quest'ultimo più dinamico e flessibile. Un esempio è il seguente:
 
 \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \textit{Componente genitore}
-    \vspace{0.5cm}
-    \begin{verbatim}
+    \begin{lstlisting}[caption=Componente genitore]
 import React from 'react';
-import Greeting from './Greeting';   
+import Greeting from './Greeting';
 
 const App = () => {
     return (
@@ -127,82 +192,73 @@ const App = () => {
             <Greeting name="Bob" />
         </div>
     );
-};     
-    \end{verbatim}
+};  
+    \end{lstlisting}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.45\textwidth}
-    \centering
-    \textit{Componente figlio}
-    \vspace{0.5cm}
-    \begin{verbatim}
+    \begin{lstlisting}[caption=Componente figlio]
 import React from 'react';
 
 const Greeting = ({ name }) => {
     return <h1>Hello, {name}!</h1>;
 };
-    
+
 export default Greeting;
-    \end{verbatim}
+    \end{lstlisting}
 \end{minipage}
 
 In questo esempio, il componente \texttt{Greeting} è una funzione che accetta la prop \texttt{name} e restituisce il testo  "Hello," seguito dal valore della prop \texttt{name}, ottenuta dal componente padre. Per esempio, quando viene passato "Alice" come valore, il risultato renderizzato sarà un'intestazione che dice "Hello, Alice!", mentre se invece viene passato "Bob", verrá stampato "Hello, Bob!".
 
 \section{Next.js}
-\section{Next UI}
-\section{Tailwind CSS}
-\section{Conclusione}
+Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} React per la creazione di applicazioni web full-stack. Next.js permette di usare i componenti React per costruire interfacce utente, fornendo funzionalità aggiuntive e ottimizzazioni: Next.js astrae e configura automaticamente tutti gli strumenti necessari per React, come il \textit{bundling}, la \textit{compilazione} e il \textit{routing}.
+
+\subsection{Rendering}
+Il principale vantaggio di Next.js è l'uso del \textbf{rendering lato server}: i componenti vengono renderizzati direttamente sul server, il cui contenuto viene poi inviato al client. Inoltre, offre la generazione di \textbf{siti statici}, che consente di prerenderizzare determinate pagine e componenti con dati statici durante la costruzione delle applicazioni, rendendoli disponibili al momento del bisogno.
+
+\begin{itemize}
+    \item Nel \textbf{Client-Side Rendering (CSR)}, i componenti dell'applicazione vengono raggruppati in un \texttt{bundle} e inviati al client per il rendering. Con l'aumentare della complessità dell'applicazione, la dimensione del \texttt{bundle} cresce, poiché deve includere tutti i componenti necessari. Di conseguenza, un \texttt{bundle} più ampio richiede una quantità maggiore di memoria al client per il caricamento completo. Inoltre, il CSR presenta sfide significative per l'ottimizzazione per i motori di ricerca (SEO) e può esporre dati sensibili contenuti all'interno dei componenti.
+
+    \item Il \textbf{Server-Side Rendering (SSR)} affronta queste problematiche eseguendo il rendering dei componenti direttamente sul server. Tuttavia, i componenti server presentano alcune limitazioni: non possono rispondere a eventi del browser, come clic o modifiche, non possono accedere alle API del browser, non possono mantenere uno stato persistente né utilizzare hook come \texttt{useEffect}.
+\end{itemize}
+
+Nelle applicazioni reali, si tende a utilizzare una combinazione di CSR e SSR. L'SSR viene impiegato per la maggior parte delle parti dell'applicazione al fine di ottimizzare i tempi di caricamento, migliorare la SEO e garantire una maggiore sicurezza. Il CSR viene utilizzato solo in situazioni specifiche, per gestire interazioni che richiedono eventi del browser, accesso alle API del browser o gestione dinamica dello stato.
+
+\subsection{App Routing}
+Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poiché si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione é \texttt{.tsx} perché si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
+
+\begin{figure}[htbp]
+    \centering
+    \vspace{0.8cm} 
+    \includegraphics[width=0.9\textwidth]{img/routing.pdf} 
+    \caption{App routing \cite{nextjsdocs2024} di Next.js}
+    \label{fig:routing} 
+\end{figure}
+
+
+
+\section{Next UI e Tailwind CSS}
+In questo progetto si é deciso di utilizzare Next UI \cite{nextui2024}, la quale è una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
+
+Un'altra libreria utilizzata per la progettazione del CRM di Archeido é Tailwind CSS: un framework CSS utility-first \footnote{É un approccio alla progettazione di interfacce utente in cui si utilizzano classi CSS per applicare stili direttamente agli elementi HTML, piuttosto che definire classi personalizzate o stili specifici per i componenti.} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Con Tailwind, é infatti possibile applicare stili direttamente nei file HTML o JSX, rendendo il processo di sviluppo più efficiente. Un esempio é il seguente:
+\vspace{0.8cm} 
+\begin{lstlisting}[caption=Parte del file \texttt{app.tsx} del CRM]
+    <main className="flex flex-col h-screen">
+        <Navbar className="w-screen" signOut={signOut} />
+        <div className="flex flex-row h-full">
+            <div className="col-auto">
+                <SideBar />
+            </div>
+            <div className="col-auto p-8 grow">{children}</div>
+        </div>
+    </main> 
+\end{lstlisting}
 
 %\appendix
-
 %\part{Appendici}
-
 %\chapter{Titolo della prima appendice}
 
-
-%% Parte conclusiva del documento; tipicamente per riassunto, bibliografia e/o indice analitico.
-\backmatter
-
-%% Riassunto (opzionale)
-%\summary
-%Maecenas tempor elit sed arcu commodo, dapibus sagittis leo egestas. Praesent at ultrices urna. Integer et nibh in augue mollis facilisis sit amet eget magna. Fusce at porttitor sapien. Phasellus imperdiet, felis et molestie vulputate, mauris sapien tincidunt justo, in lacinia velit nisi nec ipsum. Duis elementum pharetra lorem, ut pellentesque nulla congue et. Sed eu venenatis tellus, pharetra cursus felis. Sed et luctus nunc. Aenean commodo, neque a aliquam bibendum, mauris augue fringilla justo, et scelerisque odio mi sit amet diam. Nulla at placerat nibh, nec rutrum urna. Donec ut egestas magna. Aliquam erat volutpat. Phasellus vestibulum justo sed purus mattis, vitae lacinia magna viverra. Nulla rutrum diam dui, vel semper mi mattis ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec id vestibulum lectus, eget tristique est.
-
-%% Bibliografia (praticamente obbligatoria)
-\bibliographystyle{plain_\languagename}%% Carica l'omonimo file .bst, dove \languagename � la lingua attiva.
-%% Nel caso in cui si usi un file .bib (consigliato)
+%% Bibliografia
+\bibliographystyle{plain_\languagename}
 \bibliography{thud}
-%% Nel caso di bibliografia manuale, usare l'environment thebibliography.
-
-%% Per l'indice analitico, usare il pacchetto makeidx (o analogo).
-
 \end{document}
-
---- Istruzioni per l'aggiunta di nuove lingue ---
-Per ogni nuova lingua utilizzata aggiungere nel preambolo il seguente spezzone:
-    \addto\captionsitalian{%
-        \def\abstractname{Sommario}%
-        \def\acknowledgementsname{Ringraziamenti}%
-        \def\authorcontactsname{Contatti dell'autore}%
-        \def\candidatename{Candidato}%
-        \def\chairname{Direttore}%
-        \def\conclusionsname{Conclusioni}%
-        \def\cosupervisorname{Co-relatore}%
-        \def\cosupervisorsname{Co-relatori}%
-        \def\cyclename{Ciclo}%
-        \def\datename{Anno accademico}%
-        \def\indexname{Indice analitico}%
-        \def\institutecontactsname{Contatti dell'Istituto}%
-        \def\introductionname{Introduzione}%
-        \def\prefacename{Prefazione}%
-        \def\reviewername{Controrelatore}%
-        \def\reviewersname{Controrelatori}%
-        %% Anno accademico
-        \def\shortdatename{A.A.}%
-        \def\summaryname{Riassunto}%
-        \def\supervisorname{Relatore}%
-        \def\supervisorsname{Relatori}%
-        \def\thesisname{Tesi di \expandafter\ifcase\csname thud@target\endcsname Laurea\or Laurea Magistrale\or Dottorato\fi}%
-        \def\tutorname{Tutor aziendale%
-        \def\tutorsname{Tutor aziendali}%
-    }
-sostituendo a "italian" (nella 1a riga) il nome della lingua e traducendo le varie voci.
