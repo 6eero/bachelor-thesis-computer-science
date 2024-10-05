@@ -254,6 +254,113 @@ Un'altra libreria utilizzata per la progettazione del CRM di Archeido é Tailwin
     </main> 
 \end{lstlisting}
 
+
+\section{AWS: Amazon Web Service}
+Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amazon Web Services (AWS) come piattaforma di hosting e gestione delle funzionalità del sistema. AWS offre una vasta gamma di servizi cloud che si integrano in modo efficiente per garantire scalabilità, sicurezza e affidabilità. Di seguito si descrivono i principali servizi AWS utilizzati per il deployment della web app e per la gestione del login degli utenti.
+
+\subsection{AWS Amplify e BitBucket}
+Per il deployment e la gestione del front-end del CRM, è stato impiegato AWS Amplify, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository BitBucket, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche o aggiornamenti al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
+
+\subsection{Cognito}
+Per la gestione dell'autenticazione degli utenti, è stato utilizzato AWS Cognito. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non é stata sviluppata una funzionalitá per rendere possibile l'invito di nuovi utenti, essendo una funzionalitá che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
+
+\vspace{0.8cm} 
+\begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
+    const AuthenticatedLayout = ({ children }: any) => {
+      return (
+        <Authenticator hideSignUp components={components}>
+          {(props) => <App {...props}>{children}</App>}
+        </Authenticator>
+      );
+    };
+\end{lstlisting}
+
+
+Cognito offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. In questo modo, il sistema CRM può garantire un livello elevato di sicurezza, fondamentale per la gestione di dati sensibili come quelli legati ai progetti aziendali.
+
+\begin{figure}[htbp]
+    \centering
+    \vspace{0.8cm} 
+    \includegraphics[width=0.5\textwidth]{img/login.pdf} 
+    \caption{Pagina di login}
+    \label{fig:routing} 
+\end{figure}
+
+
+% Capitolo 4
+\chapter{Descrizione dei requisiti}
+
+\section{Introduzione}
+In questo capitolo si descriveranno i requisiti del sistema CRM per la gestione dei progetti, sviluppato durante il tirocinio. Verranno utilizzati diversi strumenti di modellazione per rappresentare i requisiti funzionali e non funzionali del sistema, tra cui diagrammi use case, sequence diagram, activity diagram e pseudocodice per i casi più rilevanti. Inoltre, verrà presentato un deployment diagram per illustrare la struttura di distribuzione del sistema.
+
+\section{Definizione dei requisiti del sistema}
+Il sistema CRM è stato progettato per supportare la gestione di progetti aziendali, offrendo funzionalità che spaziano dalla creazione e monitoraggio dei progetti, alla gestione degli utenti. I principali requisiti funzionali includono:
+
+\begin{itemize}
+    \item \textbf{Gestione utenti e ruoli}: gli utenti con ruolo \texttt{ADMIN} possono accedere e apportare modifiche a tutte le sezioni della dashboard: è loro compito assegnare un progetto a uno o più project manager. Gli utenti con ruolo \texttt{PROJECT\_MANAGER} possono visionare, modificare e/o cancellare solo i progetti a cui sono stati assegnati da un utente con ruolo \texttt{ADMIN}. Inoltre, la sezione utenti, disponibile al link \texttt{./users}, è visibile solo ad utenti con ruolo \texttt{ADMIN}.
+    \item \textbf{Accesso riservato ad utenti invitati}: Un nuovo utente che desidera utilizzare il CRM deve ricevere un invito via email contenente una password temporanea, inviato da un amministratore. Al primo accesso, l'utente sarà obbligato a cambiare la password temporanea.
+    \item \textbf{Creazione di un progetto}: l'utente può creare un progetto, specificando dettagli come \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine}, \texttt{stato} (il quale può assumere i valori di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}) e \texttt{assegnazione\_ai\_project\_manager}.
+    \item \textbf{Modifica di un progetto}: l'utente può modificare un progetto esistente, modificandone i campi sopracitati.
+    \item \textbf{Cancellazione di un progetto}: l'utente può cancellare un progetto. 
+\end{itemize}
+
+\subsection{Gestione dei ruoli degli utenti}
+Per implementare le regole di visibilità in base ai ruoli degli utenti é stato aggiunto un campo custom dalla dashboard di Cognito: tale campo é stato definito come \texttt{ROLE} e puó assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti} globale, il quale "wrappa" l'intera apllicazione. Tale contesto puó essere quindi ottenuto in ogni componente della web app. Un esempio di utilizzo avviene nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido a funzionalità o opzioni di navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato. Se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
+
+\begin{lstlisting}[caption=Campi default visibili nella sidebar]
+    const Menus = [
+        {
+          title: "Performances",
+          src: "performances",
+          icon: <FaRegChartBar className="scale-150" />,
+          visibility: "ALL",
+        },
+        {
+          title: "Projects",
+          src: "projects",
+          icon: <FaProjectDiagram className="scale-150" />,
+          visibility: "ALL",
+        },
+        {
+          title: "Orders",
+          src: "orders",
+          icon: <FaClipboardList className="scale-150" />,
+          visibility: "ALL",
+        },
+      ];
+\end{lstlisting}
+
+Viene successivamente estratto il ruolo dell'utente loggato:
+
+\begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
+    const user = useContext(AuthContext);
+    const role = user["custom:role"];
+\end{lstlisting}
+
+In questo modo, la costante \texttt{role} contiene la stringa \texttt{"ADMIN"} o la stringa  \texttt{"PROJECT\_MANAGER"}. Tale valore, viene usato in seguito per decidere se mostrare o meno la sezione Orders:
+
+\begin{lstlisting}[caption=Verifica ruolo]
+    role === "ADMIN" 
+        ? [...Menus, {
+            title: "Users",
+            src: "users",
+            icon: <FaUserFriends className="scale-150" />,
+            visibility: "ADMIN",
+        }]
+        : Menus;
+\end{lstlisting}
+
+Questo codice verifica se il ruolo dell'utente è "ADMIN". Se è così, crea una nuova lista Menus che include gli elementi esistenti, aggiungendo un nuovo oggetto per la voce di menu "Users". Se l'utente non è un admin, la lista Menus rimane invariata. L'uso dell'operatore di spread \texttt{...Menus} garantisce che la lista originale non venga modificata, mantenendo l'approccio immutabile tipico della programmazione funzionale.
+
+\subsection{Operazioni di CRUD}
+
+
+\section{Diagrammi}
+\subsection{Diagramma dei casi d'uso (Use Case Diagram)}
+\subsection{Sequence diagram}
+\subsection{Activity diagram per la creazione di un progetto}
+
+
 %\appendix
 %\part{Appendici}
 %\chapter{Titolo della prima appendice}
