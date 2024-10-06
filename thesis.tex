@@ -374,7 +374,6 @@ Ogni volta che si definisce un modello con \texttt{a.model()}, vengono automatic
 \end{itemize}
 
 Una volta completata questa operazione, è stata creata una cartella \texttt{api} nella root del progetto. Questa cartella ha lo scopo di raggruppare tutti i file relativi alle chiamate API, ed è stata pensata per mantenere il progetto ben organizzato, estraendo tutte le funzioni che effettuano chiamate al database. Al suo interno, è stata generata un'altra cartella chiamata \texttt{Project}, che a sua volta contiene il file \texttt{endpoints.ts}. Quest'ultimo file si occupa di definire ed esportare le funzioni relative alle operazioni CRUD. 
-
 Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
 
 \begin{lstlisting}[caption=funzione \texttt{getProject}]
@@ -391,14 +390,34 @@ Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getPro
         return projects;
     };
 \end{lstlisting}
+Graficamente, le due funzioni sopracitate popolano la tabella dei progetti:
 
-La creazione di un nuovo progetto si effettua tramite la funzione \texttt{createProject}, la quale prende in input un oggetto \texttt{Project} e lo invia al database per la sua creazione:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{img/interfacce/table_project.pdf} 
+    \caption{Pagina dei progetti}
+\end{figure}
+Se dalla schermata dei progetti, viene cliccato il pulsante "Create Project", viene caricato l'url \texttt{./projects/create}, il quale mostra un form vuoto per l'inserimento dei dati del progetto. Per la realizzazione e gestione del form, si é ricorso alla libreria \texttt{Formik}. Una volta popolati tutti i campi del form, premendo il pulsante "Create" viene chiamata la funzione \texttt{createProject}, la quale prende in input l'oggetto \texttt{Project} appena creato e lo invia al database per la sua creazione.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{img/interfacce/table_add.pdf} 
+    \caption{Creazione progetto}
+\end{figure}
 
 \begin{lstlisting}[caption=funzione \texttt{createProject}]
     const createProject = async (projectToCreate: Project) => {
         await client.models.Project.create(project);
     };
 \end{lstlisting}
+
+La tabella dei progetti in \texttt{./projects} presenta una colonna denominata \texttt{ACTIONS}. In questa colonna sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale che consente di confermare l'eliminazione del progetto. D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In tale pagina è possibile effettuare modifiche o procedere all'eliminazione del progetto.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{img/interfacce/table_edit.pdf} 
+    \caption{Dettaglio progetto}
+\end{figure}
+
 
 Per eliminare un progetto, si utilizza la funzione \texttt{deleteProject}, che richiede come argomento l'oggetto \texttt{Project} da eliminare, e tramite il suo ID, esegue la cancellazione:
 
