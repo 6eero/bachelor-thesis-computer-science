@@ -137,7 +137,7 @@ Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante 
 \chapter{Background tecnico}
 
 \section{Introduzione}
-In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: TypeScript, React, Next.js, Next UI e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
+In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: TypeScript, React, Next.js, AWS, Next UI e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
 
 \section{JavaScript e TypeScript}
 JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js, come approfondito nelle sezioni successive. Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata. Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente.
@@ -232,7 +232,6 @@ Il routing in React gestisce la navigazione tra diverse pagine o componenti all'
     \vspace{0.8cm} 
     \includegraphics[width=0.9\textwidth]{img/routing.pdf} 
     \caption{App routing \cite{nextjsdocs2024} di Next.js}
-    \label{fig:routing} 
 \end{figure}
 
 
@@ -253,7 +252,6 @@ Un'altra libreria utilizzata per la progettazione del CRM di Archeido é Tailwin
         </div>
     </main> 
 \end{lstlisting}
-
 
 \section{AWS: Amazon Web Service}
 Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amazon Web Services (AWS) come piattaforma di hosting e gestione delle funzionalità del sistema. AWS offre una vasta gamma di servizi cloud che si integrano in modo efficiente per garantire scalabilità, sicurezza e affidabilità. Di seguito si descrivono i principali servizi AWS utilizzati per il deployment della web app e per la gestione del login degli utenti.
@@ -283,9 +281,7 @@ Cognito offre una gestione sicura delle credenziali, supportando funzionalità c
     \vspace{0.8cm} 
     \includegraphics[width=0.5\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
-    \label{fig:routing} 
 \end{figure}
-
 
 % Capitolo 4
 \chapter{Descrizione dei requisiti}
@@ -353,10 +349,85 @@ In questo modo, la costante \texttt{role} contiene la stringa \texttt{"ADMIN"} o
 Questo codice verifica se il ruolo dell'utente è "ADMIN". Se è così, crea una nuova lista Menus che include gli elementi esistenti, aggiungendo un nuovo oggetto per la voce di menu "Users". Se l'utente non è un admin, la lista Menus rimane invariata. L'uso dell'operatore di spread \texttt{...Menus} garantisce che la lista originale non venga modificata, mantenendo l'approccio immutabile tipico della programmazione funzionale.
 
 \subsection{Operazioni di CRUD}
+Le operazioni CRUD sono le quattro azioni fondamentali per la gestione dei dati in un database:Create (creare nuovi dati), Read (leggere o visualizzare i dati), Update (aggiornare i dati esistenti) e Delete (eliminare i dati). Il CRM supporta tutte e quattro queste operazioni, implementate seguendo la guida \cite{awsamplifynextjs2024} sulla documentazione di Amplify. Prima di tutto é stato creato il \textbf{modello dati} realtivo ai proggetti
 
+\begin{lstlisting}[caption=Parte del file \texttt{amplify/data/resource.ts}]
+    const schema = a
+    .schema({
+        Project: a.model({
+            code: a.string(),
+            name: a.string(),
+            startdate: a.string(),
+            enddate: a.string(),
+            state: a.string(),
+            assignedTo: a.string(),
+        }),
+    })
+\end{lstlisting}
+
+Ogni volta che si definisce un modello con \texttt{a.model()}, vengono automaticamente create le seguenti risorse nel cloud:
+\begin{itemize}
+    \item Una tabella DynamoDB per memorizzare i record.
+    \item API per query che permettono di creare, leggere (list/get), modificare ed eliminare i record.
+    \item Campi \texttt{createdAt} e \texttt{updatedAt} per tracciare quando ogni record è stato creato o aggiornato.
+    \item API in tempo reale per iscriversi agli eventi di creazione, aggiornamento ed eliminazione dei record.
+\end{itemize}
+
+Una volta completata questa operazione, è stata creata una cartella \texttt{api} nella root del progetto. Questa cartella ha lo scopo di raggruppare tutti i file relativi alle chiamate API, ed è stata pensata per mantenere il progetto ben organizzato, estraendo tutte le funzioni che effettuano chiamate al database. Al suo interno, è stata generata un'altra cartella chiamata \texttt{Project}, che a sua volta contiene il file \texttt{endpoints.ts}. Quest'ultimo file si occupa di definire ed esportare le funzioni relative alle operazioni CRUD. 
+
+Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
+
+\begin{lstlisting}[caption=funzione \texttt{getProject}]
+    const getProject = async (id: string) => {
+        const { data: selectedProject }: Project = await client.models.Project.get({
+            id
+        });
+        return selectedProject;
+    };
+\end{lstlisting}
+\begin{lstlisting}[caption=funzione \texttt{listProject}]
+    const listProject = async () => {
+        const { data: projects } = await client.models.Projects.list();
+        return projects;
+    };
+\end{lstlisting}
+
+La creazione di un nuovo progetto si effettua tramite la funzione \texttt{createProject}, la quale prende in input un oggetto \texttt{Project} e lo invia al database per la sua creazione:
+
+\begin{lstlisting}[caption=funzione \texttt{createProject}]
+    const createProject = async (projectToCreate: Project) => {
+        await client.models.Project.create(project);
+    };
+\end{lstlisting}
+
+Per eliminare un progetto, si utilizza la funzione \texttt{deleteProject}, che richiede come argomento l'oggetto \texttt{Project} da eliminare, e tramite il suo ID, esegue la cancellazione:
+
+\begin{lstlisting}[caption=funzione \texttt{deleteProject}]
+    const deleteProject = async (projectToDelete: Project) => {
+        const { id } = projectToDelete;
+        await client.models.Project.delete({ id });
+    };
+\end{lstlisting}
+
+L'aggiornamento di un progetto esistente viene fatto  attraverso la funzione \texttt{updateProject}, che accetta come parametro un oggetto \texttt{Project} e aggiorna il database con i nuovi dati forniti:
+
+\begin{lstlisting}[caption=funzione \texttt{updateProject}]
+    const updateProject = async (projectToUpdate: Project) => {
+        await client.models.Project.update(projectToUpdate);
+    };
+\end{lstlisting}
 
 \section{Diagrammi}
 \subsection{Diagramma dei casi d'uso (Use Case Diagram)}
+Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, sia umani che esterni. Gli attori umani includono "User", "Project Manager" e "Admin", mentre i servizi esterni sono "AWS DynamoDB" e "AWS Cognito". Gli attori umani interagiscono con il sistema principalmente per la gestione dei progetti e degli utenti. Le operazioni di gestione dei progetti comprendono la creazione, lettura, aggiornamento e cancellazione di progetti, raggruppate sotto il caso d'uso generale "Manage Projects". In modo simile (ma limitato agli attori Admin), la gestione degli utenti è modellata attraverso il caso d'uso "Manage Users", che include funzionalità come invitare nuovi utenti, modificare i ruoli e cancellare utenti giá registrati. Il processo di autenticazione è diviso in due casi d'uso principali: il "First Login" per il primo accesso e "Second + Login" per i successivi. Questi casi d'uso si estendono con la gestione degli errori e la verifica delle password. Inoltre, è presente un caso d'uso separato per il cambio della password, "Change Password". Il sistema interagisce con "AWS Cognito" per gestire l'autenticazione e con "AWS DynamoDB" per eseguire operazioni sui dati dei progetti.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{img/diagrammi/use_case.pdf} 
+    \caption{Use Case Diagram}
+\end{figure}
+
+
 \subsection{Sequence diagram}
 \subsection{Activity diagram per la creazione di un progetto}
 
