@@ -28,22 +28,22 @@
 \def\chaptermark#1{\ifnum\c@secnumdepth>\m@ne\relax\def\thud@tmpcmd{\chaptername\ \thechapter\ ---  #1}\else\let\thud@tmpcmd\@empty\fi\markboth{\thud@tmpcmd}{\thud@tmpcmd}}
 \def\sectionmark#1{\markright{\ifnum\c@secnumdepth>\z@\relax\thesection\quad \fi#1}}
 
-%\def\thud@headruledbox#1#2#3{\underline{\makebox[\textwidth]{%
-%    {\small#1\bfseries#2\hfill#3}\rule[-0.5ex]{0pt}{1ex}%
-%}}}
-%\def\thud@defheads#1{%
-%	\def\@evenhead{\thud@headrulebox{#1}\thepage\leftmark}%
-%	\def\@oddhead{\thud@headrulebox{#1}\rightmark\thepage}%
-%}
+\def\thud@headruledbox#1#2#3{\underline{\makebox[\textwidth]{%
+    {\small#1\bfseries#2\hfill#3}\rule[-0.5ex]{0pt}{1ex}%
+}}}
+\def\thud@defheads#1{%
+	\def\@evenhead{\thud@headruledbox{#1}\thepage\leftmark}%
+	\def\@oddhead{\thud@headruledbox{#1}\leftmark\thepage}%
+}
 
 %\def\thud@headbox#1#2#3{\makebox[\textwidth]{%
 %			{\small#1\bfseries#2\hfill#3}\rule[-0.5ex]{0pt}{1ex}%
 %}}
 
-\def\thud@defheads#1{%
-	\def\@evenhead{\sffamily\small\thepage\qquad #1\leftmark\hfill}%
-	\def\@oddhead{\hfill\sffamily\small #1\rightmark\qquad\thepage}%
-}
+%\def\thud@defheads#1{%
+%	\def\@evenhead{\sffamily\small\thepage\qquad #1\leftmark\hfill}%
+%	\def\@oddhead{\hfill\sffamily\small #1\rightmark\qquad\thepage}%
+%}
 
 \let\ps@bookplain\ps@plain
 
@@ -178,7 +178,7 @@
     \newpage\thispagestyle{empty}%
 }
 \newenvironment{approval}{\begin{titlelike}{center}}{\end{titlelike}}
-\newenvironment{dedication}{\begin{titlelike}{flushright}}{\end{titlelike}}
+\newenvironment{dedication}{\begin{titlelike}{flushleft}}{\end{titlelike}}
 
 \def\thud@patchNoUc#1{
     \thud@save{#1}
@@ -207,12 +207,13 @@
 \thud@save{@starttoc}
 \def\@starttoc#1{\singlespacing\thud@save@@starttoc{#1}\thud@spacing}
 
-\let\oldmainmatter\mainmatter
-\renewcommand{\mainmatter}{\clearpage\addtocounter{page}{-1}\oldmainmatter}
+\let\oldtableofcontents\tableofcontents
+\renewcommand{\tableofcontents}{\begingroup\pagestyle{empty}\oldtableofcontents\cleardoublepage\addtocounter{page}{-1}\endgroup}
 
 \def\maketitle{
     \begin{titlepage}%
         \noindent%
+        \centering
 %        \ifpdf\makebox[\z@][l]{\raisebox{-.98\textheight}[\z@][\z@]{\includegraphics[height=\textheight]{UdineLogo}}}\fi%
         \begin{minipage}[t][\textheight][s]{.99\linewidth}%
         	\sffamily
@@ -231,8 +232,9 @@
                         \let\thud@candidate\@author
                         \thud@showentry*{candidate}%
                     }%
+                    \hspace{0.5cm}
                     \qquad%
-                    \parbox[t]{.4\linewidth}{%
+                    \parbox[t]{.25\linewidth}{%
                         \thud@showentry{supervisor}%
                         \thud@showentry{cosupervisor}%
                         \thud@showentry{tutor}%
@@ -256,6 +258,6 @@
 }
 
 \AtBeginDocument{%
-    \pagestyle{sfbig}%
+    \pagestyle{plain}%
     \frontmatter%
 }

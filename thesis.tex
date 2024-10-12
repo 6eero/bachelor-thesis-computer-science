@@ -15,58 +15,55 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{microtype}
-
-\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
-\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
-\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
-\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
-\definecolor{red}{rgb}{1.0, 0.0, 0.0}
-\definecolor{green}{rgb}{0.0, 0.5, 0.0}
-\definecolor{orange}{rgb}{1.0, 0.5, 0.0}
+\usepackage{geometry}
+\usepackage{tocbibind}
+\usepackage{array}
+\usepackage{enumitem}
+    \setlist{itemsep=.08em}
+\usepackage{subcaption}
+\usepackage{float}
 
 \lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, switch, var, if, in, while, do, else, case, break, className},
-  keywordstyle=\color{orange}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
-  ndkeywordstyle=\color{blue}\bfseries,
-  sensitive=false,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  commentstyle=\color{purple}\ttfamily,
-  stringstyle=\color{green}\ttfamily,
-  morestring=[b]',
-  morestring=[b]"
+    basicstyle=\fontsize{10}{11}\ttfamily, 
+    keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, throw, try, typeof, var, void, while, with, yield, const, let, async, await, import, export, from, as, interface},
+    keywordstyle=\color{blue}\bfseries,
+    ndkeywords={class, boolean, throw, implements, this, string, any, number, model, Project},
+    ndkeywordstyle=\color{violet}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{gray}\ttfamily,
+    morestring=[b]',
+    morestring=[b]"
 }
 
-\lstdefinelanguage{JavaScriptWithInterface}{
-  language=JavaScript,
-  morekeywords={id, code, name, startdate, enddate, state, children}, 
-  keywordstyle=\color{purple}\bfseries,
-}
-
-\lstdefinelanguage{JavaScriptWithTailwind}{
-  language=JavaScript,
-  morekeywords={main, Navbar, div, Sidebar}, 
-  keywordstyle=\color{blue}\bfseries,
+\lstdefinelanguage{React}{
+    language=JavaScript,
+    alsoletter={<>=-},
+    morekeywords={JSX, render, Component, useState, useEffect, useContext, useReducer, useRef, useCallback, useMemo, createContext, PropTypes, Fragment, className, =>},
+    keywordstyle=\color{teal}\bfseries,
+    morecomment=[s][\color{purple}]{<>}{</>},
+    morestring=[b]`,
+    sensitive=true
 }
 
 \lstset{
-   language=JavaScript,
-   backgroundcolor=\color{lightgray},
-   extendedchars=true,
-   basicstyle=\footnotesize\ttfamily,
-   showstringspaces=false,
-   showspaces=false,
-   numbers=left,
-   numberstyle=\footnotesize,
-   numbersep=9pt,
-   tabsize=2,
-   breaklines=true,
-   showtabs=false,
-   captionpos=b,
-   framerule=0.5pt, % Spessore del riquadro
-   rulecolor=\color{darkgray}, % Colore del riquadro
+    language=React,
+    extendedchars=true,
+    basicstyle=\footnotesize\ttfamily,
+    showstringspaces=false,
+    showspaces=false,
+    numbers=left,
+    numberstyle=\footnotesize,
+    numbersep=9pt,
+    tabsize=2,
+    breaklines=true,
+    showtabs=false,
+    captionpos=b
 }
+
 
 
 \begin{document}
@@ -148,7 +145,7 @@ Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizi
 
 \noindent Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema.
 
-\begin{lstlisting}[language=JavaScriptWithInterface, caption=Interfaccia di progetto]
+\begin{lstlisting}[language=React, caption=Interfaccia di progetto]
     export interface Project {
         id: string;
         code: string;
@@ -162,7 +159,7 @@ Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizi
 \section{React}
 React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX}, una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Nell'esempio qui sotto,  il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma ritorna un codice HTML:
 
-\begin{lstlisting}[caption=Esempio di codice React]
+\begin{lstlisting}[language=React, caption=Esempio di codice React]
     const name = 'Alice';   
     const Greeting = () => {
         return <h1>Hello, {name}!</h1>
@@ -189,8 +186,8 @@ import Greeting from './Greeting';
 const App = () => {
     return (
         <div>
-            <Greeting name="Alice" />
-            <Greeting name="Bob" />
+            <Greeting name= "Alice" />
+            <Greeting name= "Bob" />
         </div>
     );
 };  
@@ -228,7 +225,7 @@ Il principale vantaggio di Next.js è l'uso del \textbf{rendering lato server}: 
 \subsection{App Routing}
 Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poichè si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione è \texttt{.tsx} perchè si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/routing.pdf} 
     \caption{App routing \cite{nextjsdocs2024} di Next.js}
@@ -242,13 +239,13 @@ In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, la qual
 \noindent Un'altra libreria utilizzata per la progettazione del CRM di Archeido è Tailwind CSS: un framework CSS utility-first \footnote{È un approccio alla progettazione di interfacce utente in cui si utilizzano classi CSS per applicare stili direttamente agli elementi HTML, piuttosto che definire classi personalizzate o stili specifici per i componenti.} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Con Tailwind, è infatti possibile applicare stili direttamente nei file HTML o JSX, rendendo il processo di sviluppo più efficiente. Un esempio è il seguente:
 
 \begin{lstlisting}[caption=Parte del file \texttt{app.tsx} del CRM]
-    <main className="flex flex-col h-screen">
-        <Navbar className="w-screen" signOut={signOut} />
-        <div className="flex flex-row h-full">
-            <div className="col-auto">
+    <main className = "flex flex-col h-screen">
+        <Navbar className = "w-screen" signOut={signOut} />
+        <div className = "flex flex-row h-full">
+            <div className = "col-auto">
                 <SideBar />
             </div>
-            <div className="col-auto p-8 grow">{children}</div>
+            <div className = "col-auto p-8 grow">{children}</div>
         </div>
     </main> 
 \end{lstlisting}
@@ -276,7 +273,7 @@ Per la gestione dell'autenticazione degli utenti, è stato utilizzato AWS Cognit
 
 \noindent Cognito offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. In questo modo, il sistema CRM può garantire un livello elevato di sicurezza, fondamentale per la gestione di dati sensibili come quelli legati ai progetti aziendali.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
@@ -308,19 +305,19 @@ Per implementare le regole di visibilità in base ai ruoli degli utenti è stato
         {
           title: "Performances",
           src: "performances",
-          icon: <FaRegChartBar className="scale-150" />,
+          icon: <FaRegChartBar className = "scale-150" />,
           visibility: "ALL",
         },
         {
           title: "Projects",
           src: "projects",
-          icon: <FaProjectDiagram className="scale-150" />,
+          icon: <FaProjectDiagram className = "scale-150" />,
           visibility: "ALL",
         },
         {
           title: "Orders",
           src: "orders",
-          icon: <FaClipboardList className="scale-150" />,
+          icon: <FaClipboardList className = "scale-150" />,
           visibility: "ALL",
         },
       ];
@@ -340,7 +337,7 @@ Per implementare le regole di visibilità in base ai ruoli degli utenti è stato
         ? [...Menus, {
             title: "Users",
             src: "users",
-            icon: <FaUserFriends className="scale-150" />,
+            icon: <FaUserFriends className = "scale-150" />,
             visibility: "ADMIN",
         }]
         : Menus;
@@ -391,7 +388,7 @@ Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getPro
 \end{lstlisting}
 Graficamente, le due funzioni sopracitate popolano la tabella dei progetti:
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{img/interfacce/table_project.pdf} 
     \caption{Pagina dei progetti}
@@ -427,7 +424,7 @@ Graficamente, le due funzioni sopracitate popolano la tabella dei progetti:
 \subsection{Diagramma dei casi d'uso (Use Case Diagram)}
 Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, sia umani che esterni. Gli attori umani includono "User", "Project Manager" e "Admin", mentre i servizi esterni sono "AWS DynamoDB" e "AWS Cognito". Gli attori umani interagiscono con il sistema principalmente per la gestione dei progetti e degli utenti. Le operazioni di gestione dei progetti comprendono la creazione, lettura, aggiornamento e cancellazione di progetti, raggruppate sotto il caso d'uso generale "Manage Projects". In modo simile (ma limitato agli attori Admin), la gestione degli utenti è modellata attraverso il caso d'uso "Manage Users", che include funzionalità come invitare nuovi utenti, modificare i ruoli e cancellare utenti già registrati. Il processo di autenticazione è diviso in due casi d'uso principali: il "First Login" per il primo accesso e "Second + Login" per i successivi. Questi casi d'uso si estendono con la gestione degli errori e la verifica delle password. Inoltre, è presente un caso d'uso separato per il cambio della password, "Change Password". Il sistema interagisce con "AWS Cognito" per gestire l'autenticazione e con "AWS DynamoDB" per eseguire operazioni sui dati dei progetti.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/diagrammi/use_case.pdf} 
     \caption{Use Case Diagram}
@@ -436,7 +433,7 @@ Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, 
 \subsection{Sequence diagram}
 Il diagramma di sequenza illustra il flusso delle interazioni tra l'utente, il sistema di autenticazione Cognito, la dashboard del CRM e il database DynamoDB per la gestione dei progetti. Inizia con l'utente che inserisce le credenziali (email e password) nella pagina di login. La pagina di login, quindi, inoltra questi dati al pool di utenti Cognito per verificarne la validità. Se l'indirizzo email è presente nel databae e la password è corretta, viene inviata una risposta di successo al client, che conferma l'accesso; altrimenti, l'utente riceve un messaggio di errore per indicare che le credenziali sono errate o che l'utente non è stato trovato. Dopo un login riuscito, l'utente naviga alla pagina dei progetti (/project), dove può visualizzare l'elenco di tutti i progetti disponibili. La dashboard CRM richiede i dati al database DynamoDB utilizzando una funzione \texttt{listProject}, e una volta ottenuta la risposta, i progetti vengono visualizzati in una tabella sullo schermo. Quando l'utente desidera creare, modificare o eliminare un progetto, invia una richiesta attraverso la dashboard per eseguire l'operazione. Per creare un nuovo progetto o cancellarne uno esistente, viene chiamata la funzione \texttt{createProject} o \texttt{deleteProject} sul database, rispettivamente. Dopo l'esecuzione di una di queste operazioni, la dashboard aggiorna la lista dei progetti mostrando i dati più recenti. Analogamente, se l'utente sceglie di aggiornare un progetto, la funzione \texttt{updateProject} viene invocata, e i dati modificati vengono salvati nel database. Anche in questo caso, la lista dei progetti viene ricaricata per riflettere le modifiche appena apportate.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{img/diagrammi/sequence.pdf} 
     \caption{Sequence Diagram per il login e le operazioni CRUD sui progetti}
