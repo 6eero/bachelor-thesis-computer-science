@@ -23,8 +23,13 @@
 \usepackage{subcaption}
 \usepackage{float}
 
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+
 \lstdefinelanguage{JavaScript}{
+    backgroundcolor=\color{backcolour},
     basicstyle=\fontsize{10}{11}\ttfamily, 
+    numberstyle=\color{codegray},
     keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, throw, try, typeof, var, void, while, with, yield, const, let, async, await, import, export, from, as, interface},
     keywordstyle=\color{blue}\bfseries,
     ndkeywords={class, boolean, throw, implements, this, string, any, number, model, Project},
@@ -119,9 +124,6 @@ Gli stakeholders di questo progetto includono:
     \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poichè il sistema è progettato per rispondere meglio alle loro necessità.
 \end{itemize}
 
-\subsection{Caratteristiche tecniche}
-Questo progetto è stato sviluppato utilizzando React e Next.js, sfruttando la libreria NextUI e Tailwind CSS per garantire un'interfaccia utente moderna e responsiva. Next.js \cite{nextjs2024} è ideale per lo sviluppo di applicazioni web grazie al rendering lato server e statico, che ottimizza prestazioni e SEO. La gestione delle route è semplice e la suddivisione automatica del codice accelera i caricamenti.
-
 \section{Ciclo di Vita Adottato}
 Archeido adotta un ciclo di vita del software basato su metodologie agili, come Scrum \cite{scrumwiki2024} e Kanban \cite{kanbanwiki2024}, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si distingue per un approccio meno rigido, focalizzato sull'obiettivo di fornire al cliente software funzionante in tempi brevi e con frequenza. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback. L'obiettivo primario è garantire la piena soddisfazione del cliente, andando oltre il semplice adempimento di un contratto.
 
@@ -135,7 +137,7 @@ Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante 
 \chapter{Background tecnico}
 
 \section{Introduzione}
-In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo le tecnologie principali utilizzate: TypeScript, React, Next.js, AWS, Next UI e Tailwind CSS. Ogni tecnologia verrà analizzata per evidenziarne i punti di forza e come contribuisce alla creazione di un CRM efficace.
+In questo capitolo, verrà presentato il contesto tecnico del progetto, descrivendo nel dettaglio le tecnologie principali utilizzate: TypeScript, React, Next.js, AWS, Next UI e Tailwind CSS. Queste tecnologie rappresentano la base dell'architettura del sistema e sono state selezionate per le loro caratteristiche che consentono di sviluppare un CRM moderno, efficiente e altamente scalabile. Verranno analizzati i punti di forza di ciascuna tecnologia, con un focus su come ognuna di esse contribuisce alla creazione di un'interfaccia utente reattiva, di un'esperienza utente fluida e di una gestione robusta dei dati.
 
 \section{JavaScript e TypeScript}
 JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js, come approfondito nelle sezioni successive. Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata. Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente.
@@ -179,7 +181,7 @@ Un componente React è una funzione JavaScript che rappresenta una parte riutili
 Le props permettono a un componente genitore di fornire informazioni immutabili a un componente figlio, rendendo quest'ultimo più dinamico e flessibile. Un esempio è il seguente:
 
 \begin{minipage}[t]{0.45\textwidth}
-    \begin{lstlisting}[caption=Componente genitore]
+    \begin{lstlisting}
 import React from 'react';
 import Greeting from './Greeting';
 
@@ -195,7 +197,7 @@ const App = () => {
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.45\textwidth}
-    \begin{lstlisting}[caption=Componente figlio]
+    \begin{lstlisting}
 import React from 'react';
 
 const Greeting = ({ name }) => {
@@ -275,7 +277,7 @@ Per la gestione dell'autenticazione degli utenti, è stato utilizzato AWS Cognit
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/login.pdf} 
+    \includegraphics[width=0.7\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
 \end{figure}
 
@@ -426,7 +428,7 @@ Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/diagrammi/use_case.pdf} 
+    \includegraphics[width=1\textwidth]{img/diagrammi/use_case.pdf} 
     \caption{Use Case Diagram}
 \end{figure}
 
