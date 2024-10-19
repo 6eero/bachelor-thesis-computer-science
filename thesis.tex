@@ -120,7 +120,7 @@ Il presente lavoro di tesi si propone di analizzare il progetto di un software C
 
 \section{Struttura di questa Tesi}
 
-Nelle sezioni seguenti, si fornirà un'analisi dettagliata del prodotto software sviluppato, evidenziando le sue funzionalità principali, gli obiettivi prefissati e gli stakeholder coinvolti. Inoltre, verrà discusso il ciclo di vita adottato per il progetto, i problemi riscontrati e le valutazioni effettuate, nonché il percorso di formazione che ha affiancato il tirocinio. Successivamente, sarà fornita una panoramica delle tecnologie utilizzate e dei requisiti funzionali del sistema, accompagnata da diagrammi esplicativi per facilitare la comprensione del lavoro svolto. 
+Nelle sezioni seguenti, si fornirà un'analisi dettagliata del prodotto software sviluppato, evidenziando le sue funzionalità principali, gli obiettivi prefissati e gli stakeholder coinvolti. Inoltre, verrà discusso il ciclo di vita adottato per il progetto, i problemi riscontrati e le valutazioni effettuate, nonchè il percorso di formazione che ha affiancato il tirocinio. Successivamente, sarà fornita una panoramica delle tecnologie utilizzate e dei requisiti funzionali del sistema, accompagnata da diagrammi esplicativi per facilitare la comprensione del lavoro svolto. 
 
 \noindent Infine, saranno discussi i metodi di testing impiegati, le aree che hanno ricevuto maggior attenzione e quelle che necessiterebbero di ulteriori verifiche. In prospettiva, saranno esplorate le opportunità di ampliamento del progetto, come l'integrazione di nuove funzionalità o l'ottimizzazione di quelle giá esistenti. 
 
@@ -182,7 +182,7 @@ JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-
 
 \noindent Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata, mettendo a disposizione le \textbf{interfacce}. Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente. 
 
-\noindent Un esempio é il seguente, in cui, la funzione \texttt{add} somma i parametri \texttt{a} e \texttt{b}, ma, nel caso di JavaScript, accetta qualsiasi tipo di valore senza controlli, essendo un linguaggio a tipizzazione dinamica. In TypeScript, invece, la funzione genera un errore di compilazione per \texttt{add("5", 10)}, poiché si aspetta parametri di tipo \texttt{number}.
+\noindent Un esempio è il seguente, in cui, la funzione \texttt{add} somma i parametri \texttt{a} e \texttt{b}, ma, nel caso di JavaScript, accetta qualsiasi tipo di valore senza controlli, essendo un linguaggio a tipizzazione dinamica. In TypeScript, invece, la funzione genera un errore di compilazione per \texttt{add("5", 10)}, poichè si aspetta parametri di tipo \texttt{number}.
 
 \begin{minipage}[t]{0.45\textwidth}
     \begin{lstlisting}[caption=Coercion in JavaScript]
@@ -202,7 +202,7 @@ add("5", 10); -> // Errore
     \end{lstlisting}
 \end{minipage}
 
-\noindent Nell'esempio sopra, JavaScript non genera un errore perché applica automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade perché l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa.
+\noindent Nell'esempio sopra, JavaScript non genera un errore perchè applica automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade perchè l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa.
 
 \subsection{Le interfacce in TypeScript}
 Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizione a priori di \textbf{interfacce} come linee guida per i modelli dati. Le interfacce fungono da \textit{blueprint}, definendo i tipi esplicitamente. Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema. Durante l'analisi dei requisiti, è emerso che ogni progetto registrato deve includere i seguenti campi:
@@ -296,6 +296,42 @@ export default Greeting;
 
 \noindent Per esempio, quando viene passato "Alice" come valore, come accade in \texttt{<Greeting name="Alice" />}, il risultato renderizzato sarà un'intestazione \texttt{h1} che dice "Hello, Alice!", mentre se invece viene passato "Bob" (attraverso \texttt{<Greeting name="Bob" />}), verrà stampato "Hello, Bob!".
 
+\subsection{L'uso degli hook}
+Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. 
+
+\noindent Gli hook più comuni includono \texttt{useState}, che permette di gestire lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
+
+\noindent  Piú nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato (\texttt{selectedProject}) e una funzione per aggiornare tale valore (\texttt{setSelectedProject}). \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale.
+
+\begin{center}
+\texttt{const [selectedProject, setSelectedProject] = useState<Project>({})}
+\end{center}
+
+\noindent \texttt{useEffect} invece, è un hook di React utilizzato per gestire \textbf{effetti collaterali} all'interno di un componente, come operazioni di recupero dati, manipolazione del DOM o registrazione di eventi. Accetta due argomenti: 
+
+\begin{itemize}
+    \item Una \textbf{funzione} che contiene il codice da eseguire (\texttt{() => {...}});
+    \item Un \textbf{array} di dipendenze che specifica i valori da monitorare (\texttt{[...]}). Quando una di queste dipendenze subisce una modifica, il corpo di \texttt{useEffect} viene eseguito. Tale esecuzione spesso genera effetti collaterali, con conseguente cambiamento di stato. Quando ciò accade, si verifica un rendering aggiornato del componente. Se, come in questo caso, il secondo parametro è un array vuoto, la funzione passata come primo argomento all'hook verrà eseguita soltanto la prima volta.
+\end{itemize}
+
+\noindent Un esempio d'uso dei due hooks sopracitati é il seguente, in cui si definisce una funzione chiamata \texttt{foo}. All'interno di questa funzione, viene utilizzato l'hook \texttt{useState} per creare una variabile di stato denominata \texttt{selectedProject} e la relativa funzione di aggiornamento \texttt{setSelectedProject}. L'inizializzazione di \texttt{selectedProject} è impostata su un oggetto vuoto, indicando che inizialmente non contiene dati.
+
+\noindent Successivamente, viene impiegato l'hook \texttt{useEffect}. In questo caso, l'array di dipendenze è vuoto, il che significa che la funzione sarà eseguita solo una volta, quando il componente viene montato per la prima volta. All'interno della funzione \texttt{useEffect}, viene chiamata \texttt{getProjectFromDatabase(1)}, il quale recupera il progetto identificato dall'ID \texttt{1}. Una volta ottenuto il progetto, viene utilizzata \texttt{setSelectedProject} per aggiornare lo stato di \texttt{selectedProject} con il progetto recuperato. Successivamente, questo pseudocodice sarà concretamente implementato.
+
+\begin{lstlisting}[caption=Routing dinamico con Next.js]
+const foo = () => {
+    const [selectedProject, setSelectedProject] = useState<Project>({});
+
+    useEffect(() => {
+        const myProject = getProjectFromDatabase(1)
+        setSelectedProject(myProject)
+    }, []);
+    // ...
+}
+\end{lstlisting}
+
+
+
 \section{Next.js}
 Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} React per la creazione di applicazioni web full-stack. Next.js permette di usare i componenti React per costruire interfacce utente, fornendo funzionalità aggiuntive e ottimizzazioni. Il framework astrae e configura automaticamente tutti gli strumenti necessari per React, come il \textbf{bundling}, la \textbf{compilazione} e il \textbf{routing}, permettendo di concentrarsi sulla logica dell'applicazione piuttosto che sulla configurazione tecnica. Di seguito verranno elencati i principali vantaggi di Next.js rispetto a React.
 
@@ -319,9 +355,8 @@ Il routing in React gestisce la navigazione tra diverse pagine o componenti all'
     \caption{App routing \cite{nextjsdocs2024} di Next.js}
 \end{figure}
 
-\noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa caratteristica è stata sfruttata nella pagina \texttt{./projects}, dove, selezionando un progetto, viene visualizzata la relativa pagina con i dettagli. Alla scelta di un progetto, l'utente viene reindirizzato a una pagina con un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si é creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
+\noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa caratteristica è stata sfruttata nella pagina \texttt{./projects}, dove, selezionando un progetto, viene visualizzata la relativa pagina con i dettagli. Alla scelta di un progetto, l'utente viene reindirizzato a una pagina con un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si è creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
 
-\label{sec:esempio}
 \begin{lstlisting}[caption=Routing dinamico con Next.js]
 const page = ({ params }: { params: { projectId: string } }) => {
   const [selectedProject, setSelectedProject] = useState<Project>({});
@@ -335,21 +370,6 @@ const page = ({ params }: { params: { projectId: string } }) => {
   return <div>Selected project: {params.slug}</div>
 };
 \end{lstlisting}
-
-\subsection{L'uso degli hook}
-Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. Gli hook più comuni includono \texttt{useState}, che permette di gestire lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
-
-\noindent  Piú nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato e una funzione per aggiornare tale valore. \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale. Nell'esempio sopra, \texttt{selectedProject} inizialmente é vuoto (l'argomento dell'hook é un oggetto vuoto).
-
-\noindent \texttt{useEffect} invece, è un hook di React utilizzato per gestire \textbf{effetti collaterali} all'interno di un componente, come operazioni di recupero dati, manipolazione del DOM o registrazione di eventi. Accetta due argomenti: 
-
-\begin{itemize}
-    \item Una \textbf{funzione} che contiene il codice da eseguire (\texttt{() => {...}}), in questo caso la funzione per ottenere il relativo progetto dal database e salvarlo in uno stato interno attraverso la funzione \texttt{setSelectedProject} estratta dall'hook \texttt{useState};
-    \item Un \textbf{array} di dipendenze che specifica i valori da monitorare (\texttt{[...]}), in questo caso vuoto.
-\end{itemize}
-
-\noindent Quando una di queste dipendenze subisce una modifica, il corpo di \texttt{useEffect} viene eseguito. Tale esecuzione spesso genera effetti collaterali, con conseguente cambiamento di stato. Quando ciò accade, si verifica un rendering aggiornato del componente. Se, come in questo caso, il secondo parametro è un array vuoto, la funzione passata come primo argomento all'hook verrà eseguita soltanto la prima volta.
-
 
 \section{Next UI e Tailwind CSS}
 In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, la quale è una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
@@ -370,14 +390,11 @@ In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, la qual
 
 
 \section{AWS: Amazon Web Service}
-Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amazon Web Services (AWS) come piattaforma di hosting e gestione delle funzionalità del sistema. AWS offre una vasta gamma di servizi cloud che si integrano in modo efficiente per garantire scalabilità, sicurezza e affidabilità. Di seguito si descrivono i principali servizi AWS utilizzati per il deployment della web app e per la gestione del login degli utenti.
+Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amazon Web Services (AWS) come piattaforma di hosting e gestione delle funzionalità del sistema. AWS offre una vasta gamma di servizi cloud che si integrano in modo efficiente per garantire scalabilità, sicurezza e affidabilità.
 
-\subsection{AWS Amplify e BitBucket}
-Per il deployment e la gestione del front-end del CRM, è stato impiegato AWS Amplify, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository BitBucket, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche o aggiornamenti al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
+\noindent Per il deployment e la gestione del front-end del CRM, è stato impiegato \textbf{AWS Amplify}, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository \textbf{BitBucket}, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
 
-\subsection{Cognito}
-Per la gestione dell'autenticazione degli utenti, è stato utilizzato AWS Cognito. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo una funzionalità che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
-
+\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo una funzionalità che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
 
 \begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
     const AuthenticatedLayout = ({ children }: any) => {
@@ -389,11 +406,9 @@ Per la gestione dell'autenticazione degli utenti, è stato utilizzato AWS Cognit
     };
 \end{lstlisting}
 
-\noindent Cognito offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. In questo modo, il sistema CRM può garantire un livello elevato di sicurezza, fondamentale per la gestione di dati sensibili come quelli legati ai progetti aziendali.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/login.pdf} 
+    \includegraphics[width=0.4\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
 \end{figure}
 
@@ -561,7 +576,7 @@ Il diagramma di sequenza illustra il flusso delle interazioni tra l'utente, il s
 \chapter{Testing}
 
 \section{La Libreria Cypress}
-Cypress è un framework di testing end-to-end per applicazioni web, progettato per semplificare la scrittura, l'esecuzione e il debug dei test. Cypress consente di testare l'intero flusso di un'applicazione simulando le interazioni dell'utente con l'interfaccia, come clic, inserimenti di dati e navigazione tra le pagine. La sua sintassi è intuitiva e simile a JavaScript, rendendo la scrittura dei test accessibile anche a chi ha poca esperienza nel campo del testing, motivazione per la quale si é optato per lui in questo progetto.
+Cypress è un framework di testing end-to-end per applicazioni web, progettato per semplificare la scrittura, l'esecuzione e il debug dei test. Cypress consente di testare l'intero flusso di un'applicazione simulando le interazioni dell'utente con l'interfaccia, come clic, inserimenti di dati e navigazione tra le pagine. La sua sintassi è intuitiva e simile a JavaScript, rendendo la scrittura dei test accessibile anche a chi ha poca esperienza nel campo del testing, motivazione per la quale si è optato per lui in questo progetto.
 
 \noindent Una delle caratteristiche distintive di Cypress è la sua interfaccia grafica (GUI), che permette di eseguire i test in tempo reale, mostrando il comportamento dell'applicazione e il risultato di ogni test mentre vengono eseguiti. Inoltre, offre strumenti di debugging integrati, che consentono agli sviluppatori di vedere esattamente cosa accade nel loro codice durante l'esecuzione dei test.
 
@@ -570,7 +585,7 @@ Cypress offre due modalità principali di testing: i test end-to-end (E2E) e i t
 
 \begin{itemize}
     \item I test end-to-end sono progettati per verificare il funzionamento dell'intera applicazione dall'inizio alla fine, simulando l'interazione dell'utente con l'interfaccia. Questa modalità consente di testare scenari complessi in cui più parti dell'applicazione sono coinvolte, garantendo che tutte le parti dell'applicazione funzionino correttamente e che l'esperienza utente sia fluida e priva di errori. 
-    \item D'altra parte, i test dei componenti si concentrano su singoli componenti dell'interfaccia utente, consentendo di verificare il comportamento e l'aspetto di ciascun elemento in isolamento. Utilizzando Cypress per i test dei componenti, é possibile testare come un componente reagisce a diverse props o stati, assicurandosi che funzioni correttamente in vari scenari. Questo approccio favorisce un ciclo di sviluppo più rapido e consente di identificare e correggere i bug a livello di singolo componente prima che influenzino l'intera applicazione.
+    \item D'altra parte, i test dei componenti si concentrano su singoli componenti dell'interfaccia utente, consentendo di verificare il comportamento e l'aspetto di ciascun elemento in isolamento. Utilizzando Cypress per i test dei componenti, è possibile testare come un componente reagisce a diverse props o stati, assicurandosi che funzioni correttamente in vari scenari. Questo approccio favorisce un ciclo di sviluppo più rapido e consente di identificare e correggere i bug a livello di singolo componente prima che influenzino l'intera applicazione.
 \end{itemize}
     
 
