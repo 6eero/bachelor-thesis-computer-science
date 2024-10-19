@@ -294,13 +294,13 @@ INPUT thesis.toc
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
 OUTPUT thesis.toc
+INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
-INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmbxti10.tfm
 INPUT E:\Programmi\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
