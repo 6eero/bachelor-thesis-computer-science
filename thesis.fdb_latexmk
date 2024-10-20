@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1729357164.81623 "thesis.aux" "thesis.bbl" "thesis" 1729357190.91526 0
+["bibtex thesis"] 1729439707.68932 "thesis.aux" "thesis.bbl" "thesis" 1729439710.04557 0
   "./plain_italian.bst" 1727366380 21772 b9f53fc1e71a9c29c62ec7586a3d5fef ""
   "./thud.bib" 1728217868 3362 daeb7d934233d386ba3f33b349757120 ""
-  "thesis.aux" 1729357190 9958 901f4fdc89f4a707a0ef9c389caef4fe "pdflatex"
+  "thesis.aux" 1729439709 10114 fa081f72015d920d0c649245adffda19 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1729357188.90591 "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" "thesis.pdf" "thesis" 1729357190.91583 0
+["pdflatex"] 1729439707.92956 "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" "thesis.pdf" "thesis" 1729439710.04615 0
   "C:/Users/Gerot/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1728741168 82535 0266753fb37a3d673c1d739765ad059f ""
   "C:/Users/Gerot/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1724740558 12668 a1cc3fb3432db6c5ccc5caa3ff0bc054 ""
   "C:/Users/Gerot/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1724740463 24253608 de73488a0ee92edb1f1e729e271bf8c2 ""
@@ -156,18 +156,19 @@
   "E:/Programmi/MiKTeX/tex/latex/xmpincl/xmpincl.sty" 1633254124 2832 d498c59e94b7dfa3b4bcf74380ad6348 ""
   "banners/banner_uniud_italian.pdf" 1727366380 311097 43520a8d67752a5d14b2af2b86c05575 ""
   "book.thud.tex" 1728742921 8570 1a1af840d69d0b1e1b5e85e6bb3ac939 ""
-  "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" 1729357188 51773 1ceace38137112fc87cdaadb430f55e4 ""
+  "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" 1729439704 52018 3b3b572c1156a73f3de83b7a5a278117 ""
   "img/diagrammi/sequence.pdf" 1728744720 87643 8b694c10c3d9bc6de2355804e5395d93 ""
   "img/diagrammi/use_case.pdf" 1728225446 74025 c0e0b6e80f27002a2efbb9c7b2e2d420 ""
+  "img/interfacce/table_edit.pdf" 1728228710 133015 4f540681a261c649bce58e670a67ec08 ""
   "img/interfacce/table_project.pdf" 1728228706 155570 445b92d4725a746de74d98e61ec1a9d9 ""
   "img/login.pdf" 1728144017 71832 e9bb392da93fd3e6e2f53d95d7ee3bbb ""
   "img/routing.pdf" 1727796153 67479 c8265cb7930620f0402bd5105844b166 ""
-  "pdfa.xmpi" 1729357189 5042 b9612b7e884d9f07bf4e3f4660dfeae2 "pdflatex"
-  "thesis.aux" 1729357190 9958 901f4fdc89f4a707a0ef9c389caef4fe "pdflatex"
-  "thesis.bbl" 1729357165 1519 4af235ba7e277847c85ea9877471898a "bibtex thesis"
-  "thesis.out" 1729357190 6018 f68cbaba76a43593f6c5611a78a3cd9a "pdflatex"
-  "thesis.tex" 1729357188 51773 1ceace38137112fc87cdaadb430f55e4 ""
-  "thesis.toc" 1729357190 3248 c0e819242d7c2866b547823a761f1bd1 "pdflatex"
+  "pdfa.xmpi" 1729439708 5042 b9a9ec8b92aeb96d1de2156ba8f8675f "pdflatex"
+  "thesis.aux" 1729439709 10114 fa081f72015d920d0c649245adffda19 "pdflatex"
+  "thesis.bbl" 1729439707 1519 4af235ba7e277847c85ea9877471898a "bibtex thesis"
+  "thesis.out" 1729439709 6102 401c4e40f96c3c85447e294321eedc79 "pdflatex"
+  "thesis.tex" 1729439704 52018 3b3b572c1156a73f3de83b7a5a278117 ""
+  "thesis.toc" 1729439709 3263 b0786a199e222f37d7bda6f55f5c277b "pdflatex"
   "thud.cls" 1727366380 6945 34fd740a843e0f4c23172ea0cfac1b63 ""
   (generated)
   "pdfa.xmpi"

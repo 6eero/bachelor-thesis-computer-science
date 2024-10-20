@@ -110,17 +110,17 @@
 
 % Capitolo 1
 \chapter{Introduzione}
-\section{Introduzione Generale}
+\section{Introduzione generale}
 Il presente lavoro di tesi si propone di analizzare il progetto di un software CRM (Customer Relationship Management) realizzato durante il periodo di tirocinio presso Archeido. L'obiettivo principale del progetto è stato quello di sviluppare una soluzione software efficace e innovativa, in grado di rispondere alle esigenze di gestione delle relazioni con i clienti. 
 
-\noindent  Piú nel dettaglio, lo scopo di questo progetto è sviluppare un CRM per gestire e monitorare i progetti in corso all'interno dell'azienda. Quando viene commissionato un nuovo progetto, questo viene registrato nella dashboard del CRM, dove è possibile tenere traccia delle tempistiche, dello stato di avanzamento e delle persone assegnate al progetto. Il sistema consente di monitorare l'intero ciclo di vita del progetto, dalla fase iniziale di pianificazione fino alla consegna finale, garantendo una gestione più efficiente delle risorse e una maggiore trasparenza nel processo operativo.
+\noindent  Più nel dettaglio, lo scopo di questo progetto è sviluppare un CRM per gestire e monitorare i progetti in corso all'interno dell'azienda. Quando viene commissionato un nuovo progetto, questo viene registrato nella dashboard del CRM, dove è possibile tenere traccia delle tempistiche, dello stato di avanzamento e delle persone assegnate al progetto. Il sistema consente di monitorare l'intero ciclo di vita del progetto, dalla fase iniziale di pianificazione fino alla consegna finale, garantendo una gestione più efficiente delle risorse e una maggiore trasparenza nel processo operativo.
 
-\noindent Per raggiungere questo obiettivo, è stato adottato un'approccio di sviluppo basato su metodologie agili, che hanno consentito di adattare rapidamente le funzionalità del software alle necessità emergenti durante il processo di sviluppo.
+\noindent Per raggiungere questo obiettivo, è stato adottato un approccio di sviluppo basato su metodologie agili, che hanno consentito di adattare rapidamente le funzionalità del software alle necessità emergenti durante il processo di sviluppo.
 
 
-\section{Struttura di questa Tesi}
+\section{Struttura della tesi}
 
-Nelle sezioni seguenti, si fornirà un'analisi dettagliata del prodotto software sviluppato, evidenziando le sue funzionalità principali, gli obiettivi prefissati e gli stakeholder coinvolti. Inoltre, verrà discusso il ciclo di vita adottato per il progetto, i problemi riscontrati e le valutazioni effettuate, nonchè il percorso di formazione che ha affiancato il tirocinio. Successivamente, sarà fornita una panoramica delle tecnologie utilizzate e dei requisiti funzionali del sistema, accompagnata da diagrammi esplicativi per facilitare la comprensione del lavoro svolto. 
+Nelle sezioni seguenti, si fornirà un'analisi dettagliata del prodotto software sviluppato, evidenziando le sue funzionalità principali, gli obiettivi prefissati e gli stakeholder coinvolti. Inoltre, verrà discusso il ciclo di vita adottato per il progetto, i problemi riscontrati e le valutazioni effettuate, nonché il percorso di formazione che ha affiancato il tirocinio. Successivamente, sarà fornita una panoramica delle tecnologie utilizzate e dei requisiti funzionali del sistema, accompagnata da diagrammi esplicativi per facilitare la comprensione del lavoro svolto. 
 
 \noindent Infine, saranno discussi i metodi di testing impiegati, le aree che hanno ricevuto maggior attenzione e quelle che necessiterebbero di ulteriori verifiche. In prospettiva, saranno esplorate le opportunità di ampliamento del progetto, come l'integrazione di nuove funzionalità o l'ottimizzazione di quelle giá esistenti. 
 
@@ -139,10 +139,10 @@ Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del sof
 Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
 
 \subsection{Funzionalità principali}
-Il CRM offre una gestione completa (CRUD) dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione. Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti inviati da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performance aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
+Il CRM offre una gestione completa dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione (CRUD). Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti generati e condivisi da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performances aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
 
 \subsection{Obiettivi del software}
-Il CRM ha come obiettivo principale quello di valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
+Il CRM ha come obiettivo principale valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
 
 \subsection{Stakeholders}
 Gli stakeholders di questo progetto includono:
@@ -150,21 +150,23 @@ Gli stakeholders di questo progetto includono:
 \begin{itemize}
     \item I \textbf{Super Amministratori}, che gestiscono la creazione degli utenti, assegnano loro permessi e regole di visibilità e hanno accesso completo a tutte le sezioni del CRM. 
     \item I \textbf{Project Manager}, i quali ricevono un account per accedere alla dashboard e possono visualizzare solo i progetti a cui sono stati assegnati, limitando l'accesso ad alcune sezioni.
-    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poichè il sistema è progettato per rispondere meglio alle loro necessità.
+    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poiché il sistema è progettato per rispondere meglio alle loro necessità.
 \end{itemize}
 
-\section{Ciclo di Vita Adottato}
-Archeido adotta un ciclo di vita del software basato su metodologie agili, come Scrum \cite{scrumwiki2024} e Kanban \cite{kanbanwiki2024}, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si distingue per un approccio meno rigido, focalizzato sull'obiettivo di fornire al cliente software funzionante in tempi brevi e con frequenza. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback. L'obiettivo primario è garantire la piena soddisfazione del cliente, andando oltre il semplice adempimento di un contratto.
+\section{Ciclo di vita adottato}
+Archeido adotta un ciclo di vita del software basato su metodologie agili, come Scrum \cite{scrumwiki2024} e Kanban \cite{kanbanwiki2024}, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si caratterizza per un approccio flessibile, orientato a fornire rapidamente software funzionante al cliente, garantendo aggiornamenti frequenti e miglioramenti continui. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback.
 
 \section{Formazione e Pair Programming}
 Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante la quale è stata approfondita la programmazione funzionale in JavaScript \cite{knowthen2024}, acquisendo le competenze necessarie per scrivere codice più efficiente, leggibile e mantenibile. In seguito, si è analizzato React \cite{udemyreactredux2024}, una libreria JavaScript sviluppata da Facebook per la creazione di interfacce utente interattive e componenti riutilizzabili, facilitando lo sviluppo di applicazioni web complesse. Infine, è stato esplorato Next.js, un framework che estende le capacità di React, permettendo il rendering lato server e facilitando la creazione di applicazioni web performanti.
 
-\noindent Una parte fondamentale della formazione è stata lo sviluppo prevalentemente in modalità di \textbf{pair programming}, una pratica essenziale della metodologia \textbf{Extreme Programming (XP)}, che ha velocizzato e semplificato l'apprendimento grazie alla collaborazione diretta tra i membri del team. In questo approccio, due programmatori lavorano insieme su un singolo computer: uno scrive il codice (driver), mentre l'altro lo esamina e fornisce suggerimenti (observer o navigator), favorendo un continuo scambio di conoscenze e un confronto immediato sulle soluzioni.
+\noindent Una parte fondamentale della formazione è stata lo sviluppo prevalentemente in modalità di \textbf{Pair Programming}, una pratica essenziale della metodologia \textbf{Extreme Programming (XP)}, che ha velocizzato e semplificato l'apprendimento grazie alla collaborazione diretta tra i membri del team. In questo approccio, due programmatori lavorano insieme su un singolo computer: uno scrive il codice (driver), mentre l'altro lo esamina e fornisce suggerimenti (observer o navigator), favorendo un continuo scambio di conoscenze e un confronto immediato sulle soluzioni.
 
 \noindent L'adozione di XP ha migliorato significativamente la qualità del codice, grazie al feedback immediato e all'integrazione di pratiche agili come il \textbf{refactoring continuo}, i \textbf{test frequenti} e la \textbf{revisione condivisa} del lavoro. Questo metodo ha permesso di mettere in pratica fin da subito le nozioni apprese nei corsi di JavaScript funzionale e React sopramenzionati, consentendo di affinare rapidamente le competenze tecniche e di adottare efficacemente pratiche di \textbf{clean code}, garantendo uno sviluppo più strutturato, di qualità e conforme alle best practices della scrittura del codice adottate in Archeido.
 
-\section{Problemi e Valutazioni}
-Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto, approfonditi ulteriormente nelle sezioni seguenti.
+\section{Problemi e valutazioni}
+Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. 
+
+\noindent Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto, approfonditi ulteriormente nelle sezioni seguenti.
 
 
 % Capitolo 3
@@ -178,11 +180,13 @@ In questo capitolo, verrà presentato il contesto tecnico del progetto, descrive
 \section{JavaScript e TypeScript}
 JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js. 
 
-\noindent Tuttavia, nel contesto di questo progetto, si è optato per l'uso di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript ha un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. 
+\noindent Tuttavia, nel contesto di questo progetto, si è optato per l'utilizzo di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript presenta un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. 
 
-\noindent Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata, mettendo a disposizione le \textbf{interfacce}. Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente. 
+\noindent Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata, mettendo a disposizione le \textbf{interfacce}. 
 
-\noindent Un esempio è il seguente, in cui, la funzione \texttt{add} somma i parametri \texttt{a} e \texttt{b}, ma, nel caso di JavaScript, accetta qualsiasi tipo di valore senza controlli, essendo un linguaggio a tipizzazione dinamica. In TypeScript, invece, la funzione genera un errore di compilazione per \texttt{add("5", 10)}, poichè si aspetta parametri di tipo \texttt{number}.
+\noindent Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente. 
+
+\noindent Un esempio pratico è la funzione \texttt{add}, che esegue la somma dei parametri \texttt{a} e \texttt{b}. In JavaScript, essendo un linguaggio a tipizzazione dinamica, la funzione accetta qualsiasi tipo di valore senza eseguire controlli. Al contrario, in TypeScript la chiamata \texttt{add("5", 10)} genera un errore di compilazione, poiché il linguaggio richiede esplicitamente che i parametri siano di tipo \texttt{number}.
 
 \begin{minipage}[t]{0.45\textwidth}
     \begin{lstlisting}[caption=Coercion in JavaScript]
@@ -202,7 +206,7 @@ add("5", 10); -> // Errore
     \end{lstlisting}
 \end{minipage}
 
-\noindent Nell'esempio sopra, JavaScript non genera un errore perchè applica automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade perchè l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa.
+\noindent Nell'esempio sopra, JavaScript non genera un errore perché applica automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade in quanto l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa.
 
 \subsection{Le interfacce in TypeScript}
 Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizione a priori di \textbf{interfacce} come linee guida per i modelli dati. Le interfacce fungono da \textit{blueprint}, definendo i tipi esplicitamente. Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema. Durante l'analisi dei requisiti, è emerso che ogni progetto registrato deve includere i seguenti campi:
@@ -218,7 +222,7 @@ Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizi
     
 \end{itemize}
 
-\noindent Questa specifica ha consentito di definire un'interfaccia \texttt{Project}, garantendo che chiunque la implementi debba rispettare questo schema:
+\noindent Questa specifica ha consentito di definire un'interfaccia \texttt{Project}, garantendo che chiunque la implementi debba rispettare lo schema riportato di seguito:
 
 \begin{lstlisting}[language=React, caption=Interfaccia di progetto]
 export interface Project {
@@ -232,10 +236,10 @@ export interface Project {
 }
 \end{lstlisting}
 
-\noindent Inizialmente, non era previsto che un progetto potesse essere assegnato a specifici Project Manager, quindi il sistema era configurato per consentire a tutti gli utenti di accedere a tutti i progetti. Grazie a TypeScript, l'aggiornamento del sistema è stato notevolmente semplificato: modificando l'interfaccia, gli errori di compilazione sono stati segnalati automaticamente in tutte le parti del codice interessate, facilitando l'individuazione delle sezioni da aggiornare. Questo ha reso il processo di adeguamento più rapido e preciso, assicurando al contempo la qualità del software.
+\noindent Inizialmente, non era previsto che un progetto potesse essere assegnato a specifici Project Manager, quindi il sistema era configurato per consentire a tutti gli utenti di accedere a ogni progetto. Grazie a TypeScript, l'aggiornamento del sistema è stato notevolmente semplificato: modificando l'interfaccia, gli errori di compilazione sono stati segnalati automaticamente in tutte le parti del codice interessate, facilitando l'individuazione delle sezioni da aggiornare. Questo ha reso il processo di adeguamento più rapido e preciso, assicurando al contempo la qualità del software.
 
 \section{React}
-React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX} (o \textbf{TSX} nel caso di TypeScript), una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Nell'esempio qui sotto,  il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma ritorna un codice HTML:
+React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX} (o \textbf{TSX} nel caso di TypeScript), una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Nell'esempio sotto riportato, il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma restituisce un codice HTML:
 
 \begin{lstlisting}[language=React, caption=Esempio di codice React]
 const name = 'Alice';   
@@ -252,13 +256,13 @@ const Greeting = () => {
 Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma di un'interfaccia utente in un'applicazione React. I componenti permettono di scomporre l'interfaccia in parti più piccole e gestibili, promuovendo la leggibilità, la manutenzione e il riuso del codice. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti più semplici garantisce diversi vantaggi:
 
 \begin{itemize}
-    \item \textbf{Riuso}: Un componente può essere utilizzato in più parti dell'applicazione, riuducendo la duplicazione del codice.
-    \item \textbf{Isolamento}: Ogni componente ha il proprio stato e le proprie proprietà, rendendo il singolo componente utilizzabile e testabile in ambienti isolati, rimuovendone le dipendenze da ció che appare al suo esterno.
-    \item \textbf{Composizione di componenti}: Una volta sviluppati diversi componenti, React consente di comporli insieme. Ad esempio, un componente \texttt{Card} potrebbe contenere tre componenti più semplici: un'immagine, un titolo e un pulsante. Tale Card potrebbe venir poi usata molteplici volte all'interno di un componente più complesso, come un \texttt{Carousel}.
+    \item \textbf{Riuso}: Un componente può essere utilizzato in diverseparti dell'applicazione, riducendo la duplicazione del codice.
+    \item \textbf{Isolamento}: Ogni componente ha il proprio stato e le proprie proprietà, rendendo il singolo componente utilizzabile e testabile in ambienti isolati, rimuovendone le dipendenze da ciò che appare al suo esterno.
+    \item \textbf{Composizione di componenti}: Una volta sviluppati diversi componenti, React consente di comporli insieme. Ad esempio, un componente \texttt{Card} potrebbe contenere tre componenti più semplici: un'immagine, un titolo e un pulsante. Tale \texttt{Card} potrebbe venir poi usata molteplici volte all'interno di un componente più complesso, come un \texttt{Carousel}.
 \end{itemize}
 
 \subsection{Le \textit{props}}
-Le props permettono a un componente genitore di fornire informazioni immutabili a un componente figlio, rendendo quest'ultimo più dinamico e flessibile. Un esempio è il seguente:
+Le props permettono a un componente genitore di fornire informazioni immutabili a un componente figlio, rendendo quest'ultimo più dinamico e flessibile.
 
 \begin{minipage}[t]{0.45\textwidth}
     \begin{lstlisting}[caption=Componente padre]
@@ -294,14 +298,14 @@ export default Greeting;
 
 \noindent In questo esempio, il componente \texttt{Greeting} (sulla destra) è una funzione che accetta la prop \texttt{name} e restituisce il testo  "Hello," seguito dal valore della prop \texttt{name}, ottenuta dal componente padre. 
 
-\noindent Per esempio, quando viene passato "Alice" come valore, come accade in \texttt{<Greeting name="Alice" />}, il risultato renderizzato sarà un'intestazione \texttt{h1} che dice "Hello, Alice!", mentre se invece viene passato "Bob" (attraverso \texttt{<Greeting name="Bob" />}), verrà stampato "Hello, Bob!".
+\noindent Per esempio, quando viene passato "Alice" come valore, come accade in \texttt{<Greeting name="Alice" />}, il risultato renderizzato sarà un'intestazione \texttt{h1} che riporta "Hello, Alice!", mentre se invece viene passato "Bob" (attraverso \texttt{<Greeting name="Bob" />}), verrà stampato "Hello, Bob!".
 
 \subsection{L'uso degli hook}
 Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. 
 
-\noindent Gli hook più comuni includono \texttt{useState}, che permette di gestire lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
+\noindent Gli hook più comuni includono \texttt{useState}, che permette di mantenere e modificare lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
 
-\noindent  Piú nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato (\texttt{selectedProject}) e una funzione per aggiornare tale valore (\texttt{setSelectedProject}). \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale.
+\noindent Più nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato (\texttt{selectedProject}) e una funzione per aggiornare tale valore (\texttt{setSelectedProject}). \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale.
 
 \begin{center}
 \texttt{const [selectedProject, setSelectedProject] = useState<Project>({})}
@@ -314,7 +318,7 @@ Gli hook sono una caratteristica di React introdotta con la versione 16.8 che co
     \item Un \textbf{array} di dipendenze che specifica i valori da monitorare (\texttt{[...]}). Quando una di queste dipendenze subisce una modifica, il corpo di \texttt{useEffect} viene eseguito. Tale esecuzione spesso genera effetti collaterali, con conseguente cambiamento di stato. Quando ciò accade, si verifica un rendering aggiornato del componente. Se, come in questo caso, il secondo parametro è un array vuoto, la funzione passata come primo argomento all'hook verrà eseguita soltanto la prima volta.
 \end{itemize}
 
-\noindent Un esempio d'uso dei due hooks sopracitati é il seguente, in cui si definisce una funzione chiamata \texttt{foo}. All'interno di questa funzione, viene utilizzato l'hook \texttt{useState} per creare una variabile di stato denominata \texttt{selectedProject} e la relativa funzione di aggiornamento \texttt{setSelectedProject}. L'inizializzazione di \texttt{selectedProject} è impostata su un oggetto vuoto, indicando che inizialmente non contiene dati.
+\noindent Un esempio d'uso dei due hooks sopracitati è il seguente, in cui si definisce una funzione chiamata \texttt{foo}. All'interno di questa funzione, viene utilizzato l'hook \texttt{useState} per creare una variabile di stato denominata \texttt{selectedProject} e la relativa funzione di aggiornamento \texttt{setSelectedProject}. L'inizializzazione di \texttt{selectedProject} è impostata su un oggetto vuoto, indicando che inizialmente non contiene dati.
 
 \noindent Successivamente, viene impiegato l'hook \texttt{useEffect}. In questo caso, l'array di dipendenze è vuoto, il che significa che la funzione sarà eseguita solo una volta, quando il componente viene montato per la prima volta. All'interno della funzione \texttt{useEffect}, viene chiamata \texttt{getProjectFromDatabase(1)}, il quale recupera il progetto identificato dall'ID \texttt{1}. Una volta ottenuto il progetto, viene utilizzata \texttt{setSelectedProject} per aggiornare lo stato di \texttt{selectedProject} con il progetto recuperato. Successivamente, questo pseudocodice sarà concretamente implementato.
 
@@ -326,28 +330,27 @@ const foo = () => {
         const myProject = getProjectFromDatabase(1)
         setSelectedProject(myProject)
     }, []);
-    // ...
 }
 \end{lstlisting}
 
 
 
 \section{Next.js}
-Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} React per la creazione di applicazioni web full-stack. Next.js permette di usare i componenti React per costruire interfacce utente, fornendo funzionalità aggiuntive e ottimizzazioni. Il framework astrae e configura automaticamente tutti gli strumenti necessari per React, come il \textbf{bundling}, la \textbf{compilazione} e il \textbf{routing}, permettendo di concentrarsi sulla logica dell'applicazione piuttosto che sulla configurazione tecnica. Di seguito verranno elencati i principali vantaggi di Next.js rispetto a React.
+Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} React per la creazione di applicazioni web full-stack. Next.js permette di usare i componenti React per costruire interfacce utente, fornendo funzionalità aggiuntive e ottimizzazioni. Il framework astrae e configura automaticamente tutti gli strumenti necessari per React, come il \textbf{bundling}, la \textbf{compilazione} e il \textbf{routing}, permettendo di concentrarsi sulla logica dell'applicazione piuttosto che sulla configurazione tecnica. Di seguito, verranno elencati i principali vantaggi di Next.js rispetto a React.
 
 \subsection{Rendering}
-Il principale vantaggio di Next.js è l'uso del \textbf{rendering lato server}: i componenti vengono renderizzati direttamente sul server, il cui contenuto viene poi inviato al client. Oltre a questo, Next.js offre la generazione di siti statici (\textbf{Static Site Generation, SSG}), permettendo di prerenderizzare pagine e componenti con dati statici al momento della costruzione dell'applicazione, rendendoli immediatamente disponibili al caricamento.
+Il principale vantaggio di Next.js è l'uso del \textbf{rendering lato server}: i componenti vengono renderizzati direttamente sul server, il cui contenuto viene poi inviato al client. Oltre a questo, Next.js offre la generazione di siti statici (\textbf{Static Site Generation, SSG}), permettendo di pre-renderizzare pagine e componenti con dati statici al momento della costruzione dell'applicazione, rendendoli immediatamente disponibili al caricamento.
 
 \begin{itemize}
-    \item Nel \textbf{Client-Side Rendering (CSR)}, i componenti dell'applicazione vengono raggruppati in un \texttt{bundle} e inviati al client per il rendering. Con l'aumentare della complessità dell'applicazione, la dimensione del \texttt{bundle} cresce, poichè deve includere tutti i componenti necessari. Di conseguenza, un \texttt{bundle} più ampio richiede una quantità maggiore di memoria al client per il caricamento completo. Inoltre, il CSR presenta sfide significative per l'ottimizzazione per i motori di ricerca (SEO) e può esporre dati sensibili contenuti all'interno dei componenti.
+    \item Nel \textbf{Client-Side Rendering (CSR)}, i componenti dell'applicazione vengono raggruppati in un \texttt{bundle} e inviati al client per il rendering. Con l'aumentare della complessità dell'applicazione, la dimensione del \texttt{bundle} cresce, poiché deve includere tutti i componenti necessari. Di conseguenza, un \texttt{bundle} più ampio richiede una quantità maggiore di memoria al client per il caricamento completo. Inoltre, il CSR presenta sfide significative per l'ottimizzazione per i motori di ricerca (SEO) e può esporre dati sensibili contenuti all'interno dei componenti.
 
-    \item Il \textbf{Server-Side Rendering (SSR)} affronta queste problematiche eseguendo il rendering dei componenti direttamente sul server. Tuttavia, i componenti server presentano alcune limitazioni: non possono rispondere a eventi del browser, come clic o modifiche, non possono accedere alle API del browser, non possono mantenere uno stato persistente nè utilizzare hook come \texttt{useEffect}.
+    \item Il \textbf{Server-Side Rendering (SSR)} affronta queste problematiche eseguendo il rendering dei componenti direttamente sul server. Tuttavia, i componenti server presentano alcune limitazioni: non possono rispondere a eventi del browser, come clic o modifiche, accedere alle API del browser, mantenere uno stato persistente né utilizzare hook come \texttt{useEffect}.
 \end{itemize}
 
-\noindent Nelle applicazioni reali, si tende a utilizzare una combinazione di CSR e SSR. L'SSR viene impiegato per la maggior parte delle parti dell'applicazione al fine di ottimizzare i tempi di caricamento, migliorare la SEO e garantire una maggiore sicurezza. Il CSR viene utilizzato solo in situazioni specifiche, per gestire interazioni che richiedono eventi del browser, accesso alle API del browser o gestione dinamica dello stato.
+\noindent Nelle applicazioni reali, si tende a utilizzare una combinazione di CSR e SSR.L'SSR viene utilizzato nella maggior parte delle sezioni dell'applicazione per ottimizzare i tempi di caricamento, migliorare la SEO e garantire una maggiore sicurezza. Il CSR viene utilizzato solo in situazioni specifiche, per gestire interazioni che richiedono eventi del browser, accesso alle API del browser o gestione dinamica dello stato.
 
 \subsection{App Routing}
-Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poichè si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione è \texttt{.tsx} perchè si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
+Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poiché si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione è \texttt{.tsx} perchè si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
 
 \begin{figure}[H]
     \centering
@@ -355,7 +358,7 @@ Il routing in React gestisce la navigazione tra diverse pagine o componenti all'
     \caption{App routing \cite{nextjsdocs2024} di Next.js}
 \end{figure}
 
-\noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa caratteristica è stata sfruttata nella pagina \texttt{./projects}, dove, selezionando un progetto, viene visualizzata la relativa pagina con i dettagli. Alla scelta di un progetto, l'utente viene reindirizzato a una pagina con un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si è creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
+\noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa funzionalità è stata adottata nella pagina \texttt{./projects}, dove selezionando un progetto si accede ai relativi dettagli, con un reindirizzamento a una pagina avente un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si è creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
 
 \begin{lstlisting}[caption=Routing dinamico con Next.js]
 const page = ({ params }: { params: { projectId: string } }) => {
@@ -372,7 +375,7 @@ const page = ({ params }: { params: { projectId: string } }) => {
 \end{lstlisting}
 
 \section{Next UI e Tailwind CSS}
-In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, la quale è una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
+In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
 
 \noindent Un'altra libreria utilizzata per la progettazione del CRM di Archeido è Tailwind CSS: un framework CSS utility-first \footnote{È un approccio alla progettazione di interfacce utente in cui si utilizzano classi CSS per applicare stili direttamente agli elementi HTML, piuttosto che definire classi personalizzate o stili specifici per i componenti.} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Con Tailwind, è infatti possibile applicare stili direttamente nei file HTML o JSX, rendendo il processo di sviluppo più efficiente. Un esempio è il seguente:
 
@@ -394,7 +397,7 @@ Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amaz
 
 \noindent Per il deployment e la gestione del front-end del CRM, è stato impiegato \textbf{AWS Amplify}, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository \textbf{BitBucket}, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
 
-\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo una funzionalità che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
+\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
 
 \begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
     const AuthenticatedLayout = ({ children }: any) => {
@@ -420,142 +423,171 @@ Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amaz
 In questo capitolo si descriveranno i requisiti del sistema CRM per la gestione dei progetti, sviluppato durante il tirocinio. Verranno utilizzati diversi strumenti di modellazione per rappresentare i requisiti funzionali e non funzionali del sistema, tra cui diagrammi e pseudocodice per i casi più rilevanti.
 
 \section{Definizione dei requisiti del sistema}
-Il sistema CRM è stato progettato per supportare la gestione di progetti aziendali, offrendo funzionalità che spaziano dalla creazione e monitoraggio dei progetti, alla gestione degli utenti. I principali requisiti funzionali includono:
+Il sistema CRM è stato progettato per supportare la gestione di progetti aziendali, offrendo funzionalità che spaziano dalla creazione e monitoraggio dei progetti, alla gestione degli utenti. I principali requisiti funzionali delineati durante la fase di raccolta dei requisiti includono:
 
 \begin{itemize}
     \item \textbf{Gestione utenti e ruoli}: gli utenti con ruolo \texttt{ADMIN} possono accedere e apportare modifiche a tutte le sezioni della dashboard: è loro compito assegnare un progetto a uno o più project manager. Gli utenti con ruolo \texttt{PROJECT\_MANAGER} possono visionare, modificare e/o cancellare solo i progetti a cui sono stati assegnati da un utente con ruolo \texttt{ADMIN}. Inoltre, la sezione utenti, disponibile al link \texttt{./users}, è visibile solo ad utenti con ruolo \texttt{ADMIN}.
     \item \textbf{Accesso riservato ad utenti invitati}: Un nuovo utente che desidera utilizzare il CRM deve ricevere un invito via email contenente una password temporanea, inviato da un amministratore. Al primo accesso, l'utente sarà obbligato a cambiare la password temporanea.
-    \item \textbf{Creazione di un progetto}: l'utente può creare un progetto, specificando dettagli come \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine}, \texttt{stato} (il quale può assumere i valori di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}) e \texttt{assegnazione\_ai\_project\_manager}.
+    \item \textbf{Creazione di un progetto}: l'utente può creare un progetto, specificando dettagli come \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine}, \texttt{stato} (il quale può assumere i valori di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}).
     \item \textbf{Modifica di un progetto}: l'utente può modificare un progetto esistente, modificandone i campi sopracitati.
     \item \textbf{Cancellazione di un progetto}: l'utente può cancellare un progetto. 
 \end{itemize}
 
-\subsection{Gestione dei ruoli degli utenti}
-Per implementare le regole di visibilità in base ai ruoli degli utenti è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e puó assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti} globale, il quale "wrappa" l'intera appllicazione. Tale contesto puó essere quindi ottenuto in ogni componente della web app. Un esempio di utilizzo avviene nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
+\subsection{Gestione dei ruoli degli utenti e uso del contesto}
+Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e puó assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata} globale, il quale "wrappa" l'intera appllicazione. Tale contesto puó essere poi ottenuto in ogni componente della web app. 
+
+\noindent Un esempio di utilizzo avviene nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
 
 \begin{lstlisting}[caption=Campi default visibili nella sidebar]
-    const menusFields = [
-        {
-          title: "Performances",
-          src: "performances",
-          icon: <FaRegChartBar className = "scale-150" />,
-          visibility: "ALL",
-        },
-        {
-          title: "Projects",
-          src: "projects",
-          icon: <FaProjectDiagram className = "scale-150" />,
-          visibility: "ALL",
-        },
-        {
-          title: "Orders",
-          src: "orders",
-          icon: <FaClipboardList className = "scale-150" />,
-          visibility: "ALL",
-        },
-      ];
+const menusFields = [
+    {
+        title: "Performances",
+        src: "performances",
+        icon: <FaRegChartBar className = "scale-150" />,
+        visibility: "ALL",
+        gap: false
+    },
+    {
+        title: "Projects",
+        src: "projects",
+        icon: <FaProjectDiagram className = "scale-150" />,
+        visibility: "ALL",
+        gap: false
+    },
+    {
+        title: "Orders",
+        src: "orders",
+        icon: <FaClipboardList className = "scale-150" />,
+        visibility: "ALL",
+        gap: false
+    },
+];
 \end{lstlisting}
 
 \noindent Viene successivamente estratto il ruolo dell'utente loggato dal contesto dell'applicazione:
 
 \begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
-    const user = useContext(AuthContext);
-    const role = user["custom:role"];
+const user = useContext(AuthContext);
+const role = user["custom:role"];
 \end{lstlisting}
 
 \noindent In questo modo, la costante \texttt{role} contiene la stringa \texttt{"ADMIN"} o la stringa  \texttt{"PROJECT\_MANAGER"}. Tale valore, viene usato in seguito per decidere se mostrare o meno la sezione Orders:
 
 \begin{lstlisting}[caption=Verifica ruolo]
-    role === "ADMIN" 
-        ? [...Menus, {
-            title: "Users",
-            src: "users",
-            icon: <FaUserFriends className = "scale-150" />,
-            visibility: "ADMIN",
-        }]
-        : Menus;
+role === "ADMIN" 
+    ? [...Menus, {
+        title: "Users",
+        src: "users",
+        icon: <FaUserFriends className = "scale-150" />,
+        visibility: "ADMIN",
+        gap: false
+    }]
+    : Menus;
 \end{lstlisting}
 
-\noindent Questo codice verifica se il ruolo dell'utente è "ADMIN". Se è così, crea una nuova lista Menus che include gli elementi esistenti, aggiungendo un nuovo oggetto per la voce di menu "Users". Se l'utente non è un admin, la lista Menus rimane invariata. L'uso dell'operatore di spread \texttt{...Menus} garantisce che la lista originale non venga modificata, mantenendo l'approccio immutabile tipico della programmazione funzionale.
+\noindent Questo codice verifica se il ruolo dell'utente che ha effetuato il login è "ADMIN". Se è così, crea una nuova lista \texttt{Menus} che include gli elementi esistenti, aggiungendo un nuovo oggetto per la voce di menu "Users". Contraruiamente, se l'utente non è un admin, la lista \texttt{Menus} rimane invariata. 
+
+\noindent L'uso dell'operatore di spread \texttt{...Menus} garantisce che la lista originale non venga modificata, mantenendo l'approccio immutabile tipico della programmazione funzionale.
 
 \subsection{Operazioni di CRUD}
-Le operazioni CRUD sono le quattro azioni fondamentali per la gestione dei dati in un database:Create (creare nuovi dati), Read (leggere o visualizzare i dati), Update (aggiornare i dati esistenti) e Delete (eliminare i dati). Il CRM supporta tutte e quattro queste operazioni, implementate seguendo la guida \cite{awsamplifynextjs2024} sulla documentazione di Amplify. Prima di tutto è stato creato il \textbf{modello dati} realtivo ai proggetti
+Le operazioni CRUD sono le quattro azioni fondamentali per la gestione dei dati in un database: Create (creare nuovi dati), Read (leggere o visualizzare i dati), Update (aggiornare i dati esistenti) e Delete (eliminare i dati). Il CRM supporta tutte e quattro queste operazioni, implementate seguendo la guida \cite{awsamplifynextjs2024} sulla documentazione di Amplify. Prima di tutto è stato creato il \textbf{modello dati} realtivo ai proggetti
 
 \begin{lstlisting}[caption=Parte del file \texttt{amplify/data/resource.ts}]
-    const schema = a
-    .schema({
-        Project: a.model({
-            code: a.string(),
-            name: a.string(),
-            startdate: a.string(),
-            enddate: a.string(),
-            state: a.string(),
-            assignedTo: a.string(),
-        }),
-    })
+const schema = a
+.schema({
+    Project: a.model({
+        code: a.string(),
+        name: a.string(),
+        startdate: a.string(),
+        enddate: a.string(),
+        state: a.string(),
+        assignedTo: a.string(),
+    }),
+})
 \end{lstlisting}
-Ogni volta che si definisce un modello con \texttt{a.model()}, vengono automaticamente create le seguenti risorse nel cloud:
+
+\noindent Ogni volta che si definisce un modello con \texttt{a.model()}, vengono automaticamente create le seguenti risorse nel cloud:
 \begin{itemize}
     \item Una tabella DynamoDB per memorizzare i record.
     \item API per query che permettono di creare, leggere (list/get), modificare ed eliminare i record.
     \item Campi \texttt{createdAt} e \texttt{updatedAt} per tracciare quando ogni record è stato creato o aggiornato.
     \item API in tempo reale per iscriversi agli eventi di creazione, aggiornamento ed eliminazione dei record.
 \end{itemize}
-Una volta completata questa operazione, è stata creata una cartella \texttt{api} nella root del progetto. Questa cartella ha lo scopo di raggruppare tutti i file relativi alle chiamate API, ed è stata pensata per mantenere il progetto ben organizzato, estraendo tutte le funzioni che effettuano chiamate al database. Al suo interno, è stata generata un'altra cartella chiamata \texttt{Project}, che a sua volta contiene il file \texttt{endpoints.ts}. Quest'ultimo file si occupa di definire ed esportare le funzioni relative alle operazioni CRUD. 
-Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
+\noindent Una volta completata questa operazione, è stata creata una cartella \texttt{api} nella root del progetto. Questa cartella ha lo scopo di raggruppare tutti i file relativi alle chiamate API, ed è stata pensata per mantenere il progetto ben organizzato, estraendo tutte le funzioni che effettuano chiamate al database. Al suo interno, è stata generata un'altra cartella chiamata \texttt{Project}, che a sua volta contiene il file \texttt{endpoints.ts}. Quest'ultimo file si occupa di definire ed esportare le funzioni relative alle operazioni CRUD. 
+
+\noindent Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
 
 \begin{lstlisting}[caption=funzione \texttt{getProject}]
-    const getProject = async (id: string) => {
-        const { data: selectedProject }: Project = await client.models.Project.get({
-            id
-        });
-        return selectedProject;
-    };
+const getProject = async (id: string) => {
+    const { data: selectedProject }: Project = await client.models.Project.get({
+        id
+    });
+    return selectedProject;
+};
 \end{lstlisting}
 
 \begin{lstlisting}[caption=funzione \texttt{listProject}]
-    const listProject = async () => {
-        const { data: projects } = await client.models.Projects.list();
-        return projects;
-    };
+const listProject = async () => {
+    const { data: projects } = await client.models.Projects.list();
+    return projects;
+};
 \end{lstlisting}
-Graficamente, le due funzioni sopracitate popolano la tabella dei progetti:
+
+\noindent Graficamente, le due funzioni menzionate sono responsabili dell'estrazione di tutti i dati necessari dal database per popolare la tabella presente all'URL \texttt{/projects}, mostrata nell'immagine qui sotto.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/interfacce/table_project.pdf} 
+    \includegraphics[width=0.8\textwidth]{img/interfacce/table_project.pdf} 
     \caption{Pagina dei progetti}
 \end{figure}
-\noindent Se dalla schermata dei progetti, viene cliccato il pulsante "Create Project", viene caricato l'url \texttt{./projects/create}, il quale mostra un form vuoto per l'inserimento dei dati del progetto. Per la realizzazione e gestione del form, si è ricorso alla libreria \texttt{Formik}. Una volta popolati tutti i campi del form, premendo il pulsante "Create" viene chiamata la funzione \texttt{createProject}, la quale prende in input l'oggetto \texttt{Project} appena creato e lo invia al database per la sua creazione.
+
+\noindent A questo punto, se si clicca sul pulsante "Create Project" viene caricato l'URL \texttt{./projects/create}, il quale visualizza un modulo vuoto per l'inserimento dei dati del progetto. Per la realizzazione e la gestione di questo modulo, è stata utilizzata la libreria \texttt{Formik}. Dopo aver compilato tutti i campi del modulo, premendo il pulsante "Create" viene invocata la funzione \texttt{createProject}, che riceve come input l'oggetto \texttt{Project} creato tramite il riempimento dei campi e lo invia al database per la sua creazione.
 
 \begin{lstlisting}[caption=funzione \texttt{createProject}]
-    const createProject = async (projectToCreate: Project) => {
-        await client.models.Project.create(project);
-    };
+const createProject = async (projectToCreate: Project) => {
+    await client.models.Project.create(project);
+};
 \end{lstlisting}
 
-\noindent La tabella dei progetti in \texttt{./projects} presenta una colonna denominata \texttt{ACTIONS}. In questa colonna sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale che consente di confermare l'eliminazione del progetto. D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In tale pagina è possibile effettuare modifiche o procedere all'eliminazione del progetto.
+\noindent La tabella dei progetti in \texttt{./projects} presenta una colonna denominata \texttt{ACTIONS}. In questa colonna sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale di \textit{danger} che consente di confermare l'eliminazione del progetto. D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In tale pagina è possibile effettuare modifiche o procedere all'eliminazione del progetto.
 
 \noindent Per eliminare un progetto, si utilizza la funzione \texttt{deleteProject}, che richiede come argomento l'oggetto \texttt{Project} da eliminare, e tramite il suo ID, esegue la cancellazione:
 
 \begin{lstlisting}[caption=funzione \texttt{deleteProject}]
-    const deleteProject = async (projectToDelete: Project) => {
-        const { id } = projectToDelete;
-        await client.models.Project.delete({ id });
-    };
+const deleteProject = async (projectToDelete: Project) => {
+    const { id } = projectToDelete;
+    await client.models.Project.delete({ id });
+};
 \end{lstlisting}
 
-\noindent L'aggiornamento di un progetto esistente viene fatto  attraverso la funzione \texttt{updateProject}, che accetta come parametro un oggetto \texttt{Project} e aggiorna il database con i nuovi dati forniti:
+\noindent L'aggiornamento di un progetto esistente viene fatto attraverso la funzione \texttt{updateProject}, che accetta come parametro un oggetto \texttt{Project} e aggiorna il database con i nuovi dati forniti:
 
 \begin{lstlisting}[caption=funzione \texttt{updateProject}]
-    const updateProject = async (projectToUpdate: Project) => {
-        await client.models.Project.update(projectToUpdate);
-    };
+const updateProject = async (projectToUpdate: Project) => {
+    await client.models.Project.update(projectToUpdate);
+};
 \end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/interfacce/table_edit.pdf} 
+    \caption{Pagina dei progetti}
+\end{figure}
 
 \section{Diagrammi}
 \subsection{Diagramma dei casi d'uso (Use Case Diagram)}
-Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, sia umani che esterni. Gli attori umani includono "User", "Project Manager" e "Admin", mentre i servizi esterni sono "AWS DynamoDB" e "AWS Cognito". Gli attori umani interagiscono con il sistema principalmente per la gestione dei progetti e degli utenti. Le operazioni di gestione dei progetti comprendono la creazione, lettura, aggiornamento e cancellazione di progetti, raggruppate sotto il caso d'uso generale "Manage Projects". In modo simile (ma limitato agli attori Admin), la gestione degli utenti è modellata attraverso il caso d'uso "Manage Users", che include funzionalità come invitare nuovi utenti, modificare i ruoli e cancellare utenti già registrati. Il processo di autenticazione è diviso in due casi d'uso principali: il "First Login" per il primo accesso e "Second + Login" per i successivi. Questi casi d'uso si estendono con la gestione degli errori e la verifica delle password. Inoltre, è presente un caso d'uso separato per il cambio della password, "Change Password". Il sistema interagisce con "AWS Cognito" per gestire l'autenticazione e con "AWS DynamoDB" per eseguire operazioni sui dati dei progetti.
+Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, sia umani che esterni. Nello specifico:
+
+\begin{itemize}
+    \item gli \textbf{attori umani} includono "User", "Project Manager" e "Admin" ;
+    \item i \textbf{servizi esterni} sono "AWS DynamoDB" e "AWS Cognito".
+\end{itemize}
+
+\noindent Gli attori umani interagiscono con il sistema principalmente per la gestione dei progetti e degli utenti. Le operazioni di gestione dei progetti comprendono la creazione, lettura, aggiornamento e cancellazione di progetti, raggruppate sotto il caso d'uso generale "Manage Projects". 
+
+\noindent In modo simile (ma limitato agli attori Admin), la gestione degli utenti è modellata attraverso il caso d'uso "Manage Users", che include funzionalità come invitare nuovi utenti, modificare i ruoli e cancellare utenti già registrati. 
+
+\noindent Il processo di autenticazione è diviso in due casi d'uso principali: il "First Login" per il primo accesso e "Second + Login" per i successivi. Questi casi d'uso si estendono con la gestione degli errori e la verifica delle password. Inoltre, è presente un caso d'uso separato per il cambio della password, "Change Password". Il sistema interagisce con "AWS Cognito" per gestire l'autenticazione e con "AWS DynamoDB" per eseguire operazioni sui dati dei progetti.
 
 \begin{figure}[H]
     \centering
@@ -564,7 +596,7 @@ Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, 
 \end{figure}
 
 \subsection{Sequence diagram}
-Il diagramma di sequenza illustra il flusso delle interazioni tra l'utente, il sistema di autenticazione Cognito, la dashboard del CRM e il database DynamoDB per la gestione dei progetti. Inizia con l'utente che inserisce le credenziali (email e password) nella pagina di login. La pagina di login, quindi, inoltra questi dati al pool di utenti Cognito per verificarne la validità. Se l'indirizzo email è presente nel databae e la password è corretta, viene inviata una risposta di successo al client, che conferma l'accesso; altrimenti, l'utente riceve un messaggio di errore per indicare che le credenziali sono errate o che l'utente non è stato trovato. Dopo un login riuscito, l'utente naviga alla pagina dei progetti (/project), dove può visualizzare l'elenco di tutti i progetti disponibili. La dashboard CRM richiede i dati al database DynamoDB utilizzando una funzione \texttt{listProject}, e una volta ottenuta la risposta, i progetti vengono visualizzati in una tabella sullo schermo. Quando l'utente desidera creare, modificare o eliminare un progetto, invia una richiesta attraverso la dashboard per eseguire l'operazione. Per creare un nuovo progetto o cancellarne uno esistente, viene chiamata la funzione \texttt{createProject} o \texttt{deleteProject} sul database, rispettivamente. Dopo l'esecuzione di una di queste operazioni, la dashboard aggiorna la lista dei progetti mostrando i dati più recenti. Analogamente, se l'utente sceglie di aggiornare un progetto, la funzione \texttt{updateProject} viene invocata, e i dati modificati vengono salvati nel database. Anche in questo caso, la lista dei progetti viene ricaricata per riflettere le modifiche appena apportate.
+Il diagramma di sequenza illustra le interazioni tra l'utente, il sistema di autenticazione Cognito, la dashboard del CRM e il database DynamoDB nella gestione dei progetti. Inizia con l'utente che inserisce le credenziali (email e password) nella pagina di login, che inoltra i dati al pool di utenti Cognito per verificarne la validità. Se l'email è presente e la password corretta, il client riceve una risposta di successo, confermando l'accesso; in caso contrario, viene visualizzato un messaggio di errore. Dopo un accesso riuscito, l'utente naviga alla pagina dei progetti (\texttt{/projects}), dove può vedere l'elenco di tutti i progetti disponibili. La dashboard del CRM richiede i dati al database DynamoDB tramite la funzione \texttt{listProject}, e, una volta ottenuta la risposta, i progetti vengono mostrati in una tabella. Quando l'utente desidera creare, modificare o eliminare un progetto, invia una richiesta tramite la dashboard. Per creare un nuovo progetto o cancellarne uno esistente, vengono chiamate le funzioni \texttt{createProject} o \texttt{deleteProject}, rispettivamente. Dopo l'esecuzione di queste operazioni, la dashboard aggiorna la lista dei progetti per mostrare i dati più recenti. Analogamente, se l'utente sceglie di aggiornare un progetto, viene invocata la funzione \texttt{updateProject} e i dati modificati vengono salvati nel database, con la lista dei progetti che si ricarica per riflettere le modifiche.
 
 \begin{figure}[H]
     \centering
