@@ -154,14 +154,18 @@ Gli stakeholders di questo progetto includono:
 \end{itemize}
 
 \section{Ciclo di vita adottato}
-Archeido adotta un ciclo di vita del software basato su metodologie agili, come Scrum \cite{scrumwiki2024} e Kanban \cite{kanbanwiki2024}, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si caratterizza per un approccio flessibile, orientato a fornire rapidamente software funzionante al cliente, garantendo aggiornamenti frequenti e miglioramenti continui. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback.
+Archeido adotta un ciclo di vita del software basato su metodologie agili, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si caratterizza per un approccio flessibile, orientato a fornire rapidamente software funzionante al cliente, garantendo aggiornamenti frequenti e miglioramenti continui. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback.
+
+\subsection{Plan-based vs Agile development}
+La differenza tra Agile e lo sviluppo plan-based risiede principalmente nell'approccio alla gestione dei progetti e nella flessibilità di risposta ai cambiamenti. Nel modello plan-based, il processo di sviluppo è caratterizzato da una pianificazione dettagliata e rigida delle fasi del progetto, dove i requisiti vengono definiti all'inizio e rimangono relativamente statici per tutta la durata del ciclo di vita del progetto. Al contrario, le metodologie Agile, come Scrum e Kanban, pongono l'accento sulla collaborazione continua tra i membri del team e gli stakeholder, consentendo una maggiore adattabilità. I requisiti non sono definitivi e possono evolvere nel corso del progetto, permettendo al team di rispondere rapidamente alle esigenze emergenti.
+
 
 \section{Formazione e Pair Programming}
 Il primo periodo di questo tirocinio è stato dedicato alla formazione, durante la quale è stata approfondita la programmazione funzionale in JavaScript \cite{knowthen2024}, acquisendo le competenze necessarie per scrivere codice più efficiente, leggibile e mantenibile. In seguito, si è analizzato React \cite{udemyreactredux2024}, una libreria JavaScript sviluppata da Facebook per la creazione di interfacce utente interattive e componenti riutilizzabili, facilitando lo sviluppo di applicazioni web complesse. Infine, è stato esplorato Next.js, un framework che estende le capacità di React, permettendo il rendering lato server e facilitando la creazione di applicazioni web performanti.
 
 \noindent Una parte fondamentale della formazione è stata lo sviluppo prevalentemente in modalità di \textbf{Pair Programming}, una pratica essenziale della metodologia \textbf{Extreme Programming (XP)}, che ha velocizzato e semplificato l'apprendimento grazie alla collaborazione diretta tra i membri del team. In questo approccio, due programmatori lavorano insieme su un singolo computer: uno scrive il codice (driver), mentre l'altro lo esamina e fornisce suggerimenti (observer o navigator), favorendo un continuo scambio di conoscenze e un confronto immediato sulle soluzioni.
 
-\noindent L'adozione di XP ha migliorato significativamente la qualità del codice, grazie al feedback immediato e all'integrazione di pratiche agili come il \textbf{refactoring continuo}, i \textbf{test frequenti} e la \textbf{revisione condivisa} del lavoro. Questo metodo ha permesso di mettere in pratica fin da subito le nozioni apprese nei corsi di JavaScript funzionale e React sopramenzionati, consentendo di affinare rapidamente le competenze tecniche e di adottare efficacemente pratiche di \textbf{clean code}, garantendo uno sviluppo più strutturato, di qualità e conforme alle best practices della scrittura del codice adottate in Archeido.
+\noindent L'adozione di XP ha migliorato significativamente la qualità del codice, grazie al feedback immediato e all'integrazione di pratiche agili come il \textbf{refactoring continuo} e la \textbf{revisione condivisa} del lavoro. Questo metodo ha permesso di mettere in pratica fin da subito le nozioni apprese nei corsi di JavaScript funzionale e React sopramenzionati, consentendo di affinare rapidamente le competenze tecniche e di adottare efficacemente pratiche di \textbf{clean code}, garantendo uno sviluppo più strutturato, di qualità e conforme alle best practices della scrittura del codice adottate in Archeido.
 
 \section{Problemi e valutazioni}
 Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. 
@@ -300,7 +304,7 @@ export default Greeting;
 
 \noindent Per esempio, quando viene passato "Alice" come valore, come accade in \texttt{<Greeting name="Alice" />}, il risultato renderizzato sarà un'intestazione \texttt{h1} che riporta "Hello, Alice!", mentre se invece viene passato "Bob" (attraverso \texttt{<Greeting name="Bob" />}), verrà stampato "Hello, Bob!".
 
-\subsection{L'uso degli hook}
+\subsection{L'uso degli hook \texttt{useState} e \texttt{useEffect}}
 Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. 
 
 \noindent Gli hook più comuni includono \texttt{useState}, che permette di mantenere e modificare lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
@@ -332,6 +336,26 @@ const foo = () => {
     }, []);
 }
 \end{lstlisting}
+
+\subsection{L'uso dell'hook \texttt{useMemo}: problemi e soluzioni}
+\noindent Si é preso in considerazione anche l'uso dell'hook \texttt{useMemo}. Tale hook viene utilizzato per memorizzare i risultati di una funzione e restituisce un valore memorizzato che cambia solo quando le sue dipendenze cambiano. Questo assicura che i calcoli costosi non vengano ripetuti a ogni rendering, ottimizzando così le prestazioni dei componenti React. Tuttavia, l'uso di \texttt{useMemo} dovrebbe essere impiegato solo quando si tratta di calcoli che richiedono molto tempo o risorse, e i risultati non cambiano tra i rendering, come ad esempio:
+
+\begin{itemize}
+    \item \textbf{Cicli annidati};
+    \item \textbf{Operazioni ricorsive};
+    \item \textbf{Trasformazioni di dati pesanti};
+    \item \textbf{Calcoli matematici complessi}.
+\end{itemize}
+
+\noindent Tuttavia, un uso eccessivo di questo hook può comportare gravi problemi, come evidenziato da Edvins Antonovs nel suo articolo intitolato \textbf{'useMemo overdose'} \cite{edvins2024usememo} e come illustrato da Giuseppe Funicello durante il ReactJS Day 2024 svolto a Verona il 25/10/2024 \cite{funicello2024reactjsday}. Un abuso di \texttt{useMemo} può portare a:
+
+\begin{itemize}
+    \item \textbf{Ottimizzazione prematura}: Nella maggior parte dei casi, quando un componente richiede un notevole potere di calcolo e impiega molto tempo per elaborarsi, si tende a utilizzare questo hook per affrontare il collo di bottiglia, anziché affrontare direttamente la causa del problema.
+    \item \textbf{Effetti collaterali indesiderati}: L'uso eccessivo di questo hook può portare a effetti collaterali imprevisti se le dipendenze non sono gestite correttamente. Se le dipendenze sono fornite in modo accurato, si possono evitare situazioni in cui il valore memorizzato non si aggiorna quando dovrebbe, portando a risultati obsoleti o errati.
+    \item \textbf{Complessità non necessaria}: Un uso eccesivo di questo hook aumenta la ridondanza nel codice, rendendolo più difficile da comprendere, oscurando la logica reale del componente.
+\end{itemize}
+
+\noindent Considerate queste osservazioni, si è optato per evitare l'uso di questo hook, specialmente in vista dell'aggiornamento a \textbf{React 19}, che porterà con sé il nuovo React Compiler. Questo compilatore consente di eliminare del tutto la necessità di utilizzare hook come \texttt{useMemo}, \texttt{useCallback} o \texttt{React.memo}. Questo perché, sfruttando la sua conoscenza di JavaScript e delle regole di React, il compilatore memoizza automaticamente valori o gruppi di valori all'interno dei componenti e degli hook. Qualora vengano rilevate violazioni delle regole, il compilatore salterà automaticamente quei componenti o hook specifici, continuando a elaborare in modo sicuro il resto del codice.
 
 
 
@@ -606,6 +630,7 @@ Il diagramma di sequenza illustra le interazioni tra l'utente, il sistema di aut
 
 % Capitolo 5
 \chapter{Testing}
+Le attività di testing si sono concentrate principalmente sulla verifica delle funzionalità principali dell'applicazione e sulla gestione degli accessi in base ai ruoli definiti. Questo approccio ha portato a un'applicazione operativa e robusta, ma ha anche rivelato lacune significative in termini di accessibilità, un aspetto che merita una riflessione più approfondita, di cui se ne parlerá in seguito.
 
 \section{La Libreria Cypress}
 Cypress è un framework di testing end-to-end per applicazioni web, progettato per semplificare la scrittura, l'esecuzione e il debug dei test. Cypress consente di testare l'intero flusso di un'applicazione simulando le interazioni dell'utente con l'interfaccia, come clic, inserimenti di dati e navigazione tra le pagine. La sua sintassi è intuitiva e simile a JavaScript, rendendo la scrittura dei test accessibile anche a chi ha poca esperienza nel campo del testing, motivazione per la quale si è optato per lui in questo progetto.
@@ -619,10 +644,97 @@ Cypress offre due modalità principali di testing: i test end-to-end (E2E) e i t
     \item I test end-to-end sono progettati per verificare il funzionamento dell'intera applicazione dall'inizio alla fine, simulando l'interazione dell'utente con l'interfaccia. Questa modalità consente di testare scenari complessi in cui più parti dell'applicazione sono coinvolte, garantendo che tutte le parti dell'applicazione funzionino correttamente e che l'esperienza utente sia fluida e priva di errori. 
     \item D'altra parte, i test dei componenti si concentrano su singoli componenti dell'interfaccia utente, consentendo di verificare il comportamento e l'aspetto di ciascun elemento in isolamento. Utilizzando Cypress per i test dei componenti, è possibile testare come un componente reagisce a diverse props o stati, assicurandosi che funzioni correttamente in vari scenari. Questo approccio favorisce un ciclo di sviluppo più rapido e consente di identificare e correggere i bug a livello di singolo componente prima che influenzino l'intera applicazione.
 \end{itemize}
-    
+
+\subsection{Testing Unitario}
+Il testing unitario è stato utilizzato per testare singole funzioni e componenti del sistema. Ogni funzione, come quelle di creazione, lettura, aggiornamento e cancellazione (CRUD) dei progetti, è stata testata in isolamento per garantire che operassero come previsto.
+
+\subsection{Testing di Integrazione}
+Il testing di integrazione è stato condotto per verificare l'interazione tra diversi moduli del sistema, in particolare tra il frontend e il backend. Questo ha incluso test per garantire che le chiamate API al database \texttt{DynamoDB} restituissero i risultati attesi e che il sistema di autenticazione \texttt{AWS Cognito} funzionasse correttamente.
+
+\subsection{Testing di Accettazione}
+Il testing di accettazione è stato realizzato coinvolgendo gli utenti finali nel processo. Gli utenti hanno testato le funzionalità del CRM per confermare che il sistema soddisfacesse i requisiti aziendali e che fosse user-friendly.
+
+\section{Casi di Test}
+I casi di test sono stati progettati per coprire tutte le funzionalità principali del sistema. Di seguito sono riportati alcuni esempi significativi:
+
+\subsection{Test di Creazione Progetto}
+\begin{itemize}
+    \item Obiettivo: Verificare che un progetto possa essere creato con successo.
+    \item Passi:
+    \begin{enumerate}
+        \item Accedere come utente con ruolo \texttt{ADMIN}.
+        \item Navigare alla pagina di creazione del progetto.
+        \item Compilare il modulo con dati validi.
+        \item Cliccare sul pulsante "Create".
+    \end{enumerate}
+    \item Risultato Atteso: Il progetto viene creato e appare nell'elenco dei progetti.
+\end{itemize}
+
+\subsection{Test di Modifica Progetto}
+\begin{itemize}
+    \item Obiettivo: Assicurarsi che un progetto esistente possa essere modificato.
+    \item Passi:
+    \begin{enumerate}
+        \item Accedere come \texttt{PROJECT MANAGER}.
+        \item Selezionare un progetto dall'elenco.
+        \item Modificare i dettagli del progetto.
+        \item Cliccare sul pulsante "Update".
+    \end{enumerate}
+    \item Risultato Atteso: Le modifiche vengono salvate e visualizzate correttamente.
+\end{itemize}
+
+\subsection{Test di Accesso Riservato}
+\begin{itemize}
+    \item Obiettivo: Verificare che solo gli utenti autorizzati possano accedere a determinate funzionalità.
+    \item Passi:
+    \begin{enumerate}
+        \item Accedere come utente con ruolo \texttt{PROJECT MANAGER}.
+        \item Tentare di accedere alla sezione "Users", scrivendo forzatamente nella barra degli url del browser l'url \texttt{/users}.
+    \end{enumerate}
+    \item Risultato Atteso: L'accesso viene negato e viene visualizzato un messaggio di errore.
+\end{itemize}
+
+\section{Risultati del Testing}
+Il processo di testing ha portato a risultati positivi. Sono stati identificati e risolti alcuni bug minori, principalmente legati all'interfaccia utente e alla gestione degli stati. Le prestazioni del sistema sono state valutate positivamente, e le operazioni di CRUD hanno mostrato tempi di risposta rapidi e consistenti. Inoltre, il feedback degli utenti durante il testing di accettazione é stato positivo.
+
+\section{Aspetti non testati e proposte di miglioramento}
+Durante il processo di testing del sistema CRM sviluppato, ci si è concentrati prevalentemente sulla verifica della corretta implementazione delle funzionalità principali. Tuttavia, gli aspetti riguardanti l'accessibilità della web app non sono stati oggetto di un test approfondito. 
+
+\noindent Ad esempio, uno degli aspetti di accessibilità che non sono stati testati riguarda la navigazione tramite tastiera e la compatibilità con screen reader. La navigazione tramite tastiera rappresenta un elemento molto importante per gli utenti che non possono o preferiscono non utilizzare il mouse, garantendo l'accesso completo alle funzionalità dell'applicazione. Allo stesso modo, non sono stati condotti test di compatibilità con screen reader, strumenti essenziali per gli utenti non vedenti o ipovedenti.
 
 % Capitolo 6
-\chapter{Conclusioni e sviluppi futuri}
+\chapter{Conclusioni}
+
+\section{Obiettivi Raggiunti}
+Il sistema CRM per la gestione dei progetti sviluppato durante il tirocinio ha soddisfatto gli obiettivi prefissati, fornendo una soluzione completa e scalabile per la gestione di progetti e utenti all'interno di un'organizzazione. Il progetto ha permesso l'implementazione di funzionalità chiave, tra cui:
+\begin{itemize}
+    \item La gestione centralizzata di utenti e ruoli, con accessi e permessi controllati basati sui ruoli \texttt{ADMIN} e \texttt{PROJECT MANAGER}, per una maggiore sicurezza e personalizzazione dell'esperienza.
+    \item La creazione, modifica e cancellazione di progetti, con tracciamento dello stato e assegnazione dei responsabili, rendendo agevole il monitoraggio e la gestione delle attività.
+    \item L'uso di strumenti come \texttt{AWS Cognito} e \texttt{DynamoDB}, che hanno consentito la gestione degli utenti e delle operazioni CRUD, supportando le necessità di autenticazione e archiviazione dei dati.
+\end{itemize}
+
+\section{Lezioni apprese}
+Lo sviluppo del sistema CRM ha fornito numerose lezioni preziose. Le sfide tecniche affrontate durante lo sviluppo hanno ulteriormente sottolineato l'importanza di una pianificazione adeguata e di valutazioni rigorose per garantire la scalabilità futura del sistema. Dedicar tempo all'inizio del processo per costruire fondamenta solide e scalabili si è dimostrato essenziale, evitando così l'implementazione affrettata di funzionalità che potrebbero portare a problemi di scarsa scalabilità in futuro.
+
+\noindent Inoltre, l'adozione di metodologie Agile ha portato numerosi benefici al progetto. Grazie alla suddivisione del lavoro in iterazioni brevi e incrementali, si é reso possibile ricevere feedback continui e apportare modifiche rapide in base alle esigenze emergenti.
+
+\section{Possibili Sviluppi Futuri}
+Il sistema CRM ha posto delle solide basi, ma ci sono opportunità di miglioramento e crescita:
+\begin{itemize}
+    \item \textbf{Estensione dei Ruoli}: la possibilità di aggiungere ulteriori ruoli con permessi differenziati potrebbe ampliare l'utilizzo del sistema, favorendo una più ampia delega delle responsabilità.
+    \item \textbf{Integrazione con Altri Servizi}: l'integrazione con altre API, come strumenti di gestione documentale o di reportistica avanzata, offrirebbe un supporto decisionale migliore agli utenti.
+    \item \textbf{Analisi dei Dati}: implementare funzionalità di data analytics per generare report sulle performance dei progetti, aiutando l'azienda a monitorare l'efficienza operativa.
+    \item \textbf{Potenziamento della Logica di Gestione degli Stati}: implementare una nuova logica per la gestione e il mantenimento degli stati attraverso l'uso di contesti e del dispatch di azioni. Questo approccio consentirebbe una gestione centralizzata e scalabile degli stati, semplificando la condivisione dei dati tra componenti e migliorando la modularità e la manutenzione del codice, aggiungendo ad esempio, un \texttt{loading} durante ogni cambio di stato/pagina.
+    \item \textbf{Sviluppo di test per migliorare l'accessibilità}: si propone di includere test mirati nei seguenti ambiti: innanzitutto, la navigazione tramite tastiera, tramite test automatizzati che verifichino la navigabilità dell'interfaccia, con particolare attenzione agli elementi interattivi come pulsanti, link e moduli di input. Un'altra proposta è l'implementazione di test di compatibilità con screen reader comuni per assicurare che i contenuti siano esposti in modo comprensibile e sequenziale e che l'esperienza utente sia coerente. Altri test utili includono il controllo del contrasto cromatico, per assicurarsi che le scelte di colore siano conformi agli standard WCAG 2.1. Inoltre, un'analisi approfondita delle etichette e delle descrizioni alternative sarebbe fondamentale per garantire che ogni immagine o icona disponga di un testo alternativo adeguato. 
+    \item \textbf{Implementazione della gestione utenti}: Attualmente, la pagina dedicata agli utenti in \texttt{/users} consente esclusivamente la visualizzazione degli utenti registrati, senza offrire la possibilità di invitare nuovi utenti o di modificare i loro attributi. Una possibile nuova funzionalità potrebbe prevedere l'integrazione di una gestione completa degli utenti direttamente all'interno della dashboard del CRM, centralizzando così tutte le operazioni in un'unica interfaccia anziché attraverso la dashboard di Cognito. Questa implementazione permetterebbe di inviare inviti a nuovi utenti e di rimuovere quelli esistenti, semplificando il processo di amministrazione e migliorando significativamente l'usabilità del sistema.
+    .
+
+\end{itemize}
+
+\section{Conclusioni}
+Il progetto CRM realizzato durante il tirocinio rappresenta un efficace strumento di gestione dei progetti aziendali, grazie a una piattaforma sicura e facilmente scalabile. Questo progetto, oltre a consolidare competenze tecniche nella gestione e nello sviluppo di sistemi basati su cloud, ha aperto la strada a miglioramenti futuri e a possibili nuove funzionalità, rafforzando il contributo dell'applicazione nel supportare i processi aziendali.
+
+
 
 
 
