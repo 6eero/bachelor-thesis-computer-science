@@ -304,7 +304,7 @@ export default Greeting;
 
 \noindent Per esempio, quando viene passato "Alice" come valore, come accade in \texttt{<Greeting name="Alice" />}, il risultato renderizzato sarà un'intestazione \texttt{h1} che riporta "Hello, Alice!", mentre se invece viene passato "Bob" (attraverso \texttt{<Greeting name="Bob" />}), verrà stampato "Hello, Bob!".
 
-\subsection{L'uso degli hook \texttt{useState} e \texttt{useEffect}}
+\subsection{Gli hooks}
 Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. 
 
 \noindent Gli hook più comuni includono \texttt{useState}, che permette di mantenere e modificare lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
@@ -324,9 +324,9 @@ Gli hook sono una caratteristica di React introdotta con la versione 16.8 che co
 
 \noindent Un esempio d'uso dei due hooks sopracitati è il seguente, in cui si definisce una funzione chiamata \texttt{foo}. All'interno di questa funzione, viene utilizzato l'hook \texttt{useState} per creare una variabile di stato denominata \texttt{selectedProject} e la relativa funzione di aggiornamento \texttt{setSelectedProject}. L'inizializzazione di \texttt{selectedProject} è impostata su un oggetto vuoto, indicando che inizialmente non contiene dati.
 
-\noindent Successivamente, viene impiegato l'hook \texttt{useEffect}. In questo caso, l'array di dipendenze è vuoto, il che significa che la funzione sarà eseguita solo una volta, quando il componente viene montato per la prima volta. All'interno della funzione \texttt{useEffect}, viene chiamata \texttt{getProjectFromDatabase(1)}, il quale recupera il progetto identificato dall'ID \texttt{1}. Una volta ottenuto il progetto, viene utilizzata \texttt{setSelectedProject} per aggiornare lo stato di \texttt{selectedProject} con il progetto recuperato. Successivamente, questo pseudocodice sarà concretamente implementato.
+\noindent Successivamente, viene impiegato l'hook \texttt{useEffect}. In questo caso, l'array di dipendenze è vuoto, il che significa che la funzione sarà eseguita solo una volta, quando il componente viene montato per la prima volta. All'interno della funzione \texttt{useEffect}, viene chiamata \texttt{getProjectFromDatabase(1)}, il quale recupera il progetto identificato dall'ID \texttt{1}. Una volta ottenuto il progetto, viene utilizzata \texttt{setSelectedProject} per aggiornare lo stato di \texttt{selectedProject} con il progetto recuperato.
 
-\begin{lstlisting}[caption=Routing dinamico con Next.js]
+\begin{lstlisting}[caption=\texttt{useEffect} e \texttt{useState} per ottenere e salvare un progetto in uno stato locale]
 const foo = () => {
     const [selectedProject, setSelectedProject] = useState<Project>({});
 
@@ -337,15 +337,15 @@ const foo = () => {
 }
 \end{lstlisting}
 
-\subsection{L'uso dell'hook \texttt{useMemo}: problemi e soluzioni}
-\noindent Si é preso in considerazione anche l'uso dell'hook \texttt{useMemo}. Tale hook viene utilizzato per memorizzare i risultati di una funzione e restituisce un valore memorizzato che cambia solo quando le sue dipendenze cambiano. Questo assicura che i calcoli costosi non vengano ripetuti a ogni rendering, ottimizzando così le prestazioni dei componenti React. Tuttavia, l'uso di \texttt{useMemo} dovrebbe essere impiegato solo quando si tratta di calcoli che richiedono molto tempo o risorse, e i risultati non cambiano tra i rendering, come ad esempio:
+\noindent Un altro hook molto popolare é \texttt{useMemo}. Tale hook viene utilizzato per memorizzare i risultati di una funzione e restituisce un valore memorizzato che cambia solo quando le sue dipendenze cambiano. Questo assicura che i calcoli costosi non vengano ripetuti a ogni rendering, ottimizzando così le prestazioni dei componenti React. Tuttavia, l'uso di \texttt{useMemo} dovrebbe essere impiegato solo quando si tratta di calcoli che richiedono molto tempo o risorse, e i risultati non cambiano tra i rendering, come ad esempio:
 
 \begin{itemize}
-    \item \textbf{Cicli annidati};
-    \item \textbf{Operazioni ricorsive};
-    \item \textbf{Trasformazioni di dati pesanti};
-    \item \textbf{Calcoli matematici complessi}.
+    \item \textbf{Cicli annidati}: l'uso di \texttt{useMemo} permette di evitare l'esecuzione ripetuta dei cicli annidati ad ogni render, migliorando l'efficienza. Questo puó essere il caso, ad esempio, in cui un componente React deve iterare su una matrice bidimensionale per calcolare dei risultati. Senza \texttt{useMemo}, ogni volta che il componente si renderizza, il ciclo annidato viene eseguito di nuovo, anche se i dati non sono cambiati;
+    \item \textbf{Operazioni ricorsive e calcoli matematici complessi}: \texttt{useMemo} memorizza il risultato di operazioni ricorsive complesse, prevenendo ricalcoli non necessari. Un esempio potrebbe essere un componente React che esegue una funzione ricorsiva per calcolare il numero di Fibonacci. Se \texttt{useMemo} non venisse usato, la funzione verrebbe rieseguita completamente ad ogni render, anche se il numero d'ingresso è lo stesso;
+    \item \textbf{Trasformazioni di grandi quantità di dati}: ad esempio, quando si lavora con array di dimensioni significative, \texttt{useMemo} garantisce che la trasformazione venga ricalcolata solo per i dati modificati rispetto alla precedente esecuzione.
 \end{itemize}
+
+
 
 \noindent Tuttavia, un uso eccessivo di questo hook può comportare gravi problemi, come evidenziato da Edvins Antonovs nel suo articolo intitolato \textbf{'useMemo overdose'} \cite{edvins2024usememo} e come illustrato da Giuseppe Funicello durante il ReactJS Day 2024 svolto a Verona il 25/10/2024 \cite{funicello2024reactjsday}. Un abuso di \texttt{useMemo} può portare a:
 
@@ -355,23 +355,25 @@ const foo = () => {
     \item \textbf{Complessità non necessaria}: Un uso eccesivo di questo hook aumenta la ridondanza nel codice, rendendolo più difficile da comprendere, oscurando la logica reale del componente.
 \end{itemize}
 
-\noindent Considerate queste osservazioni, si è optato per evitare l'uso di questo hook, specialmente in vista dell'aggiornamento a \textbf{React 19}, che porterà con sé il nuovo React Compiler. Questo compilatore consente di eliminare del tutto la necessità di utilizzare hook come \texttt{useMemo}, \texttt{useCallback} o \texttt{React.memo}. Questo perché, sfruttando la sua conoscenza di JavaScript e delle regole di React, il compilatore memoizza automaticamente valori o gruppi di valori all'interno dei componenti e degli hook. Qualora vengano rilevate violazioni delle regole, il compilatore salterà automaticamente quei componenti o hook specifici, continuando a elaborare in modo sicuro il resto del codice.
-
-
+\noindent Considerate queste osservazioni, si è optato per evitare l'uso di questo hook all'interno di questo progetto, specialmente in vista dell'aggiornamento a \textbf{React 19}, che porterà con sé il nuovo React Compiler. Questo compilatore consente di eliminare del tutto la necessità di utilizzare hook come il sopracitato \texttt{useMemo}. Questo perché, sfruttando la sua conoscenza di JavaScript e delle regole di React, il compilatore memoizza automaticamente valori o gruppi di valori all'interno dei componenti e degli hook. Qualora vengano rilevate violazioni delle regole, il compilatore salterà automaticamente quei componenti o hook specifici, continuando a elaborare in modo sicuro il resto del codice.
 
 \section{Next.js}
-Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} React per la creazione di applicazioni web full-stack. Next.js permette di usare i componenti React per costruire interfacce utente, fornendo funzionalità aggiuntive e ottimizzazioni. Il framework astrae e configura automaticamente tutti gli strumenti necessari per React, come il \textbf{bundling}, la \textbf{compilazione} e il \textbf{routing}, permettendo di concentrarsi sulla logica dell'applicazione piuttosto che sulla configurazione tecnica. Di seguito, verranno elencati i principali vantaggi di Next.js rispetto a React.
+Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} costruito sopra React, progettato per la creazione di applicazioni web full-stack. Mentre React si concentra principalmente sulla costruzione di interfacce utente tramite componenti, Next.js estende queste funzionalità offrendo un insieme di strumenti e ottimizzazioni che semplificano lo sviluppo di applicazioni complesse. Ad esempio, Next.js supporta il rendering lato server (SSR) e la generazione di siti statici (SSG), che migliorano le prestazioni e l'indicizzazione sui motori di ricerca (SEO).
 
 \subsection{Rendering}
-Il principale vantaggio di Next.js è l'uso del \textbf{rendering lato server}: i componenti vengono renderizzati direttamente sul server, il cui contenuto viene poi inviato al client. Oltre a questo, Next.js offre la generazione di siti statici (\textbf{Static Site Generation, SSG}), permettendo di pre-renderizzare pagine e componenti con dati statici al momento della costruzione dell'applicazione, rendendoli immediatamente disponibili al caricamento.
+In React, il rendering delle pagine avviene completamente nel browser tramite Client-Side Rendering (CSR). Quando un utente richiede una pagina, il server invia un documento HTML minimale, che di solito è molto scarno e non contiene il contenuto della pagina. Solo dopo che il codice JavaScript è stato eseguito nel browser, viene effettuata una chiamata per recuperare i dati, generando così il contenuto della pagina. Questo approccio può portare a tempi di caricamento iniziali più lunghi, poiché l'utente deve attendere il caricamento e l'esecuzione del codice JavaScript prima di vedere il contenuto.
+
+\noindent Next.js ottimizza le funzionalità di React grazie al \textbf{pre-rendering} di ogni pagina. A differenza del tradizionale rendering effettuato tramite JavaScript lato client, Next.js genera in anticipo il codice HTML per ciascuna pagina. Questa strategia consente di migliorare le performance e l'esperienza utente. In particolare, Next.js implementa due forme di pre-rendering per affrontare le problematiche tipiche del rendering in React:
 
 \begin{itemize}
-    \item Nel \textbf{Client-Side Rendering (CSR)}, i componenti dell'applicazione vengono raggruppati in un \texttt{bundle} e inviati al client per il rendering. Con l'aumentare della complessità dell'applicazione, la dimensione del \texttt{bundle} cresce, poiché deve includere tutti i componenti necessari. Di conseguenza, un \texttt{bundle} più ampio richiede una quantità maggiore di memoria al client per il caricamento completo. Inoltre, il CSR presenta sfide significative per l'ottimizzazione per i motori di ricerca (SEO) e può esporre dati sensibili contenuti all'interno dei componenti.
-
-    \item Il \textbf{Server-Side Rendering (SSR)} affronta queste problematiche eseguendo il rendering dei componenti direttamente sul server. Tuttavia, i componenti server presentano alcune limitazioni: non possono rispondere a eventi del browser, come clic o modifiche, accedere alle API del browser, mantenere uno stato persistente né utilizzare hook come \texttt{useEffect}.
+    \item \textbf{Static Generation (SSG)}: Il codice HTML delle pagine che utilizzano la generazione statica viene generato una sola volta durante il processo di compilazione e riutilizzato per ogni richiesta successiva. Questa caratteristica migliora notevolmente le prestazioni, poiché il contenuto è pronto per essere servito immediatamente. È buona norma adottare la generazione statica quando possibile, soprattutto per le pagine che non richiedono aggiornamenti frequenti o dati in tempo reale, in quanto possono essere pre-renderizzate.
+    
+    \item \textbf{Server-side Rendering (SSR o Dynamic Rendering)}: Il rendering lato server consente di generare dinamicamente il codice HTML per ogni pagina al momento della richiesta. Questo approccio è cruciale per le pagine che richiedono dati in tempo reale o informazioni che cambiano frequentemente. Con il Server-Side Rendering, ogni volta che un utente richiede una pagina, il server elabora le informazioni necessarie e genera il codice HTML. Una volta completato il rendering, l'HTML viene inviato al browser, assicurando che l'utente riceva immediatamente una pagina completamente renderizzata e aggiornata.
 \end{itemize}
 
-\noindent Nelle applicazioni reali, si tende a utilizzare una combinazione di CSR e SSR.L'SSR viene utilizzato nella maggior parte delle sezioni dell'applicazione per ottimizzare i tempi di caricamento, migliorare la SEO e garantire una maggiore sicurezza. Il CSR viene utilizzato solo in situazioni specifiche, per gestire interazioni che richiedono eventi del browser, accesso alle API del browser o gestione dinamica dello stato.
+\noindent Come giá descritto in precedenza, quando una pagina web è generata attraverso il rendering lato server, il server invia al browser un documento HTML già pronto, completo di contenuto e struttura. Tuttavia, affinché l'applicazione diventi interattiva e possa rispondere agli eventi (come click, input dell'utente, ecc.), è necessario che il codice JavaScript venga caricato e eseguito nel browser. Dunque, una volta che il codice JavaScript è disponibile, viene eseguito l'\texttt{hydration}, ossia un processo che comporta l'associazione dei gestori di eventi e l'attivazione della logica dei componenti, trasformando l'HTML statico in un'applicazione interattiva.
+
+\noindent Sebbene l'hydration offra notevoli vantaggi in termini di prestazioni e SEO, durante la realizzazione di questo progetto si sono verificati diversi errori di hydration. Questi problemi erano principalmente dovuti a incongruenze tra l'HTML generato dal server e quello che il client si aspettava dopo l'esecuzione del JavaScript. In particolare, un componente utilizzava dati che cambiavano frequentemente, causando stati non sincronizzati tra server e client. La soluzione a questo problema è consistita nel trasferire la logica relativa agli stati problematici e non sincronizzati all'interno di un contesto, permettendo così di mantenere uno stato coerente tra server e client.
 
 \subsection{App Routing}
 Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poiché si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione è \texttt{.tsx} perchè si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
@@ -397,6 +399,8 @@ const page = ({ params }: { params: { projectId: string } }) => {
   return <div>Selected project: {params.slug}</div>
 };
 \end{lstlisting}
+
+\noindent Quando il componente viene montato, il codice esegue un effetto collaterale utilizzando l'hook \texttt{useEffect}. Questo effetto invoca la funzione \texttt{getProject}, passando il \texttt{projectId} come argomento per recuperare i dettagli del progetto corrispondente. Una volta ottenuto il progetto, lo stato \texttt{selectedProject} viene aggiornato con i dati ricevuti. Infine, il componente restituisce un elemento \texttt{<div>} che visualizza un messaggio con il slug presente in \texttt{params}. Questo messaggio indica quale progetto è stato selezionato. 
 
 \section{Next UI e Tailwind CSS}
 In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
