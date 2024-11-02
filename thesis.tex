@@ -182,15 +182,7 @@ In questo capitolo, verrà presentato il contesto tecnico del progetto, descrive
 \noindent Queste tecnologie rappresentano la base dell'architettura del sistema e sono state selezionate per le loro caratteristiche che consentono di sviluppare un CRM moderno, efficiente e altamente scalabile. Verranno analizzati i punti di forza di ciascuna tecnologia, con un focus su come ognuna di esse contribuisce alla creazione di un'interfaccia utente reattiva, di un'esperienza utente fluida e di una gestione robusta dei dati.
 
 \section{JavaScript e TypeScript}
-JavaScript \cite{wikipedia:javascript} è un linguaggio di programmazione multi-paradigma, concepito per supportare l'orientamento agli eventi. È utilizzato sia per la programmazione lato client, principalmente nel contesto web, sia per la programmazione lato server, grazie all'uso di Node.js. 
-
-\noindent Tuttavia, nel contesto di questo progetto, si è optato per l'utilizzo di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript presenta un \textbf{sistema di tipi statici}. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. 
-
-\noindent Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata, mettendo a disposizione le \textbf{interfacce}. 
-
-\noindent Inoltre, è completamente compatibile con JavaScript, il che consente di integrare senza problemi codice esistente. 
-
-\noindent Un esempio pratico è la funzione \texttt{add}, che esegue la somma dei parametri \texttt{a} e \texttt{b}. In JavaScript, essendo un linguaggio a tipizzazione dinamica, la funzione accetta qualsiasi tipo di valore senza eseguire controlli. Al contrario, in TypeScript la chiamata \texttt{add("5", 10)} genera un errore di compilazione, poiché il linguaggio richiede esplicitamente che i parametri siano di tipo \texttt{number}.
+Nel contesto di questo progetto si è optato per l'utilizzo di \textbf{TypeScript} \cite{wikipedia:typescript}. Questa scelta è stata effettuata durante la fase iniziale di analisi dei requisiti e il motivo principale è stato che TypeScript presenta un \textbf{sistema di tipi statici} rispetto a JavaScript, che invece utilizza un sistema di tipi dinamici. Questo significa che i tipi delle variabili, delle funzioni e delle proprietà vengono definiti al momento della compilazione e non cambiano durante l'esecuzione, permettendo di rilevare gli errori in fase di compilazione piuttosto che durante l'esecuzione. Tuttavia, il browser non puó interpretare direttamente il codice TypeScript, il quale peró è completamente compatibile con JavaScript. Infatti, prima di poter essere eseguito nel browser, il codice TypeScript deve essere convertito in JavaScript tramite un processo di compilazione. Questo processo è tipicamente gestito da strumenti come il TypeScript Compiler (tsc), Webpack, Babel e altri bundler che supportano TypeScript. Durante la compilazione, TypeScript verifica la correttezza dei tipi e successivamente trasforma il codice TypeScript in JavaScript, che può essere eseguito da qualsiasi browser. Un esempio pratico in cui JavaScript risulta problematico é il seguente: 
 
 \begin{minipage}[t]{0.45\textwidth}
     \begin{lstlisting}[caption=Coercion in JavaScript]
@@ -210,10 +202,10 @@ add("5", 10); -> // Errore
     \end{lstlisting}
 \end{minipage}
 
-\noindent Nell'esempio sopra, JavaScript non genera un errore perché applica automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade in quanto l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa.
+\noindent Qui viene dichiarata la funzione \texttt{add}, la quale che esegue la somma degli argomenti \texttt{a} e \texttt{b} che riceve come input. In JavaScript, essendo un linguaggio a tipizzazione dinamica, non viene generato alcun errore perché viene applicata automaticamente la \textbf{coercion}, ovvero la conversione implicita di un tipo di dato in un altro per eseguire l'operazione richiesta. Nel caso di \texttt{add("5", 10)}, il numero \texttt{10} viene infatti convertito in una stringa \texttt{"10"} per consentire la concatenazione con \texttt{"5"}, producendo il risultato \texttt{"510"}. Questo accade in quanto l'operatore \texttt{+} in JavaScript somma i valori se entrambi sono numeri, ma effettua la concatenazione se almeno uno dei due è una stringa. Al contrario, in TypeScript la chiamata \texttt{add("5", 10)} provoca un errore di compilazione, poiché il linguaggio richiede esplicitamente che i parametri siano di tipo \texttt{number}.
 
 \subsection{Le interfacce in TypeScript}
-Durante lo sviluppo di questo progetto, si è dimostrata molto utile la definizione a priori di \textbf{interfacce} come linee guida per i modelli dati. Le interfacce fungono da \textit{blueprint}, definendo i tipi esplicitamente. Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema. Durante l'analisi dei requisiti, è emerso che ogni progetto registrato deve includere i seguenti campi:
+\noindent Un altro punto a favore viene evidenziato in contesti dove le applicazioni sono più complesse: TypeScript offre un'architettura di codice più chiara e strutturata, mettendo a disposizione le \textbf{interfacce}. Le interfacce fungono da \textit{blueprint}, definendo i tipi esplicitamente. Ad esempio, per poter creare un nuovo progetto all'interno del CRM, è necessario che esso segua una struttura definita. Attraverso l'uso delle interfacce, è possibile stabilire chiaramente quali proprietà e quali tipi di dati devono essere presenti, garantendo così la corretta integrazione e funzionamento all'interno del sistema. Durante l'analisi dei requisiti, è emerso che ogni progetto registrato deve includere i seguenti campi:
 
 \begin{itemize}
     \item \textbf{ID univoco}: necessario per distinguere i diversi progetti.
@@ -241,6 +233,12 @@ export interface Project {
 \end{lstlisting}
 
 \noindent Inizialmente, non era previsto che un progetto potesse essere assegnato a specifici Project Manager, quindi il sistema era configurato per consentire a tutti gli utenti di accedere a ogni progetto. Grazie a TypeScript, l'aggiornamento del sistema è stato notevolmente semplificato: modificando l'interfaccia, gli errori di compilazione sono stati segnalati automaticamente in tutte le parti del codice interessate, facilitando l'individuazione delle sezioni da aggiornare. Questo ha reso il processo di adeguamento più rapido e preciso, assicurando al contempo la qualità del software.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/typescript_and_javascript.pdf} 
+    \caption{TypeScript e JavaScript}
+\end{figure}
 
 \section{React}
 React è una libreria JavaScript per la creazione di interfacce utente reattive e componenti riutilizzabili. React consente di costruire interfacce utente utilizzando i cosidetti \textbf{componenti} sfruttando \textbf{JSX} (o \textbf{TSX} nel caso di TypeScript), una sintassi di estensione per JavaScript che permette di scrivere codice che combina quest'ultimo con HTML, in un formato che è più leggibile e comprensibile. Nell'esempio sotto riportato, il componente \texttt{Greeting} viene inizializzato usando JavaScript, ma restituisce un codice HTML:
@@ -307,9 +305,7 @@ export default Greeting;
 \subsection{Gli hooks}
 Gli hook sono una caratteristica di React introdotta con la versione 16.8 che consente di utilizzare lo stato e altre funzionalità di React nei componenti funzionali, senza la necessità di convertire il componente in una classe. Gli hook forniscono un modo per gestire lo stato locale, eseguire effetti collaterali, e utilizzare contesti, tra le altre operazioni, rendendo il codice più pulito e riutilizzabile. 
 
-\noindent Gli hook più comuni includono \texttt{useState}, che permette di mantenere e modificare lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. 
-
-\noindent Più nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato (\texttt{selectedProject}) e una funzione per aggiornare tale valore (\texttt{setSelectedProject}). \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale.
+\noindent Gli hook più comuni includono \texttt{useState}, che permette di mantenere e modificare lo stato locale all'interno di un componente, e \texttt{useEffect}, che consente di gestire effetti collaterali, come il caricamento di dati o la registrazione di eventi. Più nel dettaglio, \texttt{useState} restituisce un array composto da due elementi: il valore attuale dello stato (\texttt{selectedProject}) e una funzione per aggiornare tale valore (\texttt{setSelectedProject}). \texttt{useState} accetta un argomento, il quale rappresenta lo stato iniziale.
 
 \begin{center}
 \texttt{const [selectedProject, setSelectedProject] = useState<Project>({})}
@@ -365,22 +361,35 @@ In React, il rendering delle pagine avviene completamente nel browser tramite Cl
 
 \begin{itemize}
     \item \textbf{Static Generation (SSG)}: Il codice HTML delle pagine che utilizzano la generazione statica viene generato una sola volta durante il processo di compilazione e riutilizzato per ogni richiesta successiva. Questa caratteristica migliora notevolmente le prestazioni, poiché il contenuto è pronto per essere servito immediatamente. È buona norma adottare la generazione statica quando possibile, soprattutto per le pagine che non richiedono aggiornamenti frequenti o dati in tempo reale, in quanto possono essere pre-renderizzate.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/rendering/static_generation.pdf} 
+        \caption{Static Generation}
+    \end{figure}
+    
     
     \item \textbf{Server-side Rendering (SSR o Dynamic Rendering)}: Il rendering lato server consente di generare dinamicamente il codice HTML per ogni pagina al momento della richiesta. Questo approccio è cruciale per le pagine che richiedono dati in tempo reale o informazioni che cambiano frequentemente. Con il Server-Side Rendering, ogni volta che un utente richiede una pagina, il server elabora le informazioni necessarie e genera il codice HTML. Una volta completato il rendering, l'HTML viene inviato al browser, assicurando che l'utente riceva immediatamente una pagina completamente renderizzata e aggiornata.
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/rendering/server_side_rendering.pdf} 
+        \caption{Server-side Rendering}
+    \end{figure}
 \end{itemize}
 
-\noindent Come giá descritto in precedenza, quando una pagina web è generata attraverso il rendering lato server, il server invia al browser un documento HTML già pronto, completo di contenuto e struttura. Tuttavia, affinché l'applicazione diventi interattiva e possa rispondere agli eventi (come click, input dell'utente, ecc.), è necessario che il codice JavaScript venga caricato e eseguito nel browser. Dunque, una volta che il codice JavaScript è disponibile, viene eseguito l'\texttt{hydration}, ossia un processo che comporta l'associazione dei gestori di eventi e l'attivazione della logica dei componenti, trasformando l'HTML statico in un'applicazione interattiva.
+\noindent Come giá descritto in precedenza, quando una pagina web è generata attraverso il rendering lato server, il server invia al browser un documento HTML già pronto, completo di contenuto e struttura. Tuttavia, affinché l'applicazione diventi interattiva e possa rispondere agli eventi (come click, input dell'utente, ecc.), è necessario che il codice JavaScript venga caricato e eseguito nel browser. 
+
+\noindent Dunque, una volta che il codice JavaScript è disponibile, viene eseguito l'\texttt{hydration}, ossia un processo che comporta l'associazione dei gestori di eventi e l'attivazione della logica dei componenti, trasformando l'HTML statico in un'applicazione interattiva.
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/hydration/hydration1.pdf}
         \caption{\textbf{JavaScript non ancora caricato}: facendo clic sul pulsante di eliminiazione di un progetto, non si verifica alcuna azione.}
         \label{fig:img1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.46\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/hydration/hydration2.pdf}
         \caption{\textbf{JavaScript caricato}: facendo clic sul pulsante di eliminiazione di un progetto, si apre una finestra modale per confermare l'eliminazione.}
@@ -443,7 +452,7 @@ const MyComponent = () => {
 };
 \end{lstlisting}
 
-\noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa funzionalità è stata adottata nella pagina \texttt{./projects}, dove selezionando un progetto si accede ai relativi dettagli, con un reindirizzamento a una pagina avente un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si è creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
+\noindent Un altro aspetto chiave di Next.js è la possibilità di implementare facilmente il \textbf{routing dinamico}. Questa funzionalità è stata adottata nella pagina \texttt{./projects}, dove selezionando un progetto si accede ai relativi dettagli, con un reindirizzamento a una pagina avente un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco, il che rende funzionale la navigazione e il caricamento delle informazioni specifiche relative a ciascun progetto. Per ottenere ciò, all'interno della cartella \texttt{/projects} è stata creata un'ulteriore cartella denominata \texttt{[projectId]}. Questa convenzione di denominazione, utilizzando le parentesi quadre, indica a Next.js che il file al suo interno rappresenta una \textit{route dinamica}. All'interno di questa cartella, è presente un file chiamato \texttt{page.tsx}, che funge da componente per la pagina dei dettagli del progetto.
 
 \begin{lstlisting}[caption=Routing dinamico con Next.js]
 const page = ({ params }: { params: { projectId: string } }) => {
@@ -506,7 +515,7 @@ const AuthenticatedLayout = ({ children }: any) => {
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{img/login.pdf} 
+    \includegraphics[width=0.5\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
 \end{figure}
 
