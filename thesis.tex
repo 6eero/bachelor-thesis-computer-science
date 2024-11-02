@@ -345,8 +345,6 @@ const foo = () => {
     \item \textbf{Trasformazioni di grandi quantità di dati}: ad esempio, quando si lavora con array di dimensioni significative, \texttt{useMemo} garantisce che la trasformazione venga ricalcolata solo per i dati modificati rispetto alla precedente esecuzione.
 \end{itemize}
 
-
-
 \noindent Tuttavia, un uso eccessivo di questo hook può comportare gravi problemi, come evidenziato da Edvins Antonovs nel suo articolo intitolato \textbf{'useMemo overdose'} \cite{edvins2024usememo} e come illustrato da Giuseppe Funicello durante il ReactJS Day 2024 svolto a Verona il 25/10/2024 \cite{funicello2024reactjsday}. Un abuso di \texttt{useMemo} può portare a:
 
 \begin{itemize}
@@ -373,6 +371,25 @@ In React, il rendering delle pagine avviene completamente nel browser tramite Cl
 
 \noindent Come giá descritto in precedenza, quando una pagina web è generata attraverso il rendering lato server, il server invia al browser un documento HTML già pronto, completo di contenuto e struttura. Tuttavia, affinché l'applicazione diventi interattiva e possa rispondere agli eventi (come click, input dell'utente, ecc.), è necessario che il codice JavaScript venga caricato e eseguito nel browser. Dunque, una volta che il codice JavaScript è disponibile, viene eseguito l'\texttt{hydration}, ossia un processo che comporta l'associazione dei gestori di eventi e l'attivazione della logica dei componenti, trasformando l'HTML statico in un'applicazione interattiva.
 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/hydration/hydration1.pdf}
+        \caption{\textbf{JavaScript non ancora caricato}: facendo clic sul pulsante di eliminiazione di un progetto, non si verifica alcuna azione.}
+        \label{fig:img1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/hydration/hydration2.pdf}
+        \caption{\textbf{JavaScript caricato}: facendo clic sul pulsante di eliminiazione di un progetto, si apre una finestra modale per confermare l'eliminazione.}
+        \label{fig:img2}
+    \end{subfigure}
+    \caption{Prima e dopo l'hydration}
+    \label{fig:two_images}
+\end{figure}
+
 \noindent Sebbene l'hydration offra notevoli vantaggi in termini di prestazioni e SEO, durante la realizzazione di questo progetto si sono verificati diversi errori di hydration. Questi problemi erano principalmente dovuti a incongruenze tra l'HTML generato dal server e quello che il client si aspettava dopo l'esecuzione del JavaScript. In particolare, un componente utilizzava dati che cambiavano frequentemente, causando stati non sincronizzati tra server e client. La soluzione a questo problema è consistita nel trasferire la logica relativa agli stati problematici e non sincronizzati all'interno di un contesto, permettendo così di mantenere uno stato coerente tra server e client.
 
 \subsection{App Routing}
@@ -383,6 +400,48 @@ Il routing in React gestisce la navigazione tra diverse pagine o componenti all'
     \includegraphics[width=0.9\textwidth]{img/routing.pdf} 
     \caption{App routing \cite{nextjsdocs2024} di Next.js}
 \end{figure}
+
+\noindent La gestione del routing è stata implementata utilizzando un hook specifico chiamato \texttt{useRouter}. Questo hook, fornito da Next.js, permette di accedere al router e gestire la navigazione all'interno dell'applicazione. Per utilizzarlo, è sufficiente importarlo con la seguente istruzione:
+
+\begin{center}
+    \texttt{import \{ useRouter \} from 'next/router';}
+\end{center}
+
+\noindent Dopodiché, può essere dichiarato all'interno del componente con la seguente sintassi:
+
+\begin{center}
+    \texttt{const router = useRouter();}
+\end{center}
+
+\noindent Utilizzando la costante \texttt{router}, è possibile accedere facilmente a numerose informazioni e funzionalità legate alla navigazione. In particolare, si possono ottenere:
+
+\begin{itemize} 
+    \item Il \textbf{percorso attuale}: con \texttt{router.pathname}, che restituisce il percorso della route corrente senza includere i parametri della query. Questo può essere utile per sapere quale pagina è attualmente visualizzata e per applicare logiche condizionali basate sulla posizione dell'utente nell'applicazione;
+    \item I \textbf{parametri della query string}: tramite \texttt{router.query}, che fornisce un oggetto contenente i parametri della query presenti nell'URL. Questa funzionalità è utile per leggere dati dinamici dalla route, come identificatori o filtri passati tramite l'URL;
+    \item \textbf{Funzioni per navigare a nuove route e gestione della cronologia del browser}: ad esempio, \texttt{router.push()} consente di navigare verso un nuovo percorso specificato, permettendo reindirizzamenti programmatici all'interno dell'applicazione. Un'alternativa è \texttt{router.replace()}, che, a differenza di \texttt{push()}, sostituisce la voce corrente nella cronologia del browser, evitando di aggiungere una nuova voce. Infine, \texttt{router.back()} offre la possibilità di tornare alla pagina precedente, simulando il comportamento del pulsante "indietro" del browser.
+\end{itemize}
+
+\noindent Nel contesto della web app sviluppata, questo hook é stato usato molte volte nel seguente modo:
+
+\begin{lstlisting}[caption=\texttt{useRouter} per la navigazione tra url]
+import { useRouter } from 'next/router';
+
+const MyComponent = () => {
+    const router = useRouter();
+
+    const handleNavigation = () => {
+        router.push('/new-page'); // Reindirizza a "/new-page"
+    };
+
+    return (
+        <div>
+            <p>Current path: {router.pathname}</p>
+            <p>Query params: {router.query}</p>
+            <button onClick={handleNavigation}>Go to new page</button>
+        </div>
+    );
+};
+\end{lstlisting}
 
 \noindent Un'altra funzionalità di Next.js è la possibilità di implementare il \textbf{routing dinamico}. Questa funzionalità è stata adottata nella pagina \texttt{./projects}, dove selezionando un progetto si accede ai relativi dettagli, con un reindirizzamento a una pagina avente un URL del tipo \texttt{/projects/ID\_PROGETTO}. Naturalmente, ogni progetto ha un URL univoco. Per ottenere ció, all'interno della cartella \texttt{/projects} si è creata un'ulteriore cartella \texttt{[projectId]} contenente un file \texttt{page.tsx} strutturato in questo modo:
 
@@ -403,20 +462,28 @@ const page = ({ params }: { params: { projectId: string } }) => {
 \noindent Quando il componente viene montato, il codice esegue un effetto collaterale utilizzando l'hook \texttt{useEffect}. Questo effetto invoca la funzione \texttt{getProject}, passando il \texttt{projectId} come argomento per recuperare i dettagli del progetto corrispondente. Una volta ottenuto il progetto, lo stato \texttt{selectedProject} viene aggiornato con i dati ricevuti. Infine, il componente restituisce un elemento \texttt{<div>} che visualizza un messaggio con il slug presente in \texttt{params}. Questo messaggio indica quale progetto è stato selezionato. 
 
 \section{Next UI e Tailwind CSS}
-In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. 
+La parte grafica del progetto è stata gestita con l'uso combinato di Next UI e Tailwind CSS, due strumenti che hanno permesso di ottenere un design moderno e personalizzabile.
 
+\subsection{Next UI}
+In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. Un aspetto distintivo di Next UI è la sua ottimizzazione per le prestazioni, grazie all'uso di tecniche come il server-side rendering (SSR) e il client-side hydration, che migliorano l'esperienza utente garantendo un caricamento rapido delle pagine. Inoltre, la libreria è completamente modulare, permettendo di importare solo i componenti necessari e non tutta la suite, riducendo il peso complessivo dell'applicazione. Questo puó essere fatto utilizzando la destrutturazione in questo modo:
+
+\begin{center}
+    \texttt{import \{ Button \} from "@nextui-org/react";}
+\end{center}
+
+\subsection{Tailwind CSS}
 \noindent Un'altra libreria utilizzata per la progettazione del CRM di Archeido è Tailwind CSS: un framework CSS utility-first \footnote{È un approccio alla progettazione di interfacce utente in cui si utilizzano classi CSS per applicare stili direttamente agli elementi HTML, piuttosto che definire classi personalizzate o stili specifici per i componenti.} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Con Tailwind, è infatti possibile applicare stili direttamente nei file HTML o JSX, rendendo il processo di sviluppo più efficiente. Un esempio è il seguente:
 
 \begin{lstlisting}[caption=Parte del file \texttt{app.tsx} del CRM]
-    <main className = "flex flex-col h-screen">
-        <Navbar className = "w-screen" signOut={signOut} />
-        <div className = "flex flex-row h-full">
-            <div className = "col-auto">
-                <SideBar />
-            </div>
-            <div className = "col-auto p-8 grow">{children}</div>
+<main className = "flex flex-col h-screen">
+    <Navbar className = "w-screen" signOut={signOut} />
+    <div className = "flex flex-row h-full">
+        <div className = "col-auto">
+            <SideBar />
         </div>
-    </main> 
+        <div className = "col-auto p-8 grow">{children}</div>
+    </div>
+</main> 
 \end{lstlisting}
 
 
@@ -428,18 +495,18 @@ Nel contesto del progetto CRM per la gestione dei progetti, è stato scelto Amaz
 \noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
 
 \begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
-    const AuthenticatedLayout = ({ children }: any) => {
-      return (
-        <Authenticator hideSignUp components={components}>
-          {(props) => <App {...props}>{children}</App>}
-        </Authenticator>
-      );
-    };
+const AuthenticatedLayout = ({ children }: any) => {
+    return (
+    <Authenticator hideSignUp components={components}>
+        {(props) => <App {...props}>{children}</App>}
+    </Authenticator>
+    );
+};
 \end{lstlisting}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{img/login.pdf} 
+    \includegraphics[width=0.6\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
 \end{figure}
 
