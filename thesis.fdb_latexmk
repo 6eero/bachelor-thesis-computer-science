@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1730643022.58155 "thesis.aux" "thesis.bbl" "thesis" 1730643227.36647 0
+["bibtex thesis"] 1730647604.90544 "thesis.aux" "thesis.bbl" "thesis" 1730647607.64182 0
   "./plain_italian.bst" 1727366380 21772 b9f53fc1e71a9c29c62ec7586a3d5fef ""
   "./thud.bib" 1730050349 3779 7e92e49b1ea3302dea98cbca48c29b9a ""
-  "thesis.aux" 1730643226 15053 38b8b08127137cf9b3754f00102cb3f6 "pdflatex"
+  "thesis.aux" 1730647606 15516 59ee1c86c2f5c256be29e6b4dc7a8a7f "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1730643225.14307 "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" "thesis.pdf" "thesis" 1730643227.36706 0
+["pdflatex"] 1730647605.26536 "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" "thesis.pdf" "thesis" 1730647607.64241 0
   "C:/Users/Gerot/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1728741168 82535 0266753fb37a3d673c1d739765ad059f ""
   "C:/Users/Gerot/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1724740558 12668 a1cc3fb3432db6c5ccc5caa3ff0bc054 ""
   "C:/Users/Gerot/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1724740463 24253608 de73488a0ee92edb1f1e729e271bf8c2 ""
@@ -157,24 +157,26 @@
   "E:/Programmi/MiKTeX/tex/latex/xmpincl/xmpincl.sty" 1633254124 2832 d498c59e94b7dfa3b4bcf74380ad6348 ""
   "banners/banner_uniud_italian.pdf" 1727366380 311097 43520a8d67752a5d14b2af2b86c05575 ""
   "book.thud.tex" 1728742921 8570 1a1af840d69d0b1e1b5e85e6bb3ac939 ""
-  "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" 1730643224 83816 adc88e62dc18d34964a8d7b26b63b4ea ""
+  "c:/Users/Gerot/Desktop/Tesi/thud/thesis.tex" 1730647602 84956 3e643329f7589e6e9540987b83b8847c ""
+  "img/calendar.pdf" 1730645063 83649 ca9f10f59bdc27839f62c0e7d23205de ""
   "img/diagrammi/sequence.pdf" 1728744720 87643 8b694c10c3d9bc6de2355804e5395d93 ""
   "img/diagrammi/use_case.pdf" 1728225446 74025 c0e0b6e80f27002a2efbb9c7b2e2d420 ""
   "img/hydration/hydration1.pdf" 1730559127 121297 b6991c3b9a5c160867dc5762f872dbd4 ""
   "img/hydration/hydration2.pdf" 1730565652 669359 c1672b86890f626efb216002904db2dc ""
   "img/interfacce/table_edit.pdf" 1728228710 133015 4f540681a261c649bce58e670a67ec08 ""
   "img/interfacce/table_project.pdf" 1728228706 155570 445b92d4725a746de74d98e61ec1a9d9 ""
+  "img/layout.pdf" 1730647304 58568 ec43a575672c03fd19a078680215f257 ""
   "img/login.pdf" 1728144017 71832 e9bb392da93fd3e6e2f53d95d7ee3bbb ""
   "img/rendering/server_side_rendering.pdf" 1730564490 82832 7f757c46d9f0c374688051e9b4e6c588 ""
   "img/rendering/static_generation.pdf" 1730565027 83834 ee6b475f3b7556ca735cd48223d78500 ""
   "img/routing.pdf" 1727796153 67479 c8265cb7930620f0402bd5105844b166 ""
   "img/typescript_and_javascript.pdf" 1730567204 59648 a900747dd18aac283481711052daac73 ""
-  "pdfa.xmpi" 1730643225 5042 5d3c2efe67d6a7f788254f76260dccb8 "pdflatex"
-  "thesis.aux" 1730643226 15053 38b8b08127137cf9b3754f00102cb3f6 "pdflatex"
-  "thesis.bbl" 1730643022 1401 37d5282a6a3ded5afe392587445bc3c2 "bibtex thesis"
-  "thesis.out" 1730643226 10601 b983e45d385f81d8251f30de4eb1bd0c "pdflatex"
-  "thesis.tex" 1730643224 83816 adc88e62dc18d34964a8d7b26b63b4ea ""
-  "thesis.toc" 1730643226 5415 b12204a93251d3a7a64155195faea391 "pdflatex"
+  "pdfa.xmpi" 1730647605 5042 b1ab08d1f0382a09245b972dddcfe72b "pdflatex"
+  "thesis.aux" 1730647606 15516 59ee1c86c2f5c256be29e6b4dc7a8a7f "pdflatex"
+  "thesis.bbl" 1730647605 1401 37d5282a6a3ded5afe392587445bc3c2 "bibtex thesis"
+  "thesis.out" 1730647606 10494 58c58c199e2839544e6410eb7b3cbff8 "pdflatex"
+  "thesis.tex" 1730647602 84956 3e643329f7589e6e9540987b83b8847c ""
+  "thesis.toc" 1730647606 5396 5a2cda094e8e5d53680592c16b467174 "pdflatex"
   "thud.cls" 1727366380 6945 34fd740a843e0f4c23172ea0cfac1b63 ""
   (generated)
   "pdfa.xmpi"

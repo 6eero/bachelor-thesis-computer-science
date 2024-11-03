@@ -135,7 +135,7 @@ Questo capitolo fornisce un quadro dettagliato del contesto aziendale di Archeid
 \section{Archiedo}
 Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del software, focalizzata sulla creazione e implementazione di soluzioni su architetture cloud-native e infrastrutture Cloud, utilizzando principalmente Amazon Web Services. La missione di Archeido è supportare le aziende durante il processo di trasformazione digitale e adozione del Cloud, offrendo un'assistenza sia tecnica che strategica con massima trasparenza. L'azienda adotta e si basa sulle metodologie Agile, garantendo un processo di sviluppo rapido, sicuro ed efficiente.
 
-\section{Prodotto Software}
+\section{Prodotto software}
 Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
 
 \subsection{Funzionalità principali}
@@ -402,7 +402,7 @@ In React, il rendering delle pagine avviene completamente nel browser tramite Cl
 \label{sec:hydration_error}
 \noindent Sebbene l'hydration offra notevoli vantaggi in termini di prestazioni e SEO, durante la realizzazione di questo progetto si sono verificati diversi errori di hydration, evidenziati specialmente nella fase di testing. Questi problemi erano principalmente dovuti a incongruenze tra l'HTML generato dal server e quello che il client si aspettava dopo l'esecuzione del JavaScript. In particolare, un componente utilizzava dati che cambiavano frequentemente, causando stati non sincronizzati tra server e client. La soluzione a questo problema è consistita nel trasferire la logica relativa agli stati problematici e non sincronizzati all'interno di un contesto, permettendo così di mantenere uno stato coerente tra server e client.
 
-\subsection{App Routing}
+\subsection{App routing}
 Il routing in React gestisce la navigazione tra diverse pagine o componenti all'interno di un'applicazione. Utilizza librerie come \texttt{React Router} per definire percorsi e associare URL specifici a componenti. Quando un utente naviga a un URL, React Router mostra il componente corrispondente senza ricaricare l'intera pagina, permettendo un'esperienza utente fluida e dinamica. In Next.js, il sistema di routing è reso notevolmente più semplice e intuitivo, poiché si basa sulla \textbf{struttura del file system}. Le cartelle rappresentano i percorsi nell'applicazione web, e ogni cartella dedicata a una pagina deve contenere un file chiamato \texttt{page.tsx}\footnote{L'estensione è \texttt{.tsx} perché si sta usando TypeScript. Con JavaScript sarebbe \texttt{.jsx}.}, che include il contenuto della pagina. La cartella \texttt{app} funge da radice del progetto. Ad esempio, nel CRM è stata creata una cartella \texttt{projects}, al cui interno si trova il file \texttt{page.tsx}. In questo file, è stata definita ed esportata una funzione che restituisce un elemento TSX. Questo componente verrà visualizzato quando si visiterà il percorso \texttt{./projects} nella pagina web.
 
 \begin{figure}[H]
@@ -472,21 +472,42 @@ const page = ({ params }: { params: { projectId: string } }) => {
 \noindent Quando il componente viene montato, il codice esegue un effetto collaterale utilizzando l'hook \texttt{useEffect}. Questo effetto invoca la funzione \texttt{getProject}, passando il \texttt{projectId} come argomento per recuperare i dettagli del progetto corrispondente. Una volta ottenuto il progetto, lo stato \texttt{selectedProject} viene aggiornato con i dati ricevuti. Infine, il componente restituisce un elemento \texttt{<div>} che visualizza un messaggio con il slug presente in \texttt{params}. Questo messaggio indica quale progetto è stato selezionato. 
 
 \section{Next UI e Tailwind CSS}
-La parte grafica del progetto è stata gestita con l'uso combinato di Next UI e Tailwind CSS, due strumenti che hanno permesso di ottenere un design moderno e personalizzabile.
 
 \subsection{Next UI}
-In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente con un estetica accattivante ma pulita ed intuitiva. Un aspetto distintivo di Next UI è la sua ottimizzazione per le prestazioni, grazie all'uso di tecniche come il server-side rendering (SSR) e il client-side hydration, che migliorano l'esperienza utente garantendo un caricamento rapido delle pagine. Inoltre, la libreria è completamente modulare, permettendo di importare solo i componenti necessari e non tutta la suite, riducendo il peso complessivo dell'applicazione. Questo puó essere fatto utilizzando la destrutturazione in questo modo:
+In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una libreria di componenti UI progettata specificamente per Next.js. Essa offre una serie di componenti predefiniti (come bottoni, calendari, modali, cards, chips, etc.) e stilizzati che semplificano la creazione di interfacce utente. Inoltre é possibile importare solo i componenti necessari e non tutta la suite, riducendo il peso complessivo dell'applicazione. Ad esempio, se si volesse imporare un componente relativo ad un calendario, sarebbe sufficente scrivere il relativo codice:
 
-\begin{center}
-    \texttt{import \{ Button \} from "@nextui-org/react";}
-\end{center}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.6\textwidth}
+        \begin{lstlisting}[caption=Uso di un componente NextUI]
+import {Calendar} from "@nextui-org/react";
+
+const date = parseDate("2020-02-03");
+    
+export default function App() {
+    return (
+        <Calendar 
+            aria-label="Date" 
+            defaultValue={date} 
+        /> 
+    );
+}
+        \end{lstlisting}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/calendar.pdf}
+        \caption{Calendario di NextUI}
+    \end{minipage}
+\end{figure}
 
 \subsection{Tailwind CSS}
-\noindent Un'altra libreria utilizzata per la progettazione del CRM di Archeido è Tailwind CSS: un framework CSS utility-first \footnote{È un approccio alla progettazione di interfacce utente in cui si utilizzano classi CSS per applicare stili direttamente agli elementi HTML, piuttosto che definire classi personalizzate o stili specifici per i componenti.} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Con Tailwind, è infatti possibile applicare stili direttamente nei file HTML o JSX, rendendo il processo di sviluppo più efficiente. Un esempio è il seguente:
+\noindent Un'altra libreria utilizzata per la progettazione del CRM di Archeido è Tailwind CSS: un framework CSS \textit{utility-first} che permette agli sviluppatori di creare interfacce utente in modo rapido e flessibile. Il termine \textit{utility-first} si riferisce a un approccio alla progettazione delle interfacce utente che prevede l'uso di classi CSS predefinite per applicare gli stili direttamente agli elementi HTML, anziché creare classi personalizzate o definire stili specifici per i componenti. Un esempio è il seguente:
 
 \begin{lstlisting}[caption=Parte del file \texttt{app.tsx} del CRM]
 <main className = "flex flex-col h-screen">
-    <Navbar className = "w-screen" signOut={signOut} />
+    <NavBar className = "w-screen" signOut={signOut} />
     <div className = "flex flex-row h-full">
         <div className = "col-auto">
             <SideBar />
@@ -495,6 +516,14 @@ In questo progetto si è deciso di utilizzare Next UI \cite{nextui2024}, una lib
     </div>
 </main> 
 \end{lstlisting}
+
+\noindent Questo codice rappresenta la struttura di un componente React che definisce la disposizione generale delle pagine del progetto. L'elemento \texttt{<main>} ha una classe che lo rende un contenitore flessibile e verticale, con un'altezza che occupa l'intero schermo. All'interno di questo contenitore, è presente una barra di navigazione \texttt{<NavBar>} che si estende per tutta la larghezza della pagina e riceve una proprietà \texttt{signOut} per la gestione del logout. Sotto la barra di navigazione, vi è un contenitore diviso orizzontalmente in due sezioni. La prima sezione contiene una barra laterale \texttt{<SideBar>} che occupa spazio in base al suo contenuto, mentre la seconda sezione si estende e cresce per occupare il resto dello spazio disponibile. Questa seconda sezione include un'area di contenuto, rappresentata da \texttt{{children}}, che è un segnaposto per i contenuti passati come figli al componente principale
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/layout.pdf} 
+    \caption{Layout generico delle pagine, ottenuto utilizzando Tailwind CSS}
+\end{figure}
 
 
 \section{AWS: Amazon Web Service}
@@ -538,7 +567,7 @@ Il sistema CRM è stato progettato per supportare la gestione di progetti aziend
     \item \textbf{Cancellazione di un progetto}: l'utente può cancellare un progetto. 
 \end{itemize}
 
-\subsection{Gestione dei ruoli degli utenti e uso del contesto}
+\subsection{Gestione dei ruoli degli utenti}
 Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e puó assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata} globale, il quale "wrappa" l'intera appllicazione. Tale contesto puó essere poi ottenuto in ogni componente della web app. 
 
 \noindent Un esempio di utilizzo avviene nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
@@ -720,19 +749,19 @@ Diversi tipi di test sono stati implementati per valutare le funzionalità, l'af
 
 \noindent Infine, il testing di accettazione ha coinvolto gli utenti finali, amin e project managers, fornendo un feedback per confermare che il sistema rispondesse alle esigenze aziendali e offrisse un'esperienza user-friendly.
 
-\subsection{Testing Unitario}
+\subsection{Testing unitario}
 Il testing unitario è stato utilizzato per testare singole funzioni e componenti del sistema in un ambiente controllato, verificando che ciascun elemento funzionasse correttamente e in modo indipendente dagli altri. Ogni funzione, come quelle di creazione, lettura, aggiornamento e cancellazione dei progetti, è stata controllata in isolamento per assicurare che operasse come previsto e che le risposte fossero accurate e coerenti. In secondo luogo, il testing unitario ha reso più semplice il refactoring del codice, garantendo che i miglioramenti e le modifiche non compromettessero le funzionalità esistenti. La copertura dei test ha contribuito a costruire una base solida per i successivi livelli di test, come il testing di integrazione, dove si è verificata l'interazione tra più componenti del sistema per confermare che collaborassero senza problemi.
 
-\subsection{Testing di Integrazione}
+\subsection{Testing di integrazione}
 Il testing di integrazione è stato condotto per verificare l'interazione tra diversi moduli del sistema, in particolare tra il frontend e il backend. Questo ha incluso test per garantire che le chiamate API al database \texttt{DynamoDB} restituissero i risultati attesi e che il sistema di autenticazione \texttt{AWS Cognito} funzionasse correttamente.
 
-\subsection{Testing di Accettazione}
+\subsection{Testing di accettazione}
 Il testing di accettazione è stato realizzato coinvolgendo direttamente gli utenti finali nel processo per simulare scenari di utilizzo reale e ottenere un feedback autentico sull'efficacia del sistema. Gli utenti hanno avuto l'opportunità di testare le funzionalità principali del CRM, valutando sia la correttezza tecnica delle operazioni, sia la fluidità e l'intuitività dell'interfaccia. Durante queste sessioni, sono stati verificati aspetti come la facilità di navigazione, la chiarezza dei flussi di lavoro e i tempi di esecuzione delle varie operazioni. Inoltre, questo tipo di testing ha garantito che il CRM rispondesse pienamente ai requisiti aziendali, rispettando i requisiti funzionali, definiti nelle prime fasi del progetto, e di performance.
 
-\section{Casi di Test}
+\section{Casi di test}
 I casi di test sono stati progettati con l'obiettivo di coprire in modo completo e dettagliato tutte le funzionalità principali del sistema, oltre a garantire la conformità ai requisiti funzionali stabiliti durante la fase di pianificazione iniziale del progetto. Questi casi di test sono stati sviluppati per esplorare scenari reali di utilizzo in modo da assicurare la robustezza e l'affidabilità dell'applicazione. L'attenzione è stata rivolta a verificare che ogni aspetto del sistema rispondesse correttamente agli input previsti e non previsti, mantenendo un comportamento coerente e sicuro.  Di seguito vengono riportati alcuni esempi significativi di casi di test implementati:
 
-\subsection{Test di Creazione Progetto}
+\subsection{Test di creazione progetto}
 \begin{itemize}
     \item \textbf{Obiettivo}: Verificare che un progetto possa essere creato con successo.
     \item \textbf{Passi}:
@@ -745,7 +774,7 @@ I casi di test sono stati progettati con l'obiettivo di coprire in modo completo
     \item \textbf{Risultato Atteso}: Il progetto viene creato correttamente e compare nell'elenco dei progetti. Inoltre, anche dopo il refresh della pagina o dopo aver effettuato il logout e successivamente il login, il progetto rimane visibile e preservato nella lista, confermando la persistenza dei dati.
 \end{itemize}
 
-\subsection{Test di Cancellazione Progetto attraverso la pagina dei progetti}
+\subsection{Test di cancellazione progetto attraverso la pagina dei progetti}
 \begin{itemize}
     \item \textbf{Obiettivo}: Verificare che un progetto possa essere cancellato correttamente direttamente dall'elenco dei progetti, senza la necessità di accedere alla pagina di dettaglio del progetto stesso.
     \item \textbf{Passi}:
@@ -758,7 +787,7 @@ I casi di test sono stati progettati con l'obiettivo di coprire in modo completo
     \item \textbf{Risultato Atteso}: il progetto viene rimosso con successo dall'elenco dei progetti. Inoltre, anche dopo un refresh della pagina o dopo aver effettuato il logout e poi il login, il progetto non deve più comparire nella lista.
 \end{itemize}
 
-\subsection{Test di Cancellazione Progetto attraverso la pagina del dettaglio}
+\subsection{Test di cancellazione progetto attraverso la pagina del dettaglio}
 \begin{itemize}
     \item \textbf{Obiettivo}: Verificare che un progetto possa essere cancellato correttamente dalla pagina del dettaglio di tale progetto.
     \item \textbf{Passi}:
@@ -773,7 +802,7 @@ I casi di test sono stati progettati con l'obiettivo di coprire in modo completo
 \end{itemize}
 
 
-\subsection{Test di Modifica Progetto}
+\subsection{Test di modifica progetto}
 \begin{itemize}
     \item \textbf{Obiettivo}: Assicurarsi che un progetto esistente possa essere modificato.
     \item \textbf{Passi}:
@@ -786,7 +815,7 @@ I casi di test sono stati progettati con l'obiettivo di coprire in modo completo
     \item \textbf{Risultato Atteso}: Le modifiche vengono salvate con successo e visualizzate correttamente, assicurando che gli aggiornamenti siano immediatamente riflessi nell'interfaccia e persistano nel sistema.
 \end{itemize}
 
-\subsection{Test di Accesso Riservato}
+\subsection{Test di accesso riservato}
 \begin{itemize}
     \item \textbf{Obiettivo}: Assicurarsi che solo gli utenti autorizzati possano accedere a determinate funzionalità del sistema, come la visualizzazione dell'icona relativa alla pagina "Users" nella barra laterale della dashboard o la navigazione all'URL \texttt{/users}.
     \item \textbf{Passi}:
@@ -821,7 +850,7 @@ In particolare, non sono stati condotti test specifici sulla navigazione tramite
 % Capitolo 6
 \chapter{Conclusioni}
 
-\section{Obiettivi Raggiunti}
+\section{Obiettivi raggiunti}
 Il sistema CRM per la gestione dei progetti sviluppato durante il tirocinio ha soddisfatto gli obiettivi prefissati, fornendo una soluzione completa e scalabile per la gestione di progetti e utenti all'interno di un'organizzazione. Il progetto ha permesso l'implementazione di funzionalità chiave, tra cui:
 \begin{itemize}
     \item La gestione centralizzata di utenti e ruoli, con accessi e permessi controllati basati sui ruoli \texttt{ADMIN} e \texttt{PROJECT MANAGER}, per una maggiore sicurezza e personalizzazione dell'esperienza.
@@ -838,7 +867,7 @@ Lo sviluppo del sistema CRM ha fornito numerose lezioni preziose, specialmente n
 
 \noindent In conclusione, l'esperienza di sviluppo del sistema CRM ha non solo evidenziato l'importanza di una solida pianificazione e di una gestione attenta delle tecnologie utilizzate, ma ha anche dimostrato come le metodologie Agile possano facilitare un approccio flessibile e reattivo, fondamentale per il successo di progetti complessi. Questo ha portato a un prodotto finale non solo funzionale e scalabile, ma anche in grado di rispondere in modo efficace alle esigenze dei suoi utenti.
 
-\section{Possibili Sviluppi Futuri}
+\section{Possibili sviluppi futuri}
 Il sistema CRM ha fornito solide fondamenta, tuttavia esistono ulteriori opportunità di miglioramento e crescita. Di seguito verranno delineate alcune di queste possibilità.
 
 \subsection{Potenziamento della logica di gestione degli stati}
@@ -846,7 +875,7 @@ Al momento, tutti gli stati di questa applicazione vengono gestiti nei component
 
 \noindent Per iniziare, si potrebbe creare una cartella denominata \texttt{Context} e spostare al suo internole logiche esistenti relative al contesto globale (a.e. reperire i dati dell'utente loggato). In aggiunta, si potrebbe realizzare file separati relativi ai contesti, come \texttt{Project.tsx} e \texttt{Users.tsx}, i quali "wrapperanno" l'intera applicazione garantendo che le strutture dati all'interno dei contesti specifici siano accessibili in modo globale. Ogni contesto dovrà includere una costante \texttt{initState}, che definirà i dati iniziali e la struttura del contesto stesso. In questo nuovo approccio, le modifiche di stato non avverranno più tramite l'hook \texttt{useState}, ma piuttosto attraverso il dispatch di un'azione, che modificherà lo stato del contesto. Ogni volta che ciò si verificherà, l'applicazione verrà renderizzata nuovamente, proprio come accade con \texttt{useState}. Sfruttando questa metodologia, si potrà beneficiare di una gestione centralizzata e scalabile degli stati, semplificando la condivisione dei dati tra i componenti. Inoltre, contribuirà a migliorare la modularità e la manutenzione del codice, consentendo l'integrazione di funzionalità come un indicatore di \texttt{loading} durante i cambiamenti di stato o di pagina.
 
-\subsection{Analisi dei Dati}
+\subsection{Analisi dei dati}
 Implementare funzionalità di data analytics per generare report dettagliati sulle performance dei progetti. Queste funzionalità consentiranno di raccogliere e analizzare dati significativi riguardanti le tempistiche di completamento, l'utilizzo delle risorse (a.e. il tempo totlae speso su un certo progetto rispetto a quello stimato inizialmente) e la soddisfazione dei clienti. Queste analisi possono essere integrate nella pagina \texttt{/performances}, già presente nella struttura del progetto. All'interno di questa pagina, dovrebbe essere possibile visualizzare report interattivi e grafici che riassumono le performance dei progetti nel tempo, facilitando l'accesso a informazioni chiave per i manager e i team di progetto.
 
 \subsection{Sviluppo di test sulla sicurezza e sull'accessibilità}
