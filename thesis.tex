@@ -160,30 +160,11 @@ Questo capitolo fornisce un quadro dettagliato del contesto aziendale di Archeid
 \section{Archiedo}
 Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del software, focalizzata sulla creazione e implementazione di soluzioni su architetture cloud-native e infrastrutture Cloud, utilizzando principalmente Amazon Web Services. La missione di Archeido è supportare le aziende durante il processo di trasformazione digitale e adozione del Cloud, offrendo un'assistenza sia tecnica che strategica con massima trasparenza. L'azienda adotta e si basa sulle metodologie Agile, garantendo un processo di sviluppo rapido, sicuro ed efficiente.
 
-\section{Prodotto software}
-Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
-
-\subsection{Funzionalità principali}
-Il CRM offre una gestione completa dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione (CRUD). Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti generati e condivisi da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performances aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
-
-\subsection{Obiettivi del software}
-Il CRM ha come obiettivo principale valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
-
-\subsection{Stakeholders}
-Gli stakeholders di questo progetto includono:
-
-\begin{itemize}
-    \item I \textbf{Super Amministratori}, che gestiscono la creazione degli utenti, assegnano loro permessi e regole di visibilità e hanno accesso completo a tutte le sezioni del CRM. 
-    \item I \textbf{Project Manager}, i quali ricevono un account per accedere alla dashboard e possono visualizzare solo i progetti a cui sono stati assegnati, limitando l'accesso ad alcune sezioni.
-    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poiché il sistema è progettato per rispondere meglio alle loro necessità.
-\end{itemize}
-
 \section{Ciclo di vita adottato}
 Archeido adotta un ciclo di vita del software basato su metodologie agili, che consentono di gestire progetti in modo iterativo e incrementale. Lo sviluppo Agile si caratterizza per un approccio flessibile, orientato a fornire rapidamente software funzionante al cliente, garantendo aggiornamenti frequenti e miglioramenti continui. In questo contesto, le fasi di specifica, progettazione, sviluppo, validazione ed evoluzione si susseguono in un processo fluido e non fisso, caratterizzato da una continua negoziazione dei requisiti e raccolta di feedback.
 
 \subsection{Plan-based vs Agile development}
 La differenza tra Agile e lo sviluppo plan-based risiede principalmente nell'approccio alla gestione dei progetti e nella flessibilità di risposta ai cambiamenti. Nel modello plan-based, il processo di sviluppo è caratterizzato da una pianificazione dettagliata e rigida delle fasi del progetto, dove i requisiti vengono definiti all'inizio e rimangono relativamente statici per tutta la durata del ciclo di vita del progetto. Al contrario, le metodologie Agile, come Scrum e Kanban, pongono l'accento sulla collaborazione continua tra i membri del team e gli stakeholder, consentendo una maggiore adattabilità. I requisiti non sono definitivi e possono evolvere nel corso del progetto, permettendo al team di rispondere rapidamente alle esigenze emergenti.
-
 
 \section{Formazione e Pair Programming}
 Il periodo iniziale di questo tirocinio è stato dedicato alla formazione, durante la quale è stata approfondita la programmazione funzionale in JavaScript \cite{knowthen2024}, acquisendo le competenze necessarie per scrivere codice più efficiente, leggibile e mantenibile. In seguito, si è analizzato React \cite{udemyreactredux2024}, una libreria JavaScript sviluppata da Facebook per la creazione di interfacce utente interattive e componenti riutilizzabili, facilitando lo sviluppo di applicazioni web complesse. Infine, è stato esplorato Next.js, un framework che estende le capacità di React, permettendo il rendering lato server e facilitando la creazione di applicazioni web performanti.
@@ -191,12 +172,6 @@ Il periodo iniziale di questo tirocinio è stato dedicato alla formazione, duran
 \noindent Una parte fondamentale della formazione è stata lo sviluppo prevalentemente in modalità di \textbf{Pair Programming}, una pratica essenziale della metodologia \textbf{Extreme Programming (XP)}, che ha velocizzato e semplificato l'apprendimento grazie alla collaborazione diretta tra i membri del team. In questo approccio, due programmatori lavorano insieme su un singolo computer: uno scrive il codice (driver), mentre l'altro lo esamina e fornisce suggerimenti (observer o navigator), favorendo un continuo scambio di conoscenze e un confronto immediato sulle soluzioni.
 
 \noindent L'adozione di XP ha migliorato significativamente la qualità del codice, grazie al feedback immediato e all'integrazione di pratiche agili come il \textbf{refactoring continuo} e la \textbf{revisione condivisa} del lavoro. Questo metodo ha permesso di mettere in pratica fin da subito le nozioni apprese nei corsi di JavaScript funzionale e React sopramenzionati, consentendo di affinare rapidamente le competenze tecniche e di adottare efficacemente pratiche di \textbf{clean code}, garantendo uno sviluppo più strutturato, di qualità e conforme alle best practices della scrittura del codice adottate in Archeido.
-
-\section{Problemi e valutazioni}
-Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. 
-
-\noindent Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto, approfonditi ulteriormente nelle sezioni seguenti.
-
 
 % Capitolo 3
 \chapter{Background tecnico}
@@ -278,6 +253,11 @@ const Greeting = () => {
     )
 } 
 \end{lstlisting}
+
+\section{Motivazioni per la scelta di React e confronto con le alternative}
+Rispetto a un approccio tradizionale basato esclusivamente su HTML, CSS e JavaScript, React offre strumenti avanzati per gestire lo stato dell'applicazione e le modifiche dinamiche della UI, che rendono il codice più scalabile e facile da mantenere. Usare solo HTML, CSS e JavaScript diventa rapidamente complesso nelle applicazioni più ampie, perché richiede una gestione manuale di tutte le interazioni e dello stato, aumentando i rischi di errore e rendendo il codice meno modulare.
+
+\noindent Rispetto ad altre alternative come Angular e Vue.js, React è più leggero e offre una maggiore flessibilità, lasciando agli sviluppatori la libertà di scegliere le librerie e gli strumenti complementari in base alle proprie esigenze. Angular, al contrario, è un framework completo che include molte funzionalità integrate, ma può risultare più complesso da apprendere e configurare. Vue.js, invece, offre un approccio simile a React in termini di componenti, ma è noto per una curva di apprendimento più morbida, risultando spesso preferito per progetti di dimensioni medio-piccole.
 
 \subsection{I componenti}
 Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma di un'interfaccia utente in un'applicazione React. I componenti permettono di scomporre l'interfaccia in parti più piccole e gestibili, promuovendo la leggibilità, la manutenzione e il riuso del codice. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti più semplici garantisce diversi vantaggi:
@@ -378,6 +358,9 @@ const foo = () => {
 
 \section{Next.js}
 Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di strumenti, librerie e regole che forniscono una struttura di base per lo sviluppo di software, facilitando il lavoro dei programmatori.} costruito sopra React, progettato per la creazione di applicazioni web full-stack. Mentre React si concentra principalmente sulla costruzione di interfacce utente tramite componenti, Next.js estende queste funzionalità offrendo un insieme di strumenti e ottimizzazioni che semplificano lo sviluppo di applicazioni complesse. Ad esempio, Next.js supporta il rendering lato server (SSR) e la generazione di siti statici (SSG), che migliorano le prestazioni e l'indicizzazione sui motori di ricerca (SEO).
+
+\subsection{Motivazioni per la scelta di Next.js e confronto con le alternative}
+In confronto a framework alternativi come Gatsby e Nuxt.js (che è l'equivalente di Next.js per Vue.js), Next.js è particolarmente apprezzato per la flessibilità che offre nella scelta del metodo di rendering e per il supporto a funzionalità avanzate come l'API Routes e il sistema di routing automatico, di cui se ne parlerà in seguito. Rispetto a una configurazione puramente client-side con React, Next.js semplifica notevolmente la gestione della SEO e delle performance, evitando la necessità di soluzioni aggiuntive per il rendering lato server. Rispetto a Gatsby, che si concentra sulla generazione di siti statici, Next.js risulta più versatile per le applicazioni dinamiche che richiedono un aggiornamento continuo dei dati.
 
 \subsection{Rendering}
 In React, il rendering delle pagine avviene completamente nel browser tramite Client-Side Rendering (CSR). Quando un utente richiede una pagina, il server invia un documento HTML minimale, che di solito è molto scarno e non contiene il contenuto della pagina. Solo dopo che il codice JavaScript è stato eseguito nel browser, viene effettuata una chiamata per recuperare i dati, generando così il contenuto della pagina. Questo approccio può portare a tempi di caricamento iniziali più lunghi, poiché l'utente deve attendere il caricamento e l'esecuzione del codice JavaScript prima di vedere il contenuto.
@@ -578,56 +561,60 @@ const AuthenticatedLayout = ({ children }: any) => {
 \section{Introduzione}
 In questo capitolo si descriveranno i requisiti del sistema CRM per la gestione dei progetti, sviluppato durante il tirocinio. Verranno utilizzati diversi strumenti di modellazione per rappresentare i requisiti funzionali e non funzionali del sistema, tra cui diagrammi e pseudocodice per i casi più rilevanti.
 
+\noindent Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. 
+
+\noindent Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto, approfonditi ulteriormente nelle sezioni seguenti.
+
+\section{Prodotto software}
+Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
+
+\subsection{Funzionalità principali}
+Il CRM offre una gestione completa dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione (CRUD). Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti generati e condivisi da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performances aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
+
+\subsection{Obiettivi del software}
+Il CRM ha come obiettivo principale valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
+
+\subsection{Stakeholders}
+Gli stakeholders di questo progetto includono:
+
+\begin{itemize}
+    \item I \textbf{Super Amministratori}, che gestiscono la creazione degli utenti, assegnano loro permessi e regole di visibilità e hanno accesso completo a tutte le sezioni del CRM. 
+    \item I \textbf{Project Manager}, i quali ricevono un account per accedere alla dashboard e possono visualizzare solo i progetti a cui sono stati assegnati, limitando l'accesso ad alcune sezioni.
+    \item I \textbf{Clienti}, le cui esigenze influenzano l'uso del CRM, poiché il sistema è progettato per rispondere meglio alle loro necessità.
+\end{itemize}
+
 \section{Definizione dei requisiti del sistema}
 Il sistema CRM è stato progettato per supportare la gestione di progetti aziendali, offrendo funzionalità che spaziano dalla creazione e monitoraggio dei progetti, alla gestione degli utenti. I principali requisiti funzionali delineati durante la fase di raccolta dei requisiti includono:
 
 \begin{itemize}
-    \item \textbf{Gestione utenti e ruoli}: gli utenti con ruolo \texttt{ADMIN} possono accedere e apportare modifiche a tutte le sezioni della dashboard: è loro compito assegnare un progetto a uno o più project manager. Gli utenti con ruolo \texttt{PROJECT\_MANAGER} possono visionare, modificare e/o cancellare solo i progetti a cui sono stati assegnati da un utente con ruolo \texttt{ADMIN}. Inoltre, la sezione utenti, disponibile al link \texttt{./users}, è visibile solo ad utenti con ruolo di amministratore.
     \item \textbf{Accesso riservato ad utenti invitati}: un nuovo utente che desidera utilizzare il CRM deve ricevere un invito via e-mail contenente una password temporanea, inviato da un amministratore. Al primo accesso, l'utente sarà obbligato a cambiare la password temporanea.
+    \item \textbf{Gestione utenti e ruoli}: gli utenti con ruolo \texttt{ADMIN} possono accedere e apportare modifiche a tutte le sezioni della dashboard: è loro compito assegnare un progetto a uno o più project manager. Gli utenti con ruolo \texttt{PROJECT\_MANAGER} possono visionare, modificare e/o cancellare solo i progetti a cui sono stati assegnati da un utente con ruolo \texttt{ADMIN}. Inoltre, la sezione utenti, disponibile al link \texttt{./users}, è visibile solo ad utenti con ruolo di amministratore.
     \item \textbf{Creazione di un progetto}: l'utente può creare un progetto, specificando dettagli come \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine}, \texttt{stato} (il quale può assumere i valori di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}).
     \item \textbf{Modifica di un progetto}: l'utente può modificare un progetto esistente, cambiandone i campi sopracitati.
     \item \textbf{Cancellazione di un progetto}: l'utente può cancellare un progetto. 
 \end{itemize}
 
-\subsection{Gestione dei ruoli degli utenti}
-Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera appllicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. 
+\subsection{Accesso riservato ad utenti invitati e meccanismi di login}
+Un utente, per poter utilizzare la dashboard, deve avere un account appositamente creato da un utente con ruolo ADMIN. L'amministratore ha il compito di gestire l'accesso e i privilegi degli utenti all'interno del sistema. La creazione di un nuovo account per un utente avviene attraverso la dasboard di Cognito tramite una procedura che implica la registrazione delle informazioni essenziali, come nome ed email. Il sistema AWS Cognito genera automaticamente una password casuale e invia un'email all'indirizzo fornito, contenente la password temporanea e un link. Il link rimanda a una pagina dove il nuovo utente deve inserire la password monouso ricevuta e scegliere una nuova password, che dovrà essere confermata inserendola due volte. Una volta creato e attivato l'account, l'utente può accedere alla dashboard inserendo le proprie credenziali o cambiare la sua password, nela caso la dimenticasse.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/diagrammi/use_case_login_e_manage.pdf} 
+    \caption{Meccanismo di login e gestione utenti}
+\end{figure}
+
+\subsection{Gestione dei ruoli degli utenti }
+L'utente con ruolo ADMIN è inoltre responsabile di assegnare specifici permessi all'account, definendo quali aree della dashboard sono accessibili e quali azioni l'utente può eseguire. Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera appllicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. 
 
 \noindent Un esempio di utilizzo si può trovare nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
 
-\begin{lstlisting}[caption=Campi default visibili nella sidebar]
-const menusFields = [
-    {
-        title: "Performances",
-        src: "performances",
-        icon: <FaRegChartBar className = "scale-150" />,
-        visibility: "ALL",
-        gap: false
-    },
-    {
-        title: "Projects",
-        src: "projects",
-        icon: <FaProjectDiagram className = "scale-150" />,
-        visibility: "ALL",
-        gap: false
-    },
-    {
-        title: "Orders",
-        src: "orders",
-        icon: <FaClipboardList className = "scale-150" />,
-        visibility: "ALL",
-        gap: false
-    },
-];
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/diagrammi/uml_menufields.pdf} 
+    \caption{Campi default visibili nella sidebar}
+\end{figure}
 
-\noindent Viene successivamente estratto il ruolo dell'utente loggato dal contesto dell'applicazione:
-
-\begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
-const user = useContext(AuthContext);
-const role = user["custom:role"];
-\end{lstlisting}
-
-\noindent In questo modo, la costante \texttt{role} contiene la stringa \texttt{"ADMIN"} o la stringa  \texttt{"PROJECT\_MANAGER"}. Tale valore, viene usato in seguito per decidere se mostrare o meno la sezione Orders:
+\noindent Viene successivamente estratto e salvato in una costante \texttt{role} il ruolo dell'utente loggato dal contesto dell'applicazione. Tale valore, viene usato in seguito per decidere se mostrare o meno la sezione Orders:
 
 \begin{lstlisting}[caption=Verifica ruolo]
 role === "ADMIN" 
@@ -670,6 +657,12 @@ const schema = a
     \item API in tempo reale per iscriversi agli eventi di creazione, aggiornamento ed eliminazione dei record.
 \end{itemize}
 \noindent Una volta completata questa operazione, è stata creata una cartella \texttt{api} nella root del progetto. Questa cartella ha lo scopo di raggruppare tutti i file relativi alle chiamate API ed è stata pensata per mantenere il progetto ben organizzato, estraendo tutte le funzioni che effettuano chiamate al database. Al suo interno, è stata generata un'altra cartella denominata \texttt{Project}, che a sua volta contiene il file \texttt{endpoints.ts}. Quest'ultimo file si occupa di definire ed esportare le funzioni relative alle operazioni CRUD.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/diagrammi/use_case_manage_projects.pdf} 
+    \caption{Operazioni di CRUD sui progetti}
+\end{figure}
 
 \noindent Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
 
