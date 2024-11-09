@@ -157,7 +157,7 @@ Questo capitolo fornisce un quadro dettagliato del contesto aziendale di Archeid
 
 \noindent Infine, saranno discussi i problemi affrontati e le decisioni critiche riguardanti le tecnologie utilizzate e il percorso di formazione intrapreso per garantire un'efficace implementazione del sistema.
 
-\section{Archiedo}
+\section{Introduzione}
 Archeido \cite{archeido2024} è un'azienda specializzata nell'ingegneria del software, focalizzata sulla creazione e implementazione di soluzioni su architetture cloud-native e infrastrutture Cloud, utilizzando principalmente Amazon Web Services. La missione di Archeido è supportare le aziende durante il processo di trasformazione digitale e adozione del Cloud, offrendo un'assistenza sia tecnica che strategica con massima trasparenza. L'azienda adotta e si basa sulle metodologie Agile, garantendo un processo di sviluppo rapido, sicuro ed efficiente.
 
 \section{Ciclo di vita adottato}
@@ -254,16 +254,18 @@ const Greeting = () => {
 } 
 \end{lstlisting}
 
-\section{Motivazioni per la scelta di React e confronto con le alternative}
-Rispetto a un approccio tradizionale basato esclusivamente su HTML, CSS e JavaScript, React offre strumenti avanzati per gestire lo stato dell'applicazione e le modifiche dinamiche della UI, che rendono il codice più scalabile e facile da mantenere. Usare solo HTML, CSS e JavaScript diventa rapidamente complesso nelle applicazioni più ampie, perché richiede una gestione manuale di tutte le interazioni e dello stato, aumentando i rischi di errore e rendendo il codice meno modulare.
+\subsection{Motivazioni per la scelta di React e confronto con le alternative}
+Rispetto a un approccio tradizionale basato esclusivamente su HTML, CSS e JavaScript, React offre strumenti avanzati per gestire lo stato dell'applicazione e le modifiche dinamiche della UI, che rendono il codice più scalabile e facile da mantenere. Usare solo HTML, CSS e JavaScript diventa rapidamente complesso nelle applicazioni più ampie, perché richiede una gestione manuale di tutte le interazioni e dello stato, aumentando i rischi di errore e rendendo il codice meno modulare. React, grazie alla sua architettura basata su componenti, permette di suddividere l'interfaccia in elementi indipendenti e riutilizzabili, rendendo più facile l'aggiornamento e l'evoluzione del codice senza influire sull'intero sistema. 
 
-\noindent Rispetto ad altre alternative come Angular e Vue.js, React è più leggero e offre una maggiore flessibilità, lasciando agli sviluppatori la libertà di scegliere le librerie e gli strumenti complementari in base alle proprie esigenze. Angular, al contrario, è un framework completo che include molte funzionalità integrate, ma può risultare più complesso da apprendere e configurare. Vue.js, invece, offre un approccio simile a React in termini di componenti, ma è noto per una curva di apprendimento più morbida, risultando spesso preferito per progetti di dimensioni medio-piccole.
+\noindent Rispetto ad altre alternative come Angular, React è più leggero e offre una maggiore flessibilità, lasciando agli sviluppatori la libertà di scegliere le librerie e gli strumenti complementari in base alle proprie esigenze. Angular, al contrario, è un framework completo che include molte funzionalità integrate, ma può risultare più complesso da apprendere e configurare.
 
 \subsection{I componenti}
-Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma di un'interfaccia utente in un'applicazione React. I componenti permettono di scomporre l'interfaccia in parti più piccole e gestibili, promuovendo la leggibilità, la manutenzione e il riuso del codice. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti più semplici garantisce diversi vantaggi:
+Un componente React è una funzione JavaScript che rappresenta una parte riutilizzabile e autonoma dell'interfaccia utente in un'applicazione. Ogni componente incapsula sia la logica che il rendering di una specifica parte della UI, permettendo di scomporre interfacce complesse in parti più piccole, facilmente gestibili e comprensibili. 
+
+\noindent Questa struttura modulare rende React particolarmente adatto a costruire interfacce dinamiche e interattive, mantenendo il codice organizzato e coerente. Inoltre, un componente React può ricevere dati attraverso le \textit{props} (proprietà), che funzionano come parametri per personalizzare il comportamento del componente stesso a seconda del contesto in cui viene utilizzato. Questo rende ogni componente altamente flessibile, consentendo di riutilizzare la stessa struttura con contenuti o comportamenti diversi. Questo approccio basato sui componenti e sulla continua estrazione del codice in componenti più semplici garantisce diversi vantaggi:
 
 \begin{itemize}
-    \item \textbf{Riuso}: un componente può essere utilizzato in diverse parti dell'applicazione, riducendo la duplicazione del codice.
+    \item \textbf{Riuso}: un componente in React può essere riutilizzato in diverse parti dell'applicazione, permettendo di ridurre la duplicazione del codice e mantenere una maggiore coerenza visiva e funzionale in tutto il sistema.
     \item \textbf{Isolamento}: ogni componente ha il proprio stato e le proprie proprietà, rendendo il singolo componente utilizzabile e testabile in ambienti isolati, rimuovendo le dipendenze da quanto appare al suo esterno.
     \item \textbf{Composizione di componenti}: una volta sviluppati diversi componenti, React consente di comporli insieme. Ad esempio, un componente \texttt{Card} potrebbe contenerne a sua volta tre più semplici: un'immagine, un titolo e un pulsante. Tale \texttt{Card} potrebbe venire poi usata molteplici volte all'interno di un componente più complesso, come un \texttt{Carousel}.
 \end{itemize}
@@ -363,15 +365,15 @@ Next.js \cite{nextjsdocs2024} è un \textit{framework}\footnote{Un insieme di st
 In confronto a framework alternativi come Gatsby e Nuxt.js (che è l'equivalente di Next.js per Vue.js), Next.js è particolarmente apprezzato per la flessibilità che offre nella scelta del metodo di rendering e per il supporto a funzionalità avanzate come l'API Routes e il sistema di routing automatico, di cui se ne parlerà in seguito. Rispetto a una configurazione puramente client-side con React, Next.js semplifica notevolmente la gestione della SEO e delle performance, evitando la necessità di soluzioni aggiuntive per il rendering lato server. Rispetto a Gatsby, che si concentra sulla generazione di siti statici, Next.js risulta più versatile per le applicazioni dinamiche che richiedono un aggiornamento continuo dei dati.
 
 \subsection{Rendering}
-In React, il rendering delle pagine avviene completamente nel browser tramite Client-Side Rendering (CSR). Quando un utente richiede una pagina, il server invia un documento HTML minimale, che di solito è molto scarno e non contiene il contenuto della pagina. Solo dopo che il codice JavaScript è stato eseguito nel browser, viene effettuata una chiamata per recuperare i dati, generando così il contenuto della pagina. Questo approccio può portare a tempi di caricamento iniziali più lunghi, poiché l'utente deve attendere il caricamento e l'esecuzione del codice JavaScript prima di vedere il contenuto.
+In React, il rendering delle pagine avviene tramite Client-Side Rendering (CSR), in cui tutto il processo di costruzione della pagina viene eseguito nel browser dell'utente. Quando un utente richiede una pagina, il server invia solo un documento HTML minimale, che contiene solo lo scheletro dell'applicazione e pochi elementi essenziali. Questo HTML iniziale non include il contenuto effettivo della pagina, che verrà invece generato ed inserito dinamicamente solo dopo l'esecuzione del codice JavaScript nel browser. Una volta ricevuto l'HTML di base, il browser carica ed esegue il bundle JavaScript dell'applicazione, che contiene tutti i componenti e la logica di React. Solo a questo punto viene effettuata una chiamata per recuperare i dati necessari alla pagina, come quelli da un'API o un database remoto. Questi dati vengono poi utilizzati per generare il contenuto e aggiornare la UI, mostrando finalmente all'utente la pagina completa. Questo approccio comporta un tempo di caricamento iniziale particolarmente lungo, poiché l'utente deve aspettare che tutto il JavaScript venga caricato ed eseguito prima di vedere il contenuto. Durante questa fase, la pagina potrebbe risultare vuota o visualizzare un indicatore di caricamento, creando un ritardo percepito, noto come "Time to Interactive" (TTI).
 
-\noindent Next.js ottimizza le funzionalità di React grazie al \textbf{pre-rendering} di ogni pagina. A differenza del tradizionale rendering effettuato tramite JavaScript lato client, Next.js genera in anticipo il codice HTML per ciascuna pagina. Questa strategia consente di migliorare le performances e l'esperienza utente. In particolare, Next.js implementa due forme di pre-rendering per affrontare le problematiche tipiche del rendering in React:
+\noindent A differenza del tradizionale rendering effettuato tramite JavaScript lato client, Next.js genera in anticipo (\textbf{pre-rendering}) il codice HTML per ciascuna pagina. Questa strategia consente di migliorare le performances e l'esperienza utente. In particolare, Next.js implementa due forme di pre-rendering per affrontare le problematiche tipiche del rendering in React:
 
 \begin{itemize}
-    \item \textbf{Static Generation (SSG)}: il codice HTML delle pagine che utilizzano la generazione statica viene generato una sola volta durante il processo di compilazione e riutilizzato per ogni richiesta successiva. Questa caratteristica migliora notevolmente le prestazioni, poiché il contenuto è pronto per essere servito immediatamente. È buona norma adottare la generazione statica quando possibile, soprattutto per le pagine che non richiedono aggiornamenti frequenti o dati in tempo reale, in quanto possono essere pre-renderizzate.
+    \item \textbf{Static Generation (SSG)}: La generazione statica del codice HTML consente di creare il contenuto una sola volta durante la compilazione, riutilizzandolo per ogni richiesta successiva. Questo migliora notevolmente le prestazioni, poiché il contenuto è immediatamente disponibile e non deve essere renderizzato ogni volta. È ideale per pagine che non richiedono aggiornamenti frequenti o dati in tempo reale, come nei siti di e-commerce, poiché consente un accesso rapido e riduce gli errori. Inoltre, aumenta la scalabilità, supportando un maggior numero di utenti contemporanei senza compromettere le prestazioni, ottimizzando così anche l'uso di risorse e riducendo i costi operativi.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{img/rendering/static_generation.pdf} 
+        \includegraphics[width=1\textwidth]{img/rendering/static_generation.pdf} 
         \caption{Static Generation}
     \end{figure}
     
@@ -379,7 +381,7 @@ In React, il rendering delle pagine avviene completamente nel browser tramite Cl
     \item \textbf{Server-side Rendering (SSR o Dynamic Rendering)}: il rendering lato server consente di generare dinamicamente il codice HTML per ogni pagina al momento della richiesta. Questo approccio è cruciale per le pagine che richiedono dati in tempo reale o informazioni che cambiano frequentemente. Con il Server-Side Rendering, ogni volta che un utente richiede una pagina, il server elabora le informazioni necessarie e genera il codice HTML. Una volta completato il rendering, l'HTML viene inviato al browser, assicurando che l'utente riceva immediatamente una pagina completamente renderizzata e aggiornata.
      \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{img/rendering/server_side_rendering.pdf} 
+        \includegraphics[width=1\textwidth]{img/rendering/server_side_rendering.pdf} 
         \caption{Server-side Rendering}
     \end{figure}
 \end{itemize}
@@ -536,21 +538,11 @@ Nel contesto del CRM per la gestione dei progetti, è stato scelto Amazon Web Se
 
 \noindent Per il deployment e la gestione del front-end del CRM, è stato impiegato \textbf{AWS Amplify}, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository \textbf{BitBucket}, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
 
-\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione.
-
-\begin{lstlisting}[caption=Parte del file \texttt{AuthenticatedLayout.tsx} del CRM]
-const AuthenticatedLayout = ({ children }: any) => {
-    return (
-    <Authenticator hideSignUp components={components}>
-        {(props) => <App {...props}>{children}</App>}
-    </Authenticator>
-    );
-};
-\end{lstlisting}
+\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato \textbf{AWS Cognito}, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione. Dunque, la schermata di login appare in questo modo:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/login.pdf} 
+    \includegraphics[width=0.7\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
 \end{figure}
 
@@ -563,16 +555,22 @@ In questo capitolo si descriveranno i requisiti del sistema CRM per la gestione 
 
 \noindent Nelle prime fasi dello sviluppo, è stata condotta un'analisi approfondita per valutare quale tra le diverse tecnologie disponibili e librerie grafiche fosse più adatta per la realizzazione del progetto. Alla fine, si è deciso di utilizzare Next.js \cite{nextjs2024} e l'omonima libreria grafica NextUI \cite{nextui2024}. 
 
-\noindent Un altro aspetto cruciale nella fase di sviluppo è stata la scelta tra l'utilizzo di JavaScript puro e l'adozione di TypeScript. Questa decisione ha comportato una valutazione approfondita dei vantaggi e degli svantaggi di entrambe le opzioni, considerando fattori come la tipizzazione statica, la manutenzione del codice e la scalabilità del progetto, approfonditi ulteriormente nelle sezioni seguenti.
-
 \section{Prodotto software}
 Il software sviluppato e descritto in questa tesi è un CRM (Customer Relationship Management), progettato per servire come una dashboard centrale per il monitoraggio dei progetti attualmente in corso, come archivio completo di quelli già completati e come piattaforma di pianificazione per i progetti futuri.
 
-\subsection{Funzionalità principali}
+\subsection{Funzionalità principali e obiettivi del software}
 Il CRM offre una gestione completa dei progetti, facilitandone le operazioni di creazione, lettura, aggiornamento e cancellazione (CRUD). Inoltre, consente di monitorare gli utenti autorizzati ad accedere alla dashboard, i quali vengono creati tramite inviti generati e condivisi da un super amministratore. A ciascun utente viene assegnato un ruolo specifico, che definisce le regole di visibilità e le autorizzazioni di accesso alle informazioni presenti nella dashboard. Infine, il sistema consente di valutare le performances aziendali, fornendo dati e metriche utili per analizzare l'efficacia dei progetti e il rendimento complessivo del team.
 
-\subsection{Obiettivi del software}
-Il CRM ha come obiettivo principale valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
+\noindent Il CRM ha come obiettivo principale valutare le stime concordate con i clienti, consentendo ai project manager di confrontare le previsioni iniziali stabilite insieme al cliente con i risultati effettivi ottenuti a progetto completato. In questo modo, è possibile identificare eventuali scostamenti e adottare misure correttive tempestive per garantire il successo del progetto. Il CRM sviluppato è dunque uno strumento di monitoraggio che fornisce un supporto strategico volto all'ottimizzazione delle relazioni con i clienti.
+
+\subsection{Flusso di autenticazione e gestione dei progetti nella dashboard}
+Come viene mostrato nel diagramma di sequenza successivo a questo paragrafo, le interazioni tra l'utente, il sistema di autenticazione Cognito, la dashboard del CRM e il database DynamoDB inizia con l'utente che inserisce le credenziali (e-mail e password) nella pagina di login. Tali dati vengono inoltrati al pool di utenti Cognito per verificarne la validità. Se l'e-mail è presente e la password corretta, il client riceve una risposta di successo, confermando l'accesso; in caso contrario, viene visualizzato un messaggio di errore. Dopo un accesso riuscito, l'utente naviga alla pagina dei progetti (\texttt{/projects}), dove può visualizzare l'elenco di tutti i progetti disponibili. La dashboard del CRM richiede i dati al database DynamoDB tramite la funzione \texttt{listProject}, e, una volta ottenuta la risposta, i progetti vengono mostrati in una tabella. Quando l'utente desidera creare, modificare o eliminare un progetto, invia una richiesta tramite la dashboard. Per creare un nuovo progetto o cancellarne uno esistente, vengono invocate rispettivamente le funzioni \texttt{createProject} o \texttt{deleteProject}. Dopo l'esecuzione di queste operazioni, la dashboard aggiorna la lista dei progetti per mostrare i dati più recenti. Analogamente, se l'utente sceglie di aggiornare un progetto, viene invocata la funzione \texttt{updateProject} e i dati modificati vengono salvati nel database, con la lista dei progetti che si ricarica per riflettere le modifiche.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/diagrammi/sequence.pdf} 
+    \caption{Sequence Diagram per il login e le operazioni CRUD sui progetti}
+\end{figure}
 
 \subsection{Stakeholders}
 Gli stakeholders di questo progetto includono:
@@ -589,28 +587,24 @@ Il sistema CRM è stato progettato per supportare la gestione di progetti aziend
 \begin{itemize}
     \item \textbf{Accesso riservato ad utenti invitati}: un nuovo utente che desidera utilizzare il CRM deve ricevere un invito via e-mail contenente una password temporanea, inviato da un amministratore. Al primo accesso, l'utente sarà obbligato a cambiare la password temporanea.
     \item \textbf{Gestione utenti e ruoli}: gli utenti con ruolo \texttt{ADMIN} possono accedere e apportare modifiche a tutte le sezioni della dashboard: è loro compito assegnare un progetto a uno o più project manager. Gli utenti con ruolo \texttt{PROJECT\_MANAGER} possono visionare, modificare e/o cancellare solo i progetti a cui sono stati assegnati da un utente con ruolo \texttt{ADMIN}. Inoltre, la sezione utenti, disponibile al link \texttt{./users}, è visibile solo ad utenti con ruolo di amministratore.
-    \item \textbf{Creazione di un progetto}: l'utente può creare un progetto, specificando dettagli come \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine}, \texttt{stato} (il quale può assumere i valori di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}).
-    \item \textbf{Modifica di un progetto}: l'utente può modificare un progetto esistente, cambiandone i campi sopracitati.
-    \item \textbf{Cancellazione di un progetto}: l'utente può cancellare un progetto. 
+    \item \textbf{Gestione dei progetti}: L'utente ha la possibilità di creare un progetto specificando dettagli come: \texttt{codice}, \texttt{nome}, \texttt{data\_di\_inizio}, \texttt{data\_di\_fine} e \texttt{stato}, quest'ultimo con valori possibili di \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}. Inoltre, l'utente può modificare un progetto esistente, aggiornando i campi sopracitati, oppure eliminarlo.
 \end{itemize}
 
 \subsection{Accesso riservato ad utenti invitati e meccanismi di login}
-Un utente, per poter utilizzare la dashboard, deve avere un account appositamente creato da un utente con ruolo ADMIN. L'amministratore ha il compito di gestire l'accesso e i privilegi degli utenti all'interno del sistema. La creazione di un nuovo account per un utente avviene attraverso la dasboard di Cognito tramite una procedura che implica la registrazione delle informazioni essenziali, come nome ed email. Il sistema AWS Cognito genera automaticamente una password casuale e invia un'email all'indirizzo fornito, contenente la password temporanea e un link. Il link rimanda a una pagina dove il nuovo utente deve inserire la password monouso ricevuta e scegliere una nuova password, che dovrà essere confermata inserendola due volte. Una volta creato e attivato l'account, l'utente può accedere alla dashboard inserendo le proprie credenziali o cambiare la sua password, nela caso la dimenticasse.
+Un utente, per poter utilizzare la dashboard, deve avere un account appositamente creato da un utente con ruolo ADMIN. L'amministratore ha il compito di gestire l'accesso e i privilegi degli utenti all'interno del sistema. La creazione di un nuovo account per un utente avviene attraverso la dasboard di Cognito tramite una procedura che implica la registrazione delle informazioni essenziali, come nome ed email. Il sistema AWS Cognito genera automaticamente una password casuale e invia un'email all'indirizzo fornito, contenente la password temporanea e un link. Il link rimanda a una pagina dove il nuovo utente deve inserire la password monouso ricevuta e scegliere una nuova password, che dovrà essere confermata inserendola due volte. Una volta creato e attivato l'account, l'utente può accedere alla dashboard inserendo le proprie credenziali o cambiare la sua password, nel caso la dimenticasse.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/diagrammi/use_case_login_e_manage.pdf} 
+    \includegraphics[width=0.9\textwidth]{img/diagrammi/use_case_login_e_manage.pdf} 
     \caption{Meccanismo di login e gestione utenti}
 \end{figure}
 
 \subsection{Gestione dei ruoli degli utenti }
-L'utente con ruolo ADMIN è inoltre responsabile di assegnare specifici permessi all'account, definendo quali aree della dashboard sono accessibili e quali azioni l'utente può eseguire. Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera appllicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. 
-
-\noindent Un esempio di utilizzo si può trovare nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
+L'utente con ruolo ADMIN è inoltre responsabile di assegnare specifici permessi all'account, definendo quali aree della dashboard sono accessibili e quali azioni l'utente può eseguire. Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM, viene memorizzato in un \textbf{Context} \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera applicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. Un esempio di utilizzo si può trovare nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni: Performance, Projects, Orders e Users. Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/diagrammi/uml_menufields.pdf} 
+    \includegraphics[width=0.6\textwidth]{img/diagrammi/uml_menufields.pdf} 
     \caption{Campi default visibili nella sidebar}
 \end{figure}
 
@@ -660,98 +654,49 @@ const schema = a
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/diagrammi/use_case_manage_projects.pdf} 
+    \includegraphics[width=0.9\textwidth]{img/diagrammi/use_case_manage_projects.pdf} 
     \caption{Operazioni di CRUD sui progetti}
 \end{figure}
 
-\noindent Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database.
-
-\begin{lstlisting}[caption=funzione \texttt{getProject}]
-const getProject = async (id: string) => {
-    const { data: selectedProject }: Project = await client.models.Project.get({
-        id
-    });
-    return selectedProject;
-};
-\end{lstlisting}
-
-\begin{lstlisting}[caption=funzione \texttt{listProject}]
-const listProject = async () => {
-    const { data: projects } = await client.models.Projects.list();
-    return projects;
-};
-\end{lstlisting}
-
-\noindent Graficamente, le due funzioni menzionate sono responsabili dell'estrazione di tutti i dati necessari dal database per popolare la tabella presente all'URL \texttt{/projects}, mostrata nell'immagine sottostante.
+\subsection{Recupero dei progetti dal database}
+\noindent Le prime funzioni definite per gestire le operazioni di CRUD sono \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database. Graficamente, le due funzioni menzionate sono responsabili dell'estrazione di tutti i dati necessari dal database per popolare la tabella presente all'URL \texttt{/projects}, mostrata nell'immagine sottostante.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/interfacce/table_project.pdf} 
+    \includegraphics[width=0.9\textwidth]{img/interfacce/table_project.pdf} 
     \caption{Pagina dei progetti}
 \end{figure}
 
-\noindent A questo punto, se si clicca sul pulsante ``Create Project" viene caricato l'URL \texttt{./projects/create}, il quale visualizza un modulo vuoto per l'inserimento dei dati del progetto. Per la realizzazione e la gestione di questo modulo, è stata utilizzata la libreria \texttt{Formik}. Dopo aver compilato tutti i campi del modulo, premendo il pulsante ``Create" viene invocata la funzione \texttt{createProject}, che riceve come input l'oggetto \texttt{Project} generato tramite il riempimento dei campi e lo invia al database per la sua creazione.
-
-\begin{lstlisting}[caption=funzione \texttt{createProject}]
-const createProject = async (projectToCreate: Project) => {
-    await client.models.Project.create(project);
-};
-\end{lstlisting}
-
-\noindent La tabella dei progetti in \texttt{./projects} presenta una colonna denominata \texttt{ACTIONS}, in cui sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale di \textit{danger} che consente di confermare l'eliminazione del progetto. D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In quest'ultima è possibile effettuare modifiche o procedere all'eliminazione del progetto.
-
-\noindent Per cancellare un progetto, si utilizza la funzione \texttt{deleteProject}, che richiede come argomento l'oggetto \texttt{Project} da eliminare, e tramite il suo ID, ne esegue la cancellazione:
-
-\begin{lstlisting}[caption=funzione \texttt{deleteProject}]
-const deleteProject = async (projectToDelete: Project) => {
-    const { id } = projectToDelete;
-    await client.models.Project.delete({ id });
-};
-\end{lstlisting}
-
-\noindent L'aggiornamento di un progetto esistente viene eseguito mediante la funzione \texttt{updateProject}, che accetta come parametro un oggetto \texttt{Project} e aggiorna il database con i nuovi dati forniti:
-
-\begin{lstlisting}[caption=funzione \texttt{updateProject}]
-const updateProject = async (projectToUpdate: Project) => {
-    await client.models.Project.update(projectToUpdate);
-};
-\end{lstlisting}
+\subsection{Creazione, modifica e cancellazione di un progetto}
+A questo punto, cliccando sul pulsante "Create Project", viene caricato l'URL \texttt{./projects/create}, che visualizza un modulo vuoto per l'inserimento dei dati relativi al progetto. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/interfacce/table_edit.pdf} 
-    \caption{Pagina dei progetti}
+    \includegraphics[width=0.9\textwidth]{img/interfacce/table_add.pdf} 
+    \caption{Pagina per la creazione di un progetto}
 \end{figure}
 
-\section{Diagrammi}
-\subsection{Diagramma dei casi d'uso (Use Case Diagram)}
-Il diagramma nella figura mostra il sistema CRM con i diversi attori coinvolti, sia umani che esterni. Nello specifico:
+\noindent Per la gestione di questo modulo (e di tutti gli altri moduli presenti nell'applicazione web), è stata utilizzata la libreria \texttt{Formik}\cite{formik}, una soluzione open-source per React che semplifica la gestione dello stato, la validazione e l'invio dei dati acquisiti tramite moduli. Grazie a Formik, i dati inseriti nei campi di input, nei selettori e in altri componenti di input vengono automaticamente salvati all'interno di un contesto speciale. Una volta che tutti i campi del modulo sono compilati, premendo il pulsante "Create", viene invocata la funzione \texttt{createProject}, la quale riceve come input l'oggetto \texttt{Project}, generato attraverso il riempimento dei campi e ottenuto dal contesto di Formik, e lo invia al database per la sua creazione.
 
-\begin{itemize}
-    \item gli \textbf{attori umani} includono ``User", ``Project Manager" e ``Admin" ;
-    \item i \textbf{servizi esterni} sono ``AWS DynamoDB" e ``AWS Cognito".
-\end{itemize}
-
-\noindent Gli attori umani interagiscono con il sistema principalmente per la gestione dei progetti e degli utenti. Le operazioni di gestione dei progetti ne comprendono la creazione, lettura, aggiornamento e cancellazione, raggruppate sotto il caso d'uso generale ``Manage Projects". 
-
-\noindent In modo simile (ma limitato agli attori Admin), la gestione degli utenti è modellata attraverso il caso d'uso ``Manage Users", che include funzionalità come invitare nuovi utenti, modificare i ruoli e cancellare utenti già registrati. 
-
-\noindent Il processo di autenticazione è diviso in due casi d'uso principali: il ``First Login" per il primo accesso e ``Second + Login" per i successivi. Questi casi d'uso si estendono con la gestione degli errori e la verifica delle password. Inoltre, è presente un caso d'uso separato per il cambio della password, ``Change Password". Il sistema interagisce con ``AWS Cognito" per gestire l'autenticazione e con ``AWS DynamoDB" per eseguire operazioni sui dati dei progetti.
+\noindent Tornando alla pagina \texttt{./projects}, la tabella qui presente contiene una colonna denominata \texttt{ACTIONS}, in cui sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale di \textit{danger} che consente di confermare l'eliminazione del progetto. Premendo il pulsante di conferma, verrà richiamata la funzione \texttt{deleteProject}, che richiede come parametro l'oggetto \texttt{Project} da eliminare.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/diagrammi/use_case.pdf} 
-    \caption{Use Case Diagram}
+    \includegraphics[width=0.45\textwidth]{img/interfacce/modal.pdf} 
+    \caption{Modale per la cancellazione di un progetto}
 \end{figure}
 
-\subsection{Sequence diagram}
-Il diagramma di sequenza illustra le interazioni tra l'utente, il sistema di autenticazione Cognito, la dashboard del CRM e il database DynamoDB nella gestione dei progetti. Inizia con l'utente che inserisce le credenziali (e-mail e password) nella pagina di login, che inoltra i dati al pool di utenti Cognito per verificarne la validità. Se l'e-mail è presente e la password corretta, il client riceve una risposta di successo, confermando l'accesso; in caso contrario, viene visualizzato un messaggio di errore. Dopo un accesso riuscito, l'utente naviga alla pagina dei progetti (\texttt{/projects}), dove può visualizzare l'elenco di tutti i progetti disponibili. La dashboard del CRM richiede i dati al database DynamoDB tramite la funzione \texttt{listProject}, e, una volta ottenuta la risposta, i progetti vengono mostrati in una tabella. Quando l'utente desidera creare, modificare o eliminare un progetto, invia una richiesta tramite la dashboard. Per creare un nuovo progetto o cancellarne uno esistente, vengono invocate rispettivamente le funzioni \texttt{createProject} o \texttt{deleteProject}. Dopo l'esecuzione di queste operazioni, la dashboard aggiorna la lista dei progetti per mostrare i dati più recenti. Analogamente, se l'utente sceglie di aggiornare un progetto, viene invocata la funzione \texttt{updateProject} e i dati modificati vengono salvati nel database, con la lista dei progetti che si ricarica per riflettere le modifiche.
+\noindent D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In quest'ultima è possibile visualizzare il dettaglio del progetto, effettuare modifiche o procedere all'eliminazione del progetto.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/diagrammi/sequence.pdf} 
-    \caption{Sequence Diagram per il login e le operazioni CRUD sui progetti}
+    \includegraphics[width=0.9\textwidth]{img/interfacce/table_edit.pdf} 
+    \caption{Pagina del dettaglio di un progetto}
 \end{figure}
+
+\noindent L'aggiornamento di un progetto esistente avviene tramite la funzione \texttt{updateProject}, la quale accetta come parametro un oggetto \texttt{Project} contenente i dati aggiornati. Questa funzione individua il progetto nel database utilizzando il suo ID e sostituisce le informazioni esistenti con quelle nuove, garantendo che il database rispecchi correttamente le modifiche apportate. In questo modo, è possibile modificare dinamicamente le informazioni relative a un progetto senza la necessità di eliminarlo e ricrearlo.
+
+
 
 % Capitolo 5
 \chapter{Testing}
