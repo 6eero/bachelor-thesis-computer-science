@@ -601,7 +601,7 @@ Nel contesto del CRM per la gestione dei progetti, è stato scelto Amazon Web Se
 
 
 % Capitolo 4
-\chapter{Descrizione dei requisiti}
+\chapter{Descrizione dei requisiti}\label{chapter_4}
 
 \section{Introduzione}
 In questo capitolo si descriveranno i requisiti del sistema CRM per la gestione dei progetti, sviluppato durante il tirocinio. Verranno utilizzati diversi strumenti di modellazione per rappresentare i requisiti funzionali e non funzionali del sistema, tra cui diagrammi e pseudocodice per i casi più rilevanti.
@@ -758,7 +758,7 @@ A questo punto, cliccando sul pulsante "Create Project", viene caricato l'URL \t
 
 
 % Capitolo 5
-\chapter{Testing}
+\chapter{Testing}\label{chapter_5}
 Le attività di testing si sono concentrate principalmente sulla verifica delle funzionalità principali dell'applicazione e sulla gestione degli accessi in base ai ruoli definiti, assicurando che ogni componente critico funzionasse correttamente e che l'assegnazione dei permessi rispettasse i criteri di sicurezza e operatività previsti. Tuttavia, il focus limitato a questi aspetti ha fatto emergere alcune lacune significative, in particolare per quanto riguarda l'accessibilità e l'inclusività dell'applicazione. Questi aspetti, sebbene non compromettano l'efficienza di base, indicano la necessità di una riflessione più approfondita e di un'analisi dettagliata, che verrà discussa in un secondo momento per evidenziare come migliorare l'esperienza complessiva degli utenti e garantire che l'applicazione sia fruibile da persone con esigenze diverse.
 
 \section{Tipologie di test condotti}
@@ -777,8 +777,8 @@ Il testing di integrazione è stato condotto per verificare l'interazione tra di
 \subsection{Testing di accettazione}
 Il testing di accettazione è stato realizzato coinvolgendo direttamente gli utenti finali nel processo per simulare scenari di utilizzo reale e ottenere un feedback autentico sull'efficacia del sistema. Gli utenti hanno avuto l'opportunità di testare le funzionalità principali del CRM, valutando sia la correttezza tecnica delle operazioni, sia la fluidità e l'intuitività dell'interfaccia. Durante queste sessioni, sono stati verificati aspetti come la facilità di navigazione, la chiarezza dei flussi di lavoro e i tempi di esecuzione delle varie operazioni. Inoltre, questo tipo di testing ha garantito che il CRM rispondesse pienamente ai requisiti aziendali, rispettando i requisiti funzionali, definiti nelle prime fasi del progetto, e di performance.
 
-\section{Casi di test}
-I casi di test sono stati progettati con l'obiettivo di coprire in modo completo e dettagliato tutte le funzionalità principali del sistema, oltre a garantire la conformità ai requisiti funzionali stabiliti durante la fase di pianificazione iniziale del progetto. Questi casi di test sono stati sviluppati per esplorare scenari reali di utilizzo in modo da assicurare la robustezza e l'affidabilità dell'applicazione. L'attenzione è stata rivolta a verificare che ogni aspetto del sistema rispondesse correttamente agli input previsti e non, mantenendo un comportamento coerente e sicuro.  Di seguito vengono riportati alcuni esempi significativi di casi di test implementati:
+\section{Casi di test}\label{test_cases}
+I casi di test di accettazione sono stati progettati con l'obiettivo di coprire in modo completo e dettagliato tutte le funzionalità principali del sistema, oltre a garantire la conformità ai requisiti funzionali stabiliti durante la fase di pianificazione iniziale del progetto. Questi casi di test, da me sviluppati con la supervisione dei tutor, sono stati progettati per esplorare scenari reali di utilizzo in modo da assicurare la robustezza e l'affidabilità dell'applicazione. L'attenzione è stata rivolta a verificare che ogni aspetto del sistema rispondesse correttamente agli input previsti e non, mantenendo un comportamento coerente e sicuro. Di seguito vengono riportati alcuni esempi significativi di casi di test implementati:
 
 \subsection{Test di creazione progetto}
 \begin{itemize}
@@ -845,6 +845,37 @@ I casi di test sono stati progettati con l'obiettivo di coprire in modo completo
     \end{enumerate}
     \item \textbf{Risultato Atteso}: l'accesso viene bloccato e l'utente visualizza un messaggio di errore che informa sull'assenza delle autorizzazioni necessarie per accedere alla sezione ``Users".
 \end{itemize}
+
+\section{Matrice di copertura}
+La matrice di copertura dei requisiti e dei casi di test consente di mappare in modo strutturato i requisiti funzionali del sistema ai casi di test progettati per verificarne la corretta implementazione. Nel contesto di questa tesi, la matrice fornisce una panoramica completa del grado di copertura del testing, identificando per ogni requisito specifico quali casi di test sono stati sviluppati per verificarlo.
+
+\noindent Nel capitolo \ref{chapter_4}, sono stati definiti i requisiti che il sistema CRM deve soddisfare, mentre nel presente vengono descritti i casi di test associati \ref{test_cases}. Ogni caso di test è stato progettato per verificare uno o più dei requisiti precedentemente definiti.
+
+\noindent La matrice, quindi, funge da strumento di riferimento per assicurare che ogni requisito sia correttamente implementato e funzionante. Nella matrice, per ogni incrocio tra requisito e caso di test, è presente una "X" che indica la copertura del requisito da parte del caso di test corrispondente.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|c|c|c|c|}
+    \hline
+    \textbf{ID} & \multicolumn{1}{c|}{\textbf{Descrizione requisito}}                                                                                                 & \textbf{\begin{tabular}[c]{@{}c@{}}Creazione\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Cancellazione\\ da Elenco\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Modifica\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Accesso\\ Riservato\end{tabular}} \\ \hline
+    \textbf{1}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono creare \\ nuovi progetti.\end{tabular}                                                      & x                                                                     &                                                                            &                                                                      &                                                                      \\ \hline
+    \textbf{2}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono canellare \\ progetti dalla pagina di elenco.\end{tabular}                                  &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
+    \textbf{3}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono canellare \\ progetti dalla pagina di dettaglio.\end{tabular}                              &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|c|c|c|c|}
+    \hline
+    \textbf{ID} & \multicolumn{1}{c|}{\textbf{Descrizione requisito}}                                                                                                 & \textbf{\begin{tabular}[c]{@{}c@{}}Creazione\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Cancellazione\\ da Elenco\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Modifica\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Accesso\\ Riservato\end{tabular}} \\ \hline
+    \textbf{4}  & \begin{tabular}[c]{@{}l@{}}       L'utente con ruolo PROJECT  \\ MANAGER può modificare i \\ dettagli di un progetto.\end{tabular}             &                                                                       &                                                                            & x                                                                    &                                                                      \\ \hline
+    \textbf{5}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti non autorizzati \\ non possono accedere  alla sezione \\ utenti.\end{tabular}                        &                                                                       &                                                                            &                                                                      & x                                                                    \\ \hline
+    \textbf{6}  & \begin{tabular}[c]{@{}l@{}}       Le modifiche sono persistenti \\ dopo refresh, logout o login.\end{tabular}                                  & x                                                                     & x                                                                          & x                                                                    &                                                                      \\ \hline
+    \textbf{7}  & \begin{tabular}[c]{@{}l@{}}       Le finestre modalidevono essere \\  visualizzate durante la conferma \\ delle azioni critiche.\end{tabular} &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
+    \textbf{8}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti non autorizzati \\ che accedono a funzionalità \\ riservate visualizzano un errore.\end{tabular} &                                                                       &                                                                            &                                                                      & x                                                                    \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{Risultati}
 Il processo di testing ha prodotto risultati complessivamente positivi. Durante le fasi di verifica, sono stati identificati e risolti diversi bug minori, prevalentemente associati all'interfaccia utente e alla gestione degli stati dell'applicazione. Relativamente a quest'ultimi, particolarmente significativo è stato il problema dell'hydration, una criticità emersa durante i test e dettagliatamente descritta nella sezione \ref{sec:hydration_error}. Questa problematica ha influito sul modo in cui i dati venivano sincronizzati tra il server e il client, causando alcune anomalie visive e interattive nell'interfaccia.
