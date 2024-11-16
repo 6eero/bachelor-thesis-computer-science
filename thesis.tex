@@ -576,12 +576,13 @@ export default function App() {
 </main> 
 \end{lstlisting}
 
-\noindent Questo codice rappresenta la struttura di un componente React che definisce la disposizione generale delle pagine del progetto. L'elemento \texttt{<main>} ha una classe che lo rende un contenitore flessibile e verticale, con un'altezza che occupa l'intero schermo. All'interno di questo contenitore, è presente una barra di navigazione \texttt{<NavBar>} che si estende per tutta la larghezza della pagina e riceve una proprietà \texttt{signOut} per la gestione del logout. Sotto la barra di navigazione, vi è un contenitore diviso orizzontalmente in due sezioni. La prima sezione contiene una barra laterale \texttt{<SideBar>} che occupa spazio in base al suo contenuto, mentre la seconda sezione si estende e cresce per occupare il resto dello spazio disponibile. Quest'ultima include un'area di contenuto, rappresentata da \texttt{{children}}, che è un segnaposto per i contenuti passati come figli al componente principale.
+\noindent Questo codice rappresenta la struttura di un componente React che definisce la disposizione generale delle pagine del progetto, visibile nella Figura \ref{layout}. L'elemento \texttt{<main>} ha una classe che lo rende un contenitore flessibile e verticale, con un'altezza che occupa l'intero schermo. All'interno di questo contenitore, è presente una barra di navigazione \texttt{<NavBar>} che si estende per tutta la larghezza della pagina e riceve una proprietà \texttt{signOut} per la gestione del logout. Sotto la barra di navigazione, vi è un contenitore diviso orizzontalmente in due sezioni. La prima sezione contiene una barra laterale \texttt{<SideBar>} che occupa spazio in base al suo contenuto, mentre la seconda sezione si estende e cresce per occupare il resto dello spazio disponibile. Quest'ultima include un'area di contenuto, rappresentata da \texttt{{children}}, che è un segnaposto per i contenuti passati come figli al componente principale.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{img/layout.pdf} 
     \caption{Layout generico delle pagine, ottenuto utilizzando Tailwind CSS}
+    \label{layout}
 \end{figure}
 
 
@@ -590,12 +591,13 @@ Nel contesto del CRM per la gestione dei progetti, è stato scelto Amazon Web Se
 
 \noindent Per il deployment e la gestione del front-end del CRM, è stato impiegato AWS Amplify, un servizio che permette di ospitare applicazioni web con un'integrazione continua (CI/CD). Amplify è stato inizialmente collegato al repository BitBucket, il quale contiene il codice sorgente del progetto. Ogni volta che vengono effettuate modifiche al codice nel repository, Amplify esegue automaticamente un nuovo deployment.
 
-\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato AWS Cognito, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende in input la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione. Dunque, la schermata di login appare in questo modo:
+\noindent Per la gestione dell'autenticazione degli utenti, è stato invece utilizzato AWS Cognito, il quale offre una gestione sicura delle credenziali, supportando funzionalità come la multi-factor authentication (MFA) e la rotazione automatica delle chiavi. Il sistema di login del CRM, visibile nella Figura \ref{login}, è progettato in modo tale da non permettere la registrazione autonoma degli utenti. Infatti, gli amministratori sono gli unici autorizzati a creare nuovi account e fornire le credenziali di accesso. Questo avviene direttamente dalla dashboard di Cognito, in quanto nel CRM non è stata sviluppata una funzionalità per rendere possibile l'invito di nuovi utenti, essendo uno scenario che trova impiego in pochi casi. Per implementare l'autenticazione, AWS mette a disposizione un componente \texttt{Authenticator}, il quale prende in input la prop \texttt{hideSignUp}, che permette di nascondere l'opzione per la registrazione. Dunque, la schermata di login appare in questo modo:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/login.pdf} 
     \caption{Pagina di login}
+    \label{login}
 \end{figure}
 
 
@@ -644,21 +646,23 @@ Il sistema CRM è stato progettato per supportare la gestione di progetti aziend
 \end{itemize}
 
 \subsection{Accesso riservato ad utenti invitati e meccanismi di login}
-Un utente, per poter utilizzare la dashboard, deve avere un account appositamente creato da un utente con ruolo \texttt{ADMIN}. L'amministratore ha il compito di gestire l'accesso e i privilegi degli utenti all'interno del sistema. La creazione di un nuovo account per un utente avviene attraverso la dashboard di Cognito tramite una procedura che implica la registrazione delle informazioni essenziali, come nome ed e-mail. Il sistema AWS Cognito genera automaticamente una password casuale e invia un'e-mail all'indirizzo fornito, contenente la password temporanea e un link. Il link rimanda a una pagina dove il nuovo utente deve riportare la password monouso ricevuta e sceglierne una nuova, che dovrà essere confermata inserendola due volte. Una volta creato e attivato l'account, l'utente può accedere alla dashboard inserendo le proprie credenziali o cambiare la sua password, nel caso la dimenticasse.
+Un utente, per poter utilizzare la dashboard, deve avere un account appositamente creato da un utente con ruolo \texttt{ADMIN}. L'amministratore ha il compito di gestire l'accesso e i privilegi degli utenti all'interno del sistema. La creazione di un nuovo account per un utente avviene attraverso la dashboard di Cognito tramite una procedura che implica la registrazione delle informazioni essenziali, come nome ed e-mail. Il sistema AWS Cognito genera automaticamente una password casuale e invia un'e-mail all'indirizzo fornito, contenente la password temporanea e un link. Il link rimanda a una pagina dove il nuovo utente deve riportare la password monouso ricevuta e sceglierne una nuova, che dovrà essere confermata inserendola due volte. Una volta creato e attivato l'account, l'utente può accedere alla dashboard inserendo le proprie credenziali o cambiare la sua password, nel caso la dimenticasse. Tali meccanismi di login e gestione di utenti vengono descritti nel diagramma use case riportato in Figura \ref{login_and_user_management}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/diagrammi/use_case_login_e_manage.pdf} 
     \caption{Meccanismo di login e gestione utenti}
+    \label{login_and_user_management}
 \end{figure}
 
 \subsection{Gestione dei ruoli degli utenti }
-L'utente con ruolo \texttt{ADMIN} è inoltre responsabile dell'assegniazione di specifici permessi all'account, definendo quali aree della dashboard sono accessibili e quali azioni l'utente può eseguire. Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera applicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. Un esempio di utilizzo si può trovare nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni (Performance, Projects, Orders e Users). Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
+L'utente con ruolo \texttt{ADMIN} è inoltre responsabile dell'assegniazione di specifici permessi all'account, definendo quali aree della dashboard sono accessibili e quali azioni l'utente può eseguire. Per implementare le regole di visibilità in base ai ruoli degli utenti, è stato aggiunto un campo custom dalla dashboard di Cognito: tale campo è stato definito come \texttt{ROLE} e può assumere solo i due valori sopracitati. Un utente che accede al CRM viene memorizzato in un Context \footnote{è uno strumento (un oggetto) che consente di condividere dati (come lo stato o le funzioni) tra componenti senza dover passare esplicitamente le props attraverso ogni livello dell'albero dei componenti. Ogni volta che un campo del contesto varia, la schermata viene ri-renderizzata.} globale, il quale ``wrappa" l'intera applicazione. Tale contesto può essere poi ottenuto in ogni componente della web app. Un esempio di utilizzo si può trovare nel componente \texttt{SideBar}. Una sidebar è un pannello laterale in un'interfaccia utente che offre accesso rapido finalizzato alla navigazione. In questo caso, il contenuto della sidebar varia in base al ruolo dell'utente attualmente loggato: se l'utente è un admin, ha accesso a tutte le sezioni (Performance, Projects, Orders e Users, visibili nel diagramma \ref{default_fields}). Al contrario, se l'utente è un project manager, la sezione Users non sarà visibile. Per gestire le sezioni visibili nella sidebar, si utilizza un array di oggetti, il quale contiene l'insieme di sezioni visibili dall'utente con meno permessi, quindi project manager. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/diagrammi/uml_menufields.pdf} 
     \caption{Campi default visibili nella sidebar}
+    \label{default_fields}
 \end{figure}
 
 \noindent Viene successivamente estratto e salvato in una costante \texttt{role} il ruolo dell'utente loggato dal contesto dell'applicazione. Tale valore, viene usato in seguito per decidere se mostrare o meno la sezione Orders:
@@ -671,8 +675,7 @@ role === "ADMIN"
         icon: <FaUserFriends className = "scale-150" />,
         visibility: "ADMIN",
         gap: false
-    }]
-    : Menus;
+    }] : Menus;
 \end{lstlisting}
 
 \noindent Questo codice verifica se il ruolo dell'utente che ha effettuato il login è ``ADMIN". Se è così, crea una nuova lista \texttt{Menus} che include gli elementi esistenti, aggiungendo un nuovo oggetto per la voce di menu ``Users". Contrariamente, se l'utente non è un admin, la lista \texttt{Menus} rimane invariata. 
@@ -680,11 +683,10 @@ role === "ADMIN"
 \noindent L'uso dell'operatore di spread \texttt{...Menus} garantisce che la lista originale non venga modificata, mantenendo l'approccio immutabile tipico della programmazione funzionale.
 
 \subsection{Operazioni di CRUD}
-Le operazioni CRUD sono le quattro azioni fondamentali per la gestione dei dati in un database: Create (creare nuovi dati), Read (leggere o visualizzare i dati), Update (aggiornare i dati esistenti) e Delete (eliminare i dati). Il CRM supporta tutte e quattro queste operazioni, implementate seguendo la guida \cite{awsamplifynextjs2024} sulla documentazione di Amplify. Innanzitutto è stato creato il modello dati realtivo ai progetti
+Le operazioni CRUD (visibili nel diagramma \ref{crud_use_case}) sono le quattro azioni fondamentali per la gestione dei dati in un database: Create (creare nuovi dati), Read (leggere o visualizzare i dati), Update (aggiornare i dati esistenti) e Delete (eliminare i dati). Il CRM supporta tutte e quattro queste operazioni, implementate seguendo la guida sulla documentazione di Amplify \cite{awsamplifynextjs2024}. Innanzitutto è stato creato il modello dati realtivo ai progetti
 
 \begin{lstlisting}[caption=Parte del file \texttt{amplify/data/resource.ts}]
-const schema = a
-.schema({
+const schema = a.schema({
     Project: a.model({
         code: a.string(),
         name: a.string(),
@@ -709,43 +711,47 @@ const schema = a
     \centering
     \includegraphics[width=0.9\textwidth]{img/diagrammi/use_case_manage_projects.pdf} 
     \caption{Operazioni di CRUD sui progetti}
+    \label{crud_use_case}
 \end{figure}
 
 \subsection{Recupero dei progetti dal database}
-\noindent Le prime funzioni definite per gestire le operazioni di CRUD sono state \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database. Graficamente, le due funzioni menzionate sono responsabili dell'estrazione di tutti i dati necessari dal database per popolare la tabella presente all'URL \texttt{/projects}, mostrata nell'immagine sottostante.
+\noindent Le prime funzioni definite per gestire le operazioni di CRUD sono state \texttt{getProject} e \texttt{listProject}. La funzione \texttt{getProject} accetta come argomento un ID di tipo stringa, effettua una richiesta al database e restituisce l'oggetto \texttt{Project} corrispondente. La funzione \texttt{listProject}, invece, recupera e restituisce l'intera lista dei progetti presenti nel database. Graficamente, le due funzioni menzionate sono responsabili dell'estrazione di tutti i dati necessari dal database per popolare la tabella presente all'URL \texttt{/projects}, mostrata nella Figura \ref{get_projects} .
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/interfacce/table_project.pdf} 
     \caption{Pagina dei progetti}
-    \label{tabella_progetti}
+    \label{get_projects}
 \end{figure}
 
 \subsection{Creazione, modifica e cancellazione di un progetto}
-A questo punto, cliccando sul pulsante "Create Project", viene caricato l'URL \texttt{./projects/create}, che visualizza un modulo vuoto per l'inserimento dei dati relativi al progetto. 
+A questo punto, cliccando sul pulsante "Create Project", viene caricato l'URL \texttt{./projects/create}, che visualizza un modulo vuoto (visibile nella figura \ref{create_projects}) per l'inserimento dei dati relativi al progetto. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/interfacce/table_add.pdf} 
     \caption{Pagina per la creazione di un progetto}
+    \label{create_projects}
 \end{figure}
 
 \noindent Per la gestione di questo modulo (e di tutti gli altri moduli presenti nell'applicazione web), è stata utilizzata la libreria \texttt{Formik} \cite{formik}, una soluzione open-source per React che semplifica la gestione dello stato, la validazione e l'invio dei dati acquisiti tramite moduli. Grazie a Formik, i dati inseriti nei campi di input, nei selettori e in altri componenti di input vengono automaticamente salvati all'interno di un contesto speciale. Una volta che tutti i campi del modulo sono compilati, premendo il pulsante ``Create", viene invocata la funzione \texttt{createProject}, la quale riceve come input l'oggetto \texttt{Project}, generato attraverso il riempimento dei campi e ottenuto dal contesto di Formik, e lo invia al database per la sua creazione.
 
-\noindent Tornando alla pagina \texttt{./projects}, la tabella riportata nell'immagine \ref{tabella_progetti} contiene una colonna denominata \texttt{ACTIONS}, in cui sono visibili due icone. Quando si preme l'icona a forma di cestino, si apre una modale di \textit{danger} che consente di confermare l'eliminazione del progetto. Premendo il pulsante di conferma, verrà richiamata la funzione \texttt{deleteProject}, che richiede come parametro l'oggetto \texttt{Project} da eliminare.
+\noindent Tornando alla pagina \texttt{./projects}, la tabella riportata nell'immagine \ref{get_projects} contiene una colonna denominata \texttt{ACTIONS}, in cui sono visibili due icone. Premendo l'icona a forma di cestino, verrà aperta una finestra modale di conferma, come mostrato nella Figura \ref{delete_modal}, che richiede l'autorizzazione per l'eliminazione del progetto. Premendo il pulsante di conferma, verrà richiamata la funzione \texttt{deleteProject}, che richiede come parametro l'oggetto \texttt{Project} da eliminare.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{img/interfacce/modal.pdf} 
+    \includegraphics[width=0.4\textwidth]{img/interfacce/modal.pdf} 
     \caption{Modale per la cancellazione di un progetto}
+    \label{delete_modal}
 \end{figure}
 
-\noindent D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In quest'ultima è possibile visualizzare il dettaglio del progetto, effettuare modifiche o procedere all'eliminazione del progetto.
+\noindent D'altro canto, se si seleziona l'icona a forma di matita, viene caricato l'URL della pagina del progetto con la seguente forma: \texttt{./projects/project\_id}. In quest'ultima è possibile visualizzare il dettaglio del progetto, come mostrato nella Figura \ref{detail_project}, effettuare modifiche o procedere all'eliminazione del progetto.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/interfacce/table_edit.pdf} 
     \caption{Pagina del dettaglio di un progetto}
+    \label{detail_project}
 \end{figure}
 
 \noindent L'aggiornamento di un progetto esistente avviene tramite la funzione \texttt{updateProject}, la quale accetta come parametro un oggetto \texttt{Project} contenente i dati aggiornati. Questa funzione individua il progetto nel database utilizzando il suo ID e sostituisce le informazioni esistenti con quelle nuove, garantendo che il database rispecchi correttamente le modifiche apportate. In questo modo, è possibile modificare dinamicamente le informazioni relative a un progetto senza la necessità di eliminarlo e ricrearlo.
