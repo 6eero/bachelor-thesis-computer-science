@@ -759,26 +759,17 @@ A questo punto, cliccando sul pulsante "Create Project", viene caricato l'URL \t
 
 % Capitolo 5
 \chapter{Testing}\label{chapter_5}
-Le attività di testing si sono concentrate principalmente sulla verifica delle funzionalità principali dell'applicazione e sulla gestione degli accessi in base ai ruoli definiti, assicurando che ogni componente critico funzionasse correttamente e che l'assegnazione dei permessi rispettasse i criteri di sicurezza e operatività previsti. Tuttavia, il focus limitato a questi aspetti ha fatto emergere alcune lacune significative, in particolare per quanto riguarda l'accessibilità e l'inclusività dell'applicazione. Questi aspetti, sebbene non compromettano l'efficienza di base, indicano la necessità di una riflessione più approfondita e di un'analisi dettagliata, che verrà discussa in un secondo momento per evidenziare come migliorare l'esperienza complessiva degli utenti e garantire che l'applicazione sia fruibile da persone con esigenze diverse.
+
+\section{Introduzione}
+Le attività di testing si sono concentrate principalmente sulla verifica delle funzionalità principali dell'applicazione e sulla gestione degli accessi in base ai ruoli definiti, assicurando che ogni componente critico funzionasse correttamente e che l'assegnazione dei permessi rispettasse i criteri di sicurezza e operatività previsti. Nel caso specifico, le attività di testing sono state condotte seguendo un approccio \textit{black box}, in cui, partendo dalle specifiche funzionali dettagliate nel Capitolo \ref{chapter_4}, sono stati progettati casi di test mirati a verificare che ogni funzionalità fosse operativa. Questo approccio si concentra sull'osservazione dei risultati in relazione agli input forniti, senza considerare i dettagli interni del funzionamento del software, trattando di fatto il sistema come una ``scatola nera". L'approccio black box infatti, si basa sulla conoscenza dell'interfaccia del sistema ma ignora completamente sia il codice sorgente, che lo stato interno dell'applicazioneo. Gli obiettivi principali di questa fase di testing includono la copertura degli scenari di esecuzione definiti nei casi d'uso e la verifica delle funzionalità stabilite nella specifica dei requisiti.
 
 \section{Tipologie di test condotti}
-Diversi tipi di test sono stati implementati per valutare le funzionalità, l'affidabilità e l'usabilità del sistema in modo progressivo e complementare. Dapprima, il testing unitario ha consentito la verifica puntuale delle singole funzioni e componenti del codice, garantendo la loro operatività in un contesto isolato. 
-
-\noindent Successivamente, si è effetuato il testing di integrazione per analizzare la cooperazione tra i vari moduli, verificando l'interazione tra frontend e backend, nonché l'affidabilità delle chiamate ai servizi esterni come \texttt{DynamoDB} e \texttt{AWS Cognito}. 
-
-\noindent Infine, il testing di accettazione ha coinvolto gli utenti finali, admin e project managers, fornendo un feedback per confermare che il sistema rispondesse alle esigenze aziendali e offrisse un'esperienza user-friendly.
-
-\subsection{Testing unitario}
-Il testing unitario è stato utilizzato per testare singole funzioni e componenti del sistema in un ambiente controllato, verificando che ciascun elemento funzionasse correttamente e in modo indipendente dagli altri. Ogni funzione, come quelle di creazione, lettura, aggiornamento e cancellazione dei progetti, è stata verificata in isolamento per assicurare che operasse come previsto e che le risposte fossero accurate e coerenti. In secondo luogo, il testing unitario ha reso più semplice il refactoring del codice, garantendo che i miglioramenti e le modifiche non compromettessero le funzionalità esistenti. La copertura dei test ha contribuito a costruire una base solida per i successivi livelli di test, come il testing di integrazione, dove si è verificata l'interazione tra più componenti del sistema per confermare che collaborassero senza problemi.
-
-\subsection{Testing di integrazione}
-Il testing di integrazione è stato condotto per verificare l'interazione tra diversi moduli del sistema, in particolare tra il frontend e il backend. Questo ha incluso test per garantire che le chiamate API al database \texttt{DynamoDB} restituissero i risultati attesi e che il sistema di autenticazione \texttt{AWS Cognito} funzionasse correttamente.
-
-\subsection{Testing di accettazione}
-Il testing di accettazione è stato realizzato coinvolgendo direttamente gli utenti finali nel processo per simulare scenari di utilizzo reale e ottenere un feedback autentico sull'efficacia del sistema. Gli utenti hanno avuto l'opportunità di testare le funzionalità principali del CRM, valutando sia la correttezza tecnica delle operazioni, sia la fluidità e l'intuitività dell'interfaccia. Durante queste sessioni, sono stati verificati aspetti come la facilità di navigazione, la chiarezza dei flussi di lavoro e i tempi di esecuzione delle varie operazioni. Inoltre, questo tipo di testing ha garantito che il CRM rispondesse pienamente ai requisiti aziendali, rispettando i requisiti funzionali, definiti nelle prime fasi del progetto, e di performance.
+La principale tipologia di test che è stata svolta per questo progetto è il testing di accettazione, il quale si è svolto principalmente tramite scenari simulati, basati su test case definiti in base ai requisiti funzionali e aziendali. Gli utenti finali, inclusi admin e project manager, hanno partecipato attivamente, testando il sistema sia in ambiente controllato, sia in situazioni reali, al fine di valutare sia la correttezza delle operazioni che l'usabilità. Gli scenari sono stati progettati per coprire vari flussi di lavoro, con l'obiettivo di confermare che il sistema rispondesse adeguatamente alle necessità aziendali e garantisse una user experience fluida e intuitiva. Poiché il progetto è destinato ad essere un CRM interno all'azienda, non è stato necessario suddividere il test di accettazione in \(\alpha\)-Test e \(\beta\)-Test. Il processo di testing si è svolto infatti in un ambiente controllato, coinvolgendo esclusivamente i futuri admin e project manager del sistema. In questo modo è stato possibile verificare il rispetto dei requisiti di performance e funzionalità stabiliti nelle prime fasi del progetto, raccogliendo feedback direttamente dagli utenti finali.
 
 \section{Casi di test}\label{test_cases}
-I casi di test di accettazione sono stati progettati con l'obiettivo di coprire in modo completo e dettagliato tutte le funzionalità principali del sistema, oltre a garantire la conformità ai requisiti funzionali stabiliti durante la fase di pianificazione iniziale del progetto. Questi casi di test, da me sviluppati con la supervisione dei tutor, sono stati progettati per esplorare scenari reali di utilizzo in modo da assicurare la robustezza e l'affidabilità dell'applicazione. L'attenzione è stata rivolta a verificare che ogni aspetto del sistema rispondesse correttamente agli input previsti e non, mantenendo un comportamento coerente e sicuro. Di seguito vengono riportati alcuni esempi significativi di casi di test implementati:
+I casi di test di accettazione sono stati progettati con l'obiettivo di coprire in modo completo le funzionalità principali del sistema, oltre a garantire la conformità ai requisiti funzionali stabiliti durante la fase di pianificazione iniziale del progetto. Questi casi di test, sviluppati con il supporto degli utenti finali, sono stati concepiti per simulare scenari di utilizzo realistici, al fine di garantire la robustezza e l'affidabilità dell'applicazione. L'attenzione è stata rivolta a verificare che ogni aspetto del sistema rispondesse correttamente agli input previsti e non, mantenendo un comportamento coerente con quello atteso. 
+
+\noindent Di seguito vengono presentati alcuni esempi significativi di casi di test implementati. Per ciascun caso, vengono descritti l'obiettivo specifico del test, i passi dettagliati necessari per la sua esecuzione e i risultati attesi, al fine di garantire una comprensione chiara e completa delle operazioni e delle verifiche effettuate.
 
 \subsection{Test di creazione progetto}
 \begin{itemize}
@@ -831,7 +822,7 @@ I casi di test di accettazione sono stati progettati con l'obiettivo di coprire 
         \item Modificare i dettagli del progetto.
         \item Cliccare sul pulsante ``Update".
     \end{enumerate}
-    \item \textbf{Risultato Atteso}: le modifiche vengono salvate con successo e visualizzate correttamente, assicurando che gli aggiornamenti siano immediatamente riflessi nell'interfaccia e persistano nel sistema.
+    \item \textbf{Risultato Atteso}: le modifiche vengono salvate con successo, assicurando che gli aggiornamenti siano immediatamente riflessi nell'interfaccia e persistano nel sistema.
 \end{itemize}
 
 \subsection{Test di accesso riservato}
@@ -847,35 +838,55 @@ I casi di test di accettazione sono stati progettati con l'obiettivo di coprire 
 \end{itemize}
 
 \section{Matrice di copertura}
-La matrice di copertura dei requisiti e dei casi di test consente di mappare in modo strutturato i requisiti funzionali del sistema ai casi di test progettati per verificarne la corretta implementazione. Nel contesto di questa tesi, la matrice fornisce una panoramica completa del grado di copertura del testing, identificando per ogni requisito specifico quali casi di test sono stati sviluppati per verificarlo.
+Nel capitolo \ref{chapter_4} sono stati definiti i requisiti che il sistema CRM deve soddisfare, mentre nel presente capitolo sono stati descritti i casi di test progettati per verificarne il corretto adempimento (\ref{test_cases}). Lo scopo della matrice di copertura dei requisiti e dei casi di test è quello di mappare in modo strutturato i requisiti funzionali del sistema ai casi di test progettati per verificarne la corretta implementazione. 
 
-\noindent Nel capitolo \ref{chapter_4}, sono stati definiti i requisiti che il sistema CRM deve soddisfare, mentre nel presente vengono descritti i casi di test associati \ref{test_cases}. Ogni caso di test è stato progettato per verificare uno o più dei requisiti precedentemente definiti.
+\subsection{Costruzione della matrice}
+In primo luogo, sono stati identificati i requisiti principali emersi durante il processo di elicitazione. Tali requisiti sono stati successivamente analizzati e sottoposti ad un processo di rielaborazione al fine di risolvere eventuali dubbi e ambiguità dovti all'uso del linguaggio naturale. Successivamente, sono stati sviluppati casi di test specifici per verificare il corretto funzionamento dei requisiti implementati. Per organizzare queste informazioni in modo pratico e chiaro, è stata adottata una matrice di copertura, ponendo i requisiti nelle righe e i casi di test nelle colonne. Attraverso questa rappresentazione matriciale, per ogni incrocio tra un requisito e un caso di test, è stata inserita una 'X' che segnala la copertura del requisito da parte del caso di test corrispondente.
 
-\noindent La matrice, quindi, funge da strumento di riferimento per assicurare che ogni requisito sia correttamente implementato e funzionante. Nella matrice, per ogni incrocio tra requisito e caso di test, è presente una "X" che indica la copertura del requisito da parte del caso di test corrispondente.
+\subsection{Requisiti}\label{reqs}
+\begin{itemize}
+    \item \texttt{REQ01}: Gli utenti possono creare nuovi progetti.
+    \item \texttt{REQ02}: Gli utenti possono cancellare progetti (dall'elenco o dalla pagina di dettaglio).
+    \item \texttt{REQ03}: Gli utenti possono modificare i dettagli di un progetto.
+    \item \texttt{REQ04}: Le finestre modali devono essere visualizzate prima delle azioni critiche.
+    \item \texttt{REQ05}: Le modifiche sono persistenti dopo refresh, logout/login.
+    \item \texttt{REQ06}: Gli utenti non autorizzati non possono accedere alla sezione utenti.
+    \item \texttt{REQ07}: Gli utenti non autorizzati che accedono a funzionalità riservate visualizzano un errore.
+    \item \texttt{REQ08}: Un utente privo di account creato da un admin non può effetuare l'accesso.
+    \item \texttt{REQ09}: Un utente \texttt{PROJECT MANAGER}, può visionare solo i progetti a cui è stato assegnato.
+    \item \texttt{REQ10}: Un utente \texttt{PROJECT MANAGER}, può eliminare/modificare solo i progetti a cui è stato assegnato.
+    \item \texttt{REQ11}: I valori per il campo \texttt{stato} sono \texttt{non\_iniziato}, \texttt{in\_corso} o \texttt{completato}.
+\end{itemize}
 
+\subsection{Casi di test}
+\begin{itemize}
+     \item \texttt{TC01}: Creazione di un nuovo progetto.
+     \item \texttt{TC02}: Cancellazione di un progetto (dall'elenco o dalla pagina di dettaglio).
+     \item \texttt{TC03}: Modifica di un progetto.
+     \item \texttt{TC04}: Recupero di tutti i progetti.
+     \item \texttt{TC05}: Recupero di un singolo progetto dato il suo \texttt{ID}.
+     \item \texttt{TC06}: Verifica dell'accesso riservato e gestione degli utenti non autorizzati.
+\end{itemize}
+
+\subsection{Matrice di copertura}
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|l|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
     \hline
-    \textbf{ID} & \multicolumn{1}{c|}{\textbf{Descrizione requisito}}                                                                                                 & \textbf{\begin{tabular}[c]{@{}c@{}}Creazione\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Cancellazione\\ da Elenco\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Modifica\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Accesso\\ Riservato\end{tabular}} \\ \hline
-    \textbf{1}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono creare \\ nuovi progetti.\end{tabular}                                                      & x                                                                     &                                                                            &                                                                      &                                                                      \\ \hline
-    \textbf{2}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono canellare \\ progetti dalla pagina di elenco.\end{tabular}                                  &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
-    \textbf{3}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti possono canellare \\ progetti dalla pagina di dettaglio.\end{tabular}                              &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
+    \texttt{ID} del requisito & \texttt{TC01} & \texttt{TC02} & \texttt{TC03} & \texttt{TC04} & \texttt{TC05} & \texttt{TC06}                      \\ \hline
+    \texttt{REQ01} & X               &                 &                 &                 &                 &                       \\ \hline
+    \texttt{REQ02} &                 & X               &                 &                 &                 &                       \\ \hline
+    \texttt{REQ03} &                 &                 & X               &                 &                 &                       \\ \hline
+    \texttt{REQ04} &                 & X               & X               &                 &                 &                       \\ \hline
+    \texttt{REQ05} & X               & X               & X               & X               & X               &                       \\ \hline
+    \texttt{REQ06} &                 &                 &                 &                 &                 & X                     \\ \hline
+    \texttt{REQ07} &                 &                 &                 &                 &                 & X                     \\ \hline
+    \texttt{REQ08} &                 &                 &                 &                 &                 & X                     \\ \hline
+    \texttt{REQ09} &                 &                 &                 & X               & X               &                       \\ \hline
+    \texttt{REQ10} &                 & X               & X               &                 &                 &                       \\ \hline
+    \texttt{REQ11} & X               &                 & X               &                 &                 & \multicolumn{1}{l|}{} \\ \hline
     \end{tabular}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|l|c|c|c|c|}
-    \hline
-    \textbf{ID} & \multicolumn{1}{c|}{\textbf{Descrizione requisito}}                                                                                                 & \textbf{\begin{tabular}[c]{@{}c@{}}Creazione\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Cancellazione\\ da Elenco\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Modifica\\ Progetto\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Accesso\\ Riservato\end{tabular}} \\ \hline
-    \textbf{4}  & \begin{tabular}[c]{@{}l@{}}       L'utente con ruolo PROJECT  \\ MANAGER può modificare i \\ dettagli di un progetto.\end{tabular}             &                                                                       &                                                                            & x                                                                    &                                                                      \\ \hline
-    \textbf{5}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti non autorizzati \\ non possono accedere  alla sezione \\ utenti.\end{tabular}                        &                                                                       &                                                                            &                                                                      & x                                                                    \\ \hline
-    \textbf{6}  & \begin{tabular}[c]{@{}l@{}}       Le modifiche sono persistenti \\ dopo refresh, logout o login.\end{tabular}                                  & x                                                                     & x                                                                          & x                                                                    &                                                                      \\ \hline
-    \textbf{7}  & \begin{tabular}[c]{@{}l@{}}       Le finestre modalidevono essere \\  visualizzate durante la conferma \\ delle azioni critiche.\end{tabular} &                                                                       & x                                                                          &                                                                      &                                                                      \\ \hline
-    \textbf{8}  & \begin{tabular}[c]{@{}l@{}}       Gli utenti non autorizzati \\ che accedono a funzionalità \\ riservate visualizzano un errore.\end{tabular} &                                                                       &                                                                            &                                                                      & x                                                                    \\ \hline
-    \end{tabular}
-\end{table}
+    \end{table}
 
 \section{Risultati}
 Il processo di testing ha prodotto risultati complessivamente positivi. Durante le fasi di verifica, sono stati identificati e risolti diversi bug minori, prevalentemente associati all'interfaccia utente e alla gestione degli stati dell'applicazione. Relativamente a quest'ultimi, particolarmente significativo è stato il problema dell'hydration, una criticità emersa durante i test e dettagliatamente descritta nella sezione \ref{sec:hydration_error}. Questa problematica ha influito sul modo in cui i dati venivano sincronizzati tra il server e il client, causando alcune anomalie visive e interattive nell'interfaccia.
@@ -885,7 +896,7 @@ Il processo di testing ha prodotto risultati complessivamente positivi. Durante 
 \noindent Infine, le prestazioni del sistema sono state valutate favorevolmente e le operazioni di CRUD hanno mostrato tempi di risposta rapidi e consistenti e il feedback degli utenti durante il testing di accettazione è stato positivo.
 
 \section{Aspetti non testati e proposte di miglioramento}
-Durante il processo di testing del sistema CRM sviluppato, l'attenzione si è focalizzata principalmente sulla verifica della corretta implementazione delle funzionalità principali e sulla gestione delle operazioni di accesso. Tuttavia, alcune aree critiche, come la sicurezza o l'accessibilità, non hanno ricevuto un'analisi dettagliata e approfondita. 
+Durante il processo di testing del sistema CRM sviluppato, l'attenzione è stata rivolta principalmente alla verifica della corretta implementazione delle funzionalità principali, con un focus particolare sulla gestione delle operazioni di CRUD e sull'assegnazione dei permessi in base ai ruoli definiti. La necessità di concentrare le attività sui requisiti fondamentali ha tuttavia limitato la possibilità di condurre un'analisi approfondita di alcune aree complementari del sistema. Inoltre, come sottolineato da Dijkstra nella sua tesi, i test possono dimostrare soltanto la presenza di errori, non la loro assenza. \cite{dijkstra1972humble}. Infatti, il processo di testing non è in grado di garantire l'assenza di difetti o di assicurare la completa correttezza del software. Ciò è particolarmente significativo nel contesto del CRM, dove alcune aree critiche, come la sicurezza e l'accessibilità, non hanno ricevuto un'analisi approfondita. Questo evidenzia la necessità di un approccio più completo e continuativo al testing, che includa analisi dettagliate di aspetti trascurati come la protezione contro potenziali vulnerabilità di sicurezza e l'inclusività per utenti con esigenze diverse. Di seguito vengono presentate alcune proposte di miglioramento, volte a garantire che il sistema non solo soddisfi i requisiti funzionali, ma rispetti anche gli standard qualitativi necessari per assicurare un utilizzo sicuro e accessibile.
 
 \subsection{Test di sicurezza}
 Durante il processo di testing, poiché il CRM era destinato ad essere un progetto interno all'azienda, la sicurezza del sistema non è stata analizzata in modo approfondito, evidenziando così una significativa lacuna da considerare. La mancanza di test di sicurezza potrebbe esporre l'applicazione a rischi significativi, come furti di dati, compromissioni della privacy e danni reputazionali. Per affrontare queste preoccupazioni, è fondamentale implementare un programma di test di sicurezza che sia continuativo, in modo da rilevare e risolvere le vulnerabilità man mano che emergono. 
